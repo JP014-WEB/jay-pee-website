@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Website Developer in Kenya | App Developer | CV Writing | Jay Pee Company Limited</title>
+<meta name="description" content="Jay Pee Company Limited - Website Developer in Kenya, App Developer, CV Writing, Social Media Management & Virtual Assistant. Websites from KSh 4,999. Order on WhatsApp, pay via M-Pesa, preview before you pay. Same-day delivery.">
+<meta name="keywords" content="website developer in Kenya, app developer Kenya, CV writing Kenya, social media management Kenya, virtual assistant Kenya, poster design Kenya, KRA HELB eCitizen, Jay Pee Company Limited, Runyenjes Embu">
+<meta name="author" content="Jay Pee Company Limited">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Website Developer in Kenya | Jay Pee Company Limited">
+<meta property="og:description" content="We build websites, apps, CVs, posters & manage social media for you. Order in 2 mins on WhatsApp. Pay via M-Pesa. Preview before you pay.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Website Developer in Kenya | Jay Pee Company Limited">
+<meta name="twitter:description" content="Websites from KSh 4,999. CVs, Apps, Posters. Order on WhatsApp, pay via M-Pesa.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preload" as="image" href="images/photo 1.jpg" fetchpriority="high">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#070b1f;--navy2:#1a2145;--blue:#4f6bff;--purple:#8b5cf6;--gold:#ffcc00;--green:#25D366;--light:#f5f5f5;--muted:#555}
+html{font-size:clamp(14px,1.1vw + 12px,16px);-webkit-text-size-adjust:100%}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:#111;line-height:1.6}
+a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+.top-nav{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:clamp(6px,1.2vw,10px);padding:clamp(6px,1vw,10px) clamp(10px,2vw,15px);box-shadow:0 2px 10px rgba(0,0,0,.3);flex-wrap:wrap}
+.top-nav img{width:clamp(52px,10vw,110px);height:auto;object-fit:contain}
+.header-row1,.header-row2{display:contents}
+.nav-company{flex:1 1 auto;text-align:center;line-height:1.1;min-width:0}
+.nav-company h3{font-size:clamp(18px,3vw,26px);font-weight:900;letter-spacing:clamp(1px,0.4vw,4px)}
+.nav-company p{font-size:clamp(7px,1.2vw,10px);font-weight:700;letter-spacing:clamp(1px,0.5vw,5px);color:#8b9dff}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.nav-links a{color:#fff;font-weight:700;font-size:clamp(13px,1.4vw,14px);padding:7px 12px;background:var(--navy2);border-radius:20px;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:var(--blue)}
+.hamburger{display:none}
+.auth-tabs{display:flex;gap:6px;align-items:center;flex:0 0 auto;order:99;margin-left:0}
+.auth-tabs button{white-space:nowrap;border:none;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:clamp(12px,1.4vw,13px)}
+.login-tab{display:flex !important;align-items:center;gap:7px;background:#fff !important;color:#070b1f !important;padding:6px 13px 6px 6px !important;border-radius:999px}
+.login-tab.signup-mode{background:#25D366 !important;color:#fff !important}
+.login-tab .avatar-icon{width:26px;height:26px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto;border:1px solid #ddd}
+.login-tab .avatar-icon svg{width:22px;height:22px;display:block}
+.login-tab .avatar-letter{width:26px;height:26px;border-radius:50%;background:#4f6bff;color:#fff;display:none;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex:0 0 auto}
+.login-tab .avatar-photo{width:26px;height:26px;border-radius:50%;object-fit:cover;display:none;flex:0 0 auto}
+.login-tab.logged-in{background:#e6ffe6 !important;color:#070b1f !important}
+#userGreeting{color:#ffcc00;font-weight:800;font-size:clamp(11px,1.4vw,13px);white-space:nowrap}
+.bell-btn{position:relative;background:#fff;color:#070b1f;border:none;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:14px;flex:0 0 auto}
+.bell-badge{position:absolute;top:-6px;right:-6px;background:#ff4444;color:#fff;font-size:11px;font-weight:900;min-width:20px;height:20px;border-radius:999px;display:none;align-items:center;justify-content:center;padding:0 5px}
+.ann-banner{display:none;background:linear-gradient(90deg,#ffcc00,#ff9900);color:#070b1f;padding:12px 16px;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;font-size:clamp(13px,1.6vw,14px);font-weight:700}
+.ann-banner b{font-size:15px}
+.ann-banner a{background:#070b1f;color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:800}
+.ann-banner button{background:#fff;color:#070b1f;border:0;padding:8px 12px;border-radius:20px;font-weight:800;cursor:pointer}
+.member-badge{display:inline-block;background:#e6ffe6;color:#0a7a0a;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:900;margin-left:6px}
+.hero-section{display:flex;align-items:center;gap:clamp(16px,3vw,30px);padding:clamp(20px,4vw,40px) clamp(14px,2vw,20px);max-width:1100px;margin:0 auto;background:#fff}
+.hero-text{flex:1;min-width:0}
+.hero-text h1{font-size:clamp(26px,6vw,38px);line-height:1.15;color:var(--navy);margin:0 0 15px}
+.hero-text h1 span{color:var(--blue)}
+.hero-text p{font-size:clamp(14px,2vw,17px);line-height:1.6;color:#444;margin:0 0 15px}
+.badge{display:inline-block;background:#EEF1FF;color:var(--blue);padding:6px 12px;border-radius:999px;font-size:clamp(12px,1.6vw,13px);font-weight:700;margin-bottom:12px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(90deg,#4f6bff,#8b5cf6);color:#fff;padding:13px 22px;border-radius:30px;font-weight:700;font-size:clamp(14px,1.8vw,16px)}
+.btn-secondary{background:var(--navy);color:#fff;padding:13px 22px;border-radius:30px;font-weight:700;font-size:clamp(14px,1.8vw,16px)}
+.trust{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;font-size:clamp(12px,1.6vw,13px);color:#555}
+.hero-image{flex:1;min-width:0}
+.hero-image img{width:100%;height:520px;object-fit:cover;object-position:top;border-radius:20px}
+.caption{background:#fff;margin:-30px 16px 0;position:relative;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;box-shadow:0 10px 25px rgba(0,0,0,.15)}
+.wrap{max-width:1100px;margin:0 auto;padding:clamp(20px,3vw,36px) clamp(12px,2vw,20px)}
+.head{text-align:center;margin-bottom:22px}.head h2{font-size:clamp(22px,5vw,30px);color:var(--navy)}.head p{color:var(--muted);font-size:clamp(13px,1.8vw,16px)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,18px)}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.card-top{height:150px;background:var(--navy2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:44px}
+.card-body{padding:clamp(14px,2vw,20px)}.card-body h3{font-size:clamp(16px,2vw,18px)}.card-body p{color:#555;font-size:clamp(13px,1.8vw,14px);margin:8px 0 14px;min-height:42px}
+.price-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.price{color:green;font-weight:700;font-size:clamp(15px,2vw,18px)}
+.price-old{color:#999;text-decoration:line-through;font-size:13px;margin-left:6px}
+.order-btn{background:var(--green);color:#fff;padding:12px 20px;border-radius:8px;font-weight:700;font-size:15px;border:0}
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.why div{background:#fff;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}.why span{font-size:28px}.why b{display:block;color:var(--navy);margin:8px 0 4px}.why p{font-size:clamp(12px,1.6vw,13px);color:#555}
+.cta{background:var(--navy);color:#fff;border-radius:20px;padding:clamp(20px,3vw,28px);text-align:center}.cta h2{font-size:clamp(20px,4.5vw,26px)}.cta h2 span{color:var(--gold)}.cta p{color:#CBD5E1;margin:10px 0 20px}.cta .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+footer{background:#111;color:#fff;text-align:center;padding:22px 15px}footer .tagline{color:var(--gold)}footer p{font-size:clamp(13px,1.8vw,14px);color:#ccc;margin:4px 0}footer a{color:#fff;font-weight:700;margin:0 8px}
+.float-wa{position:fixed;right:16px;bottom:16px;background:var(--green);color:#fff;padding:13px 16px;border-radius:999px;font-weight:800;z-index:200;box-shadow:0 10px 25px rgba(0,0,0,.25)}
+.search-bar-wrap{background:#fff;border-bottom:1px solid #eee;padding:10px 15px;position:sticky;top:60px;z-index:90}
+.search-bar{max-width:1100px;margin:0 auto;display:flex;gap:8px;background:#f5f5f5;border:1px solid #ddd;border-radius:999px;padding:5px 5px 5px 16px;align-items:center}
+.search-bar input{flex:1;border:0;outline:none;background:transparent;font-size:clamp(14px,1.8vw,15px);padding:8px 0;min-width:0}
+.search-bar button{background:linear-gradient(90deg,#4f6bff,#8b5cf6);color:#fff;border:0;padding:10px 20px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
+.search-results{max-width:1100px;margin:8px auto 0;display:none;gap:8px;flex-wrap:wrap}
+.search-results a{background:#070b1f;color:#fff;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700}
+.search-results a:hover{background:#4f6bff}
+.auth-input{width:100%;padding:12px;margin:6px 0 10px;border:1.5px solid #e1e1e1;border-radius:10px;font-size:15px}
+.auth-label{font-size:12px;font-weight:800;color:#111}
+.auth-btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+.ann-item{background:#f8fafc;border:1px solid #eee;border-radius:12px;padding:14px;margin-bottom:10px}
+.ann-item b{font-size:15px}
+.ann-item p{font-size:13px;color:#555;margin:6px 0}
+.faq3{max-width:860px;margin:36px auto;padding:0 16px}
+.faq3-top{background:linear-gradient(135deg,#070b1f 0%,#4f6bff 100%);color:#fff;border-radius:20px;padding:22px 18px;text-align:center}
+.faq3-top h2{margin:0;font-size:25px}
+.faq3-top p{margin:8px 0 14px;opacity:.9;font-size:14px}
+.faq3-search{background:#fff;border-radius:999px;display:flex;align-items:center;padding:5px 5px 5px 16px;gap:8px;max-width:520px;margin:0 auto}
+.faq3-search input{flex:1;border:none;outline:none;font-size:14px;padding:9px 0;min-width:0}
+.faq3-search button{background:#070b1f;color:#fff;border:none;padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer}
+.faq3-cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
+.faq3-cat{border:1px solid #e2e8f0;background:#fff;padding:9px 15px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+.faq3-cat.active{background:#070b1f;color:#fff;border-color:#070b1f}
+.faq3-count{text-align:center;font-size:12px;color:#64748b;margin-bottom:10px}
+.faq3-item{background:#fff;border:1px solid #eef2f7;border-radius:16px;margin-bottom:10px;overflow:hidden}
+.faq3-item.open{border-color:#4f6bff}
+.faq3-q{width:100%;text-align:left;background:none;border:none;padding:15px 14px;display:flex;gap:12px;align-items:center;cursor:pointer}
+.faq3-icon{width:38px;height:38px;min-width:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;background:#EEF1FF}
+.faq3-qtext{flex:1;font-size:15px;font-weight:700;color:#070b1f;line-height:1.3}
+.faq3-arrow{width:28px;height:28px;min-width:28px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:19px}
+.faq3-item.open .faq3-arrow{transform:rotate(45deg);background:#4f6bff;color:#fff}
+.faq3-a{display:none;padding:0 14px 16px 64px;color:#475569;font-size:14px;line-height:1.65}
+.faq3-item.open .faq3-a{display:block}
+.faq3-tag{display:inline-block;background:#EEF1FF;color:#4f6bff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;margin-bottom:6px}
+.faq3-hide{display:none!important}
+.faq3-more{display:block;margin:14px auto 0;background:#070b1f;color:#fff;border:none;padding:12px 24px;border-radius:999px;font-weight:800;cursor:pointer;font-size:14px}
+.faq3-cta{margin-top:16px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px;text-align:center}
+.faq3-cta a{display:inline-block;margin-top:8px;background:#25D366;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:800;font-size:14px}
+.faq3-noresult{display:none;text-align:center;padding:20px;color:#64748b}
+.faq3-auto-badge{display:inline-block;background:#e6ffe6;color:#0a7a0a;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;margin-left:6px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.why{grid-template-columns:repeat(2,1fr)}.hero-image img{height:420px}}
+@media(max-width:750px){
+  .top-nav{flex-direction:column;flex-wrap:nowrap;padding:0;gap:0;align-items:stretch}
+  .top-nav img{width:42px;flex:0 0 auto}
+  .header-row1{display:flex !important;width:100%;align-items:center;gap:8px;padding:8px 10px 6px}
+  .nav-company{flex:1 1 auto;text-align:left;min-width:0}
+  .nav-company h3{font-size:17px;letter-spacing:1px}
+  .nav-company p{font-size:8px;letter-spacing:2px}
+  .auth-tabs{order:99;flex:0 0 auto;margin-left:0}
+  .login-tab{padding:5px 10px 5px 5px !important;font-size:12px !important}
+  #userGreeting{display:none !important}
+  .header-row2{display:flex !important;width:100%;align-items:center;gap:6px;padding:0 10px 10px}
+  .nav-links{display:flex !important;flex:1 1 auto !important;min-width:0 !important;width:auto !important;flex-direction:row !important;flex-wrap:nowrap !important;overflow-x:auto !important;background:transparent;padding:0;gap:6px;box-shadow:none;border-radius:0;scrollbar-width:none;justify-content:flex-start;-webkit-overflow-scrolling:touch;align-items:center}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{flex:0 0 auto !important;width:auto !important;padding:8px 12px;font-size:12px;white-space:nowrap;background:#1a2145;text-align:center}
+  .nav-links a.active{background:#4f6bff}
+  .nav-links.show{flex-direction:row !important;overflow-x:auto !important;background:transparent;padding:0;box-shadow:none;border-radius:0}
+  .bell-btn{flex:0 0 auto !important;padding:6px 10px;font-size:13px;align-self:center}
+  .hamburger{display:flex !important;background:var(--blue);color:#fff;border:0;font-size:16px;padding:6px 10px;border-radius:10px;cursor:pointer;align-items:center;justify-content:center;flex:0 0 auto !important;align-self:center}
+  .search-bar-wrap{position:static;padding:8px 10px}
+  .search-bar button{padding:10px 14px;font-size:13px}
+  .hero-section{flex-direction:column;padding:20px 14px;text-align:center}.hero-text h1,.hero-text p{text-align:center}.hero-buttons,.trust{justify-content:center}.hero-image{width:100%}.hero-image img{height:auto;aspect-ratio:4/5}
+  .hero-buttons a{width:100%;text-align:center}
+  .grid{grid-template-columns:1fr;gap:14px}.card-top,.card-top img{height:180px}
+  .why{grid-template-columns:1fr 1fr}.wrap{padding:20px 12px 24px}
+  .cta .btns{flex-direction:column}.cta .btns a{width:100%;text-align:center}
+  .float-wa{padding:12px 14px;font-size:13px}
+  #authModal > div{padding:18px 14px;margin:10px}
+  .auth-input,input{font-size:16px}
+}
+@media(max-width:380px){
+  .nav-company h3{font-size:15px}
+  #userGreeting{display:none !important}
+  .nav-links a{padding:7px 10px;font-size:11px}
+  .why{grid-template-columns:1fr}
+  .login-tab{padding:4px 8px 4px 4px !important;font-size:11px !important}
+  .bell-btn{padding:5px 8px;font-size:12px}
+  .hamburger{padding:5px 8px;font-size:15px}
+}
+</style>
+</head>
+<body>
+<header class="top-nav">
+<div class="header-row1">
+<a href="index.html"><img src="images/logo.png" alt="Jay Pee Logo" loading="eager" decoding="async"></a>
+<div class="nav-company"><h3>JAY PEE</h3><p>MEDIA HUB LTD</p></div>
+<div class="auth-tabs">
+  <span id="userGreeting" style="display:none"></span>
+  <button id="loginBtnHeader" class="login-tab signup-mode" onclick="handleLoginTab()">
+    <span class="avatar-icon" id="avatarIcon"><svg viewBox="0 0 24 24" fill="#9aa0a6" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#e8e8e8"/><circle cx="12" cy="9" r="3.5" fill="#9aa0a6"/><path d="M4.5 20c1.2-3.2 4-4.8 7.5-4.8s6.3 1.6 7.5 4.8c-2.2 1.4-4.7 2-7.5 2s-5.3-.6-7.5-2z" fill="#9aa0a6"/></svg></span>
+    <span class="avatar-letter" id="avatarLetter">J</span>
+    <img id="avatarPhoto" class="avatar-photo" alt="">
+    <span id="loginTabText">Sign Up</span>
+  </button>
+</div>
+</div>
+<div class="header-row2">
+<nav class="nav-links" id="navLinks"><a href="index.html" class="active">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a></nav>
+<button class="bell-btn" id="bellBtn" onclick="openAnnouncements()">🔔 <span id="bellBadge" class="bell-badge">0</span></button>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+</div>
+</header>
+<div id="annBanner" class="ann-banner"><span id="annBannerText">📢 New announcement</span><span id="annBannerDiscount" style="background:#070b1f;color:#ffcc00;padding:6px 12px;border-radius:20px;font-size:12px;display:none"></span><a id="annBannerLink" href="services.html">View →</a><button onclick="dismissBanner()">✕ Dismiss</button></div>
+<div class="search-bar-wrap"><div class="search-bar"><span>🔍</span><input id="siteSearch" placeholder="Search services, pages... e.g. CV, Website, About, Portfolio" oninput="doSearch(this.value)"><button onclick="doSearch(document.getElementById('siteSearch').value,true)">Search</button></div><div class="search-results" id="searchResults"></div></div>
+<section class="hero-section">
+<div class="hero-text">
+<span class="badge" id="h_badge">✦ Trusted in Nairobi & All Kenya • Delivered Online</span>
+<h1><span id="h_title1">Your Ideas,</span> <span id="h_titleSpan">Designed</span> <span id="h_title2">& Delivered Online.</span></h1>
+<p id="h_text1">Hi, I'm <b>John Paul</b> — founder of Jay Pee Media Hub. Need a website that sells, a poster that stops the scroll, or a video that goes viral? Or help with KRA, HELB, eCitizen or a winning CV?</p>
+<p id="h_text2">You order in 2 minutes on WhatsApp. I design, deliver, and you pay via M-Pesa. Fast, affordable, and stress-free — for businesses, students & creators.</p>
+<div class="hero-buttons"><a href="https://wa.me/254714838764?text=Hi%20Jay%20Pee!%20I%20want%20to%20order" class="btn-primary" data-wa-order>Order Now</a><a href="services.html" class="btn-secondary">View All Services →</a></div>
+<div class="trust" id="h_trust"><span>⭐ <b>4.9/5</b> customers</span><span>⚡ <b>Same-day</b> delivery</span><span>💳 <b>M-Pesa</b> Accepted</span></div>
+</div>
+<div class="hero-image"><img id="slideshow" src="images/photo 1.jpg" alt="John Paul - Jay Pee" loading="eager" decoding="async" fetchpriority="high"><div class="caption"><div><b id="capName">John Paul</b><br><span style="color:#555;font-size:13px" id="capRole">Founder • Designer • Developer</span></div><div style="color:#ffcc00">★★★★★</div></div></div>
+</section>
+<div class="wrap"><div class="head"><h2 id="h_popTitle">Popular Services</h2><p id="h_popSub">Everything you need in one place. Tap any service to order instantly.</p><p id="memberHint" style="font-size:13px;color:#0a7a0a;font-weight:800;margin-top:6px;display:none">👑 You are logged in - You get 10% OFF on all services!</p><p id="guestHint" style="font-size:13px;color:#555;margin-top:6px">💡 Login / Sign Up (free) to get 10% OFF on all services as a member!</p></div>
+<div class="grid" id="popularGrid">Loading...</div></div>
+<div class="wrap" style="padding-top:0"><div class="head"><h2 id="h_whyTitle">Why Choose Jay Pee?</h2></div><div class="why"><div><span>⚡</span><b>Super Fast</b><p>Most orders same day.</p></div><div><span>💰</span><b>Affordable</b><p>Student-friendly, no hidden fees.</p></div><div><span>🛡️</span><b>Trusted</b><p>Pay after you see preview.</p></div><div><span>📞</span><b>Always Available</b><p>Reply on WhatsApp in minutes.</p></div></div></div>
+<div class="wrap" style="padding-top:0"><div class="cta"><h2 id="h_ctaTitle">Ready to Start? <span>Let's Build Yours Today.</span></h2><p id="h_ctaText">Tell me what you need - I will reply with price & delivery time in minutes.</p><div class="btns"><a href="https://wa.me/254714838764" class="btn-primary" data-wa>💬 Chat on WhatsApp</a><a href="services.html" class="btn-secondary">See Prices →</a></div></div></div>
+
+<!-- FAQ - AUTO FETCH FROM SERVICES + SETTINGS + ADMIN -->
+<section class="faq3" id="faqSection">
+  <div class="faq3-top">
+    <h2>❓ Got Questions? We Have Answers.</h2>
+    <p>Find your answer in seconds - no need to call us <span class="faq3-auto-badge">● AUTO - Updates from Services</span></p>
+    <div class="faq3-search">
+      <span>🔍</span>
+      <input type="text" id="faq3Input" placeholder="Search... e.g. price, CV, M-Pesa, delivery" autocomplete="off">
+      <button type="button" id="faq3ClearBtn">Clear</button>
+    </div>
+  </div>
+  <div class="faq3-cats" id="faq3Cats">
+    <button type="button" class="faq3-cat active" data-cat="all">✨ All</button>
+    <button type="button" class="faq3-cat" data-cat="price">💰 Prices & Payment</button>
+    <button type="button" class="faq3-cat" data-cat="order">🛒 How To Order</button>
+    <button type="button" class="faq3-cat" data-cat="service">🛠️ Services</button>
+  </div>
+  <div class="faq3-count" id="faq3Count">Loading questions...</div>
+  <div id="faq3List"></div>
+  <div class="faq3-noresult" id="faq3NoResult">No question found. Try "price", "CV" or "M-Pesa" - or ask us on WhatsApp below 👇</div>
+  <button type="button" class="faq3-more" id="faq3MoreBtn">Show All Questions ↓</button>
+  <div class="faq3-cta"><div>💬 <b>Still have a question?</b></div><a id="faqWhatsAppBtn" href="https://wa.me/254714838764">Ask on WhatsApp →</a></div>
+</section>
+<script>
+(function(){
+  var currentCat='all'; var searchText=''; var expanded=false;
+  var allFaqData=[]; var customFaqs=[]; var currentServices=[]; var currentSettings=null;
+  var input=document.getElementById('faq3Input'); var clearBtn=document.getElementById('faq3ClearBtn');
+  var moreBtn=document.getElementById('faq3MoreBtn'); var countEl=document.getElementById('faq3Count');
+  var noResult=document.getElementById('faq3NoResult'); var listEl=document.getElementById('faq3List');
+  var catBtns=document.querySelectorAll('#faq3Cats .faq3-cat');
+  var WA="254714838764"; var MPESA="0714 838 764"; var LOCATION="Runyenjes, Embu County, Kenya"; var COMPANY="Jay Pee Company Limited";
+  function esc(s){return String(s||'').replace(/</g,'&lt;');}
+  function getFallback(){
+    return [
+      {cat:'service',icon:'🏢',tag:'OUR SERVICES',q:'What does '+COMPANY+' do?',a:'We are a website developer, app developer, CV writer, social media manager and virtual assistant company in Kenya. We build business websites, mobile apps, professional CVs, posters, logos, videos, and we help with KRA, HELB, eCitizen and NTSA - all delivered online via WhatsApp.'},
+      {cat:'price',icon:'💰',tag:'PRICE',q:'How much does a website cost in Kenya?',a:'Our business websites start from <b>KSh 4,999</b>. Message us on WhatsApp and we will send you price + delivery time in minutes. Members get <b>10% OFF</b>.'},
+      {cat:'order',icon:'🛒',tag:'EASY ORDER',q:'How do I order a website, CV or poster?',a:'Tap "Chat on WhatsApp" → Tell us what you need → We reply with price → You pay via M-Pesa → We send preview → We deliver. You order in 2 minutes.'},
+      {cat:'price',icon:'📱',tag:'M-PESA ACCEPTED',q:'How do I pay? Do you accept M-Pesa?',a:'Yes, we accept M-Pesa to <b>'+MPESA+'</b>. You get a preview before you pay the full amount. No hidden fees.'},
+      {cat:'order',icon:'⚡',tag:'FAST DELIVERY',q:'How fast is delivery?',a:'Most CVs, posters and logos are delivered <b>same-day</b>. Business websites take 1-3 days. We tell you exact time on WhatsApp before you pay.'},
+      {cat:'service',icon:'📄',tag:'CV WRITING',q:'Do you write ATS-friendly CVs that get interviews?',a:'Yes. We write professional, ATS-friendly CVs and cover letters that pass Applicant Tracking Systems and get you interviews. Delivered in 24 hours.'},
+      {cat:'service',icon:'📲',tag:'SOCIAL MEDIA',q:'Can you manage my Instagram, TikTok and Facebook?',a:'Yes. We handle posting, captions, replying to followers and growing your page - while you run your business.'},
+      {cat:'service',icon:'📱',tag:'APP DEVELOPMENT',q:'Do you build mobile apps in Kenya?',a:'Yes. We build simple, clean mobile apps for shops, schools, churches and businesses in Kenya, with WhatsApp ordering built in.'},
+      {cat:'service',icon:'🧾',tag:'GOVERNMENT SERVICES',q:'Do you help with KRA, HELB, eCitizen and NTSA?',a:'Yes. We help with KRA PIN, KRA Returns, HELB, eCitizen, NTSA and more - online, fast, without queues.'},
+      {cat:'order',icon:'📍',tag:'LOCATION',q:'Where is '+COMPANY+' located?',a:'We are based in '+LOCATION+', and serve all of Kenya online - Nairobi, Embu, Kisumu, Mombasa and everywhere. Via WhatsApp, 24/7.'},
+      {cat:'price',icon:'👀',tag:'TRUST',q:'Do I get a preview before I pay?',a:'Yes. We send you a preview first. You pay after you love it. That is how we build trust.'},
+      {cat:'price',icon:'👑',tag:'10% OFF',q:'How do I get the 10% member discount?',a:'Create a free account and log in. You automatically get 10% OFF on all services and portfolio work.'}
+    ];
+  }
+  function build(services,settings,custom){
+    if(settings){
+      if(settings.g_whatsapp) WA=String(settings.g_whatsapp).replace(/[^0-9]/g,'');
+      if(settings.g_mpesa) MPESA=settings.g_mpesa;
+      if(settings.g_locationShort) LOCATION=settings.g_locationShort;
+      if(settings.g_company) COMPANY=settings.g_company;
+      var w=document.getElementById('faqWhatsAppBtn'); if(w) w.href='https://wa.me/'+WA;
+    }
+    var list=getFallback();
+    // AUTO FROM SERVICES - price + what is
+    (services||[]).forEach(function(s){
+      var title=s.serviceTitle||s.name||s.title; if(!title) return;
+      var price=Number(s.price||s.cost||0); var desc=s.description||'';
+      var member=Math.round(price*0.9);
+      var priceQ='How much does '+title+' cost?';
+      if(price>0 && !list.some(function(f){return f.q.toLowerCase()===priceQ.toLowerCase();})){
+        list.push({cat:'price',icon:'💰',tag:'PRICE - AUTO FROM SERVICES',q:priceQ,a:esc(title)+' costs <b>From KSh '+price.toLocaleString()+'</b>'+(desc?' - '+esc(desc).substring(0,120):'')+'<br>Members pay <b>KSh '+member.toLocaleString()+'</b> (10% OFF). Order on WhatsApp, pay via M-Pesa to <b>'+esc(MPESA)+'</b>, preview before you pay.'});
+      }
+      var whatQ='What is '+title+'?';
+      if(!list.some(function(f){return f.q===whatQ;})){
+        list.push({cat:'service',icon:'🛠️',tag:'SERVICE - AUTO',q:whatQ,a:esc(desc||title+' - offered by '+COMPANY+'. Order in 2 minutes on WhatsApp. Fast delivery, preview before you pay, M-Pesa accepted.')});
+      }
+    });
+    // CUSTOM FROM ADMIN - collection faqs
+    (custom||[]).forEach(function(f){
+      if(f.active===false) return;
+      list.push({cat:f.cat||'service',icon:f.icon||'❓',tag:f.tag||'FAQ',q:f.question||f.q,a:f.answer||f.a});
+    });
+    // If Admin disabled a fallback question via faqs with same question + active false, remove it
+    (custom||[]).forEach(function(f){
+      if(f.active===false && f.question){
+        list=list.filter(function(x){return x.q.toLowerCase()!==String(f.question).toLowerCase();});
+      }
+    });
+    var seen={}; var clean=[];
+    list.forEach(function(f){ if(!f.q) return; var k=f.q.toLowerCase().trim(); if(!seen[k]){seen[k]=1; clean.push(f);} });
+    return clean;
+  }
+  function render(){
+    var filtered=allFaqData.filter(function(f){
+      var catOk=(currentCat==='all'||f.cat===currentCat);
+      var searchOk=(!searchText||(f.q+' '+f.a+' '+(f.tag||'')).toLowerCase().indexOf(searchText)!==-1);
+      return catOk&&searchOk;
+    });
+    var isFiltering=(searchText!==''||currentCat!=='all');
+    var toShow=(!isFiltering&&!expanded)?filtered.slice(0,4):filtered;
+    listEl.innerHTML=toShow.map(function(f){
+      return '<div class="faq3-item" data-cat="'+f.cat+'"><button type="button" class="faq3-q"><span class="faq3-icon">'+f.icon+'</span><span class="faq3-qtext">'+esc(f.q)+'</span><span class="faq3-arrow">+</span></button><div class="faq3-a"><span class="faq3-tag">'+esc(f.tag)+'</span><br>'+f.a+'</div></div>';
+    }).join('');
+    countEl.textContent='Showing '+toShow.length+' of '+filtered.length+' questions'+(allFaqData.length>filtered.length?' (Total '+allFaqData.length+')':'');
+    noResult.style.display=(filtered.length===0?'block':'none');
+    moreBtn.style.display=(isFiltering||expanded||filtered.length<=4)?'none':'block';
+    listEl.querySelectorAll('.faq3-q').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var item=btn.closest('.faq3-item'); var was=item.classList.contains('open');
+        listEl.querySelectorAll('.faq3-item').forEach(function(el){el.classList.remove('open');});
+        if(!was) item.classList.add('open');
+      });
+    });
+  }
+  function refresh(services,settings,custom){
+    if(services) currentServices=services;
+    if(settings) currentSettings=settings;
+    if(custom) customFaqs=custom;
+    allFaqData=build(currentServices,currentSettings,customFaqs);
+    render();
+  }
+  window._refreshFAQ=function(s,st,c){ refresh(s,st,c); };
+  window.addEventListener('jp_services_updated',function(e){ refresh(e.detail&&e.detail.services, e.detail&&e.detail.settings, e.detail&&e.detail.faqs); });
+  window.addEventListener('jp_settings_updated',function(e){ refresh(null,e.detail,null); });
+  window.addEventListener('jp_faq_updated',function(e){ refresh(null,null,e.detail&&e.detail.faqs); });
+  input.addEventListener('input',function(){searchText=input.value.toLowerCase().trim(); render();});
+  clearBtn.addEventListener('click',function(){input.value='';searchText='';render();input.focus();});
+  catBtns.forEach(function(btn){btn.addEventListener('click',function(){catBtns.forEach(function(b){b.classList.remove('active');});btn.classList.add('active');currentCat=btn.getAttribute('data-cat');render();});});
+  moreBtn.addEventListener('click',function(){expanded=true;render();});
+  // Initial: from cache (your site already caches services + settings)
+  try{
+    var c=JSON.parse(localStorage.getItem('jp_cache_services')||'null'); if(c&&c.v) currentServices=c.v;
+    var cs=JSON.parse(localStorage.getItem('jp_cache_settings')||'null'); if(cs&&cs.v) currentSettings=cs.v;
+    var cf=JSON.parse(localStorage.getItem('jp_cache_faqs')||'null'); if(cf&&cf.v) customFaqs=cf.v;
+  }catch(e){}
+  refresh();
+})();
+</script>
+<!-- END FAQ -->
+
+<footer><p><b id="footCompany">JAY PEE MEDIA HUB LTD</b></p><p class="tagline" id="h_footerTag">Online Shop - All Services In One Place</p><p>Fast • Reliable • Affordable</p><p><a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a></p><p id="footPay">Pay via M-Pesa | Delivery Online | Nairobi, Kenya</p><p>© 2026 Jay Pee</p></footer>
+<a class="float-wa" href="https://wa.me/254714838764" data-wa>💬 WhatsApp</a>
+<div id="annModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;width:100%;max-width:460px;border-radius:18px;padding:22px;position:relative;max-height:90vh;overflow-y:auto">
+    <span onclick="closeAnnouncements()" style="position:absolute;right:16px;top:10px;cursor:pointer;font-size:22px">✕</span>
+    <h2 style="margin:0;color:#070b1f">🔔 Announcements</h2><p id="annModalSub" style="font-size:13px;color:#666">Latest news from Jay Pee - new services, offers & updates.</p>
+    <div id="annList" style="margin-top:14px">Loading...</div>
+  </div>
+</div>
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;width:100%;max-width:430px;border-radius:18px;padding:24px;position:relative;max-height:92vh;overflow-y:auto">
+    <span onclick="closeAuth()" style="position:absolute;right:16px;top:10px;cursor:pointer;font-size:22px">✕</span>
+    <div id="signupBox">
+      <h2 style="margin:0;color:#070b1f">Create Account <span style="font-size:11px;background:#e6ffe6;color:#0a7a0a;padding:4px 8px;border-radius:20px">OPTIONAL</span></h2>
+      <p style="font-size:13px;color:#666">Optional - You can still order on WhatsApp without an account. Members get 10% OFF!</p>
+      <label class="auth-label">Full Name *</label><input id="su_name" class="auth-input" placeholder="Mary Wanjiku">
+      <label class="auth-label">WhatsApp / Phone *</label><input id="su_phone" class="auth-input" placeholder="0714838764">
+      <label class="auth-label">Email *</label><input id="su_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <label class="auth-label">Location (Optional)</label><input id="su_location" class="auth-input" placeholder="Nairobi / Bomet">
+      <label class="auth-label">Password *</label><input id="su_pass" type="password" class="auth-input" placeholder="Min 6 characters">
+      <button onclick="doSignup()" id="suBtn" class="auth-btn" style="background:#070b1f;color:#fff">Create Account →</button>
+      <p style="text-align:center;font-size:13px;margin-top:12px">Already have account? <b onclick="showLogin()" style="color:#25D366;cursor:pointer">Login</b></p>
+      <p onclick="closeAuth()" style="text-align:center;font-size:13px;color:#888;cursor:pointer">Skip for now - Order on WhatsApp →</p>
+    </div>
+    <div id="loginBox" style="display:none">
+      <h2 style="margin:0;color:#070b1f">Welcome Back</h2>
+      <p style="font-size:13px;color:#666">Login to order faster + get 10% OFF as a member</p>
+      <label class="auth-label">Email *</label><input id="li_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <label class="auth-label">Password *</label><input id="li_pass" type="password" class="auth-input" placeholder="Your password">
+      <button onclick="doLogin()" id="liBtn" class="auth-btn" style="background:#25D366;color:#fff">Login →</button>
+      <p onclick="showForgot()" style="text-align:center;font-size:13px;color:#25D366;cursor:pointer;margin-top:10px">Forgot Password?</p>
+      <p style="text-align:center;font-size:13px;margin-top:10px">No account? <b onclick="showSignup()" style="color:#25D366;cursor:pointer">Sign Up (Optional)</b></p>
+    </div>
+    <div id="forgotBox" style="display:none">
+      <h2 style="margin:0;color:#070b1f">Reset Password 🔑</h2>
+      <p style="font-size:13px;color:#666">We will send a <b>RESET LINK</b> to your email. Click it to create a new password. We cannot send your old password - Firebase does not store it.</p>
+      <label class="auth-label">Your Account Email *</label><input id="fp_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <button onclick="doForgot()" id="fpBtn" class="auth-btn" style="background:#070b1f;color:#fff">Send Reset Link →</button>
+      <p id="fpMsg" style="font-size:13px;text-align:center;margin-top:10px"></p>
+      <div style="background:#fff7e6;padding:10px;border-radius:10px;font-size:12px;color:#555;margin-top:10px;line-height:1.5">
+        ⚠️ Check <b>Inbox + Spam + Promotions</b>. Link expires in 1 hour.<br>
+        If you signed up with a different email, you won't get it - try your other email.<br>
+        Still nothing? WhatsApp Jay Pee - he can check your account in Admin.
+      </div>
+      <p style="text-align:center;font-size:13px;margin-top:12px"><b onclick="showLogin()" style="color:#25D366;cursor:pointer">← Back to Login</b></p>
+      <p style="text-align:center;font-size:13px;margin-top:8px">No account? <b onclick="showSignup()" style="color:#25D366;cursor:pointer">Sign Up</b></p>
+    </div>
+    <p id="authMsg" style="font-size:13px;text-align:center;margin-top:10px"></p>
+  </div>
+</div>
+<script>
+let _lastTrackedSearch = "";
+let _searchTimer = null;
+let _currentUser = null;
+let _popularServices = [];
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('show')}
+function isLoggedIn(){ return !!_currentUser; }
+function memberPrice(orig){ return Math.round(Number(orig||0)*0.9); }
+function hasAccountBefore(){ try{ return localStorage.getItem('jp_has_account')==='1'; }catch(e){ return false; } }
+function markHasAccount(){ try{ localStorage.setItem('jp_has_account','1'); }catch(e){} }
+function updateAuthButton(){
+  let btn=document.getElementById('loginBtnHeader'); let txt=document.getElementById('loginTabText');
+  if(_currentUser) return;
+  if(hasAccountBefore()){ txt.innerText='Login'; btn.classList.remove('signup-mode'); }
+  else { txt.innerText='Sign Up'; btn.classList.add('signup-mode'); }
+}
+function handleLoginTab(){
+  if(_currentUser){ if(confirm('You are logged in as '+(_currentUser.email||'')+'\n\nTap OK to Logout?')){ doLogout(); } return; }
+  if(hasAccountBefore()) openAuth('login'); else openAuth('signup');
+}
+function getCache(key){ try{ let r=JSON.parse(localStorage.getItem(key)||'null'); if(!r) return null; if(Date.now()-r.t>300000) return null; return r.v; }catch(e){ return null; } }
+function setCache(key,v){ try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), v:v})); }catch(e){} }
+function doSearch(q, forceTrack){
+  q = q.toLowerCase().trim();
+  let box = document.getElementById('searchResults');
+  let cards = document.querySelectorAll('#popularGrid .card');
+  if(!q){ box.style.display='none'; box.innerHTML=''; cards.forEach(c=>c.style.display=''); return; }
+  if(window.trackSearch){
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(()=>{ if(q !== _lastTrackedSearch && q.length>=2){ _lastTrackedSearch=q; window.trackSearch(q); } }, forceTrack ? 0 : 1200);
+  }
+  let foundCard = false;
+  cards.forEach(c=>{ let text = c.innerText.toLowerCase(); if(text.includes(q)){ c.style.display=''; foundCard=true; } else { c.style.display='none'; } });
+  let wa = window._WA || "254714838764";
+  let pages = [
+    {name:'🏠 Home', link:'index.html', keys:['home','main']},
+    {name:'🛍️ All Services', link:'services.html', keys:['service','services','all','price','prices','order']},
+    {name:'🌐 Website Design', link:'services.html', keys:['website','web','site']},
+    {name:'🎨 Posters & Logos', link:'services.html', keys:['poster','logo','flyer','design']},
+    {name:'🎬 Video Editing', link:'services.html', keys:['video','reel','tiktok','edit']},
+    {name:'📄 KRA / HELB / eCitizen', link:'services.html', keys:['kra','helb','ecitizen','government','krapin','pin']},
+    {name:'📝 CV Writing', link:'services.html', keys:['cv','resume','job','interview']},
+    {name:'📱 Social Media', link:'services.html', keys:['social','media','branding','instagram']},
+    {name:'🖼️ Portfolio', link:'portfolio.html', keys:['portfolio','work','samples','examples']},
+    {name:'👤 About - John Paul', link:'about.html', keys:['about','john','paul','jay pee','who','founder']},
+    {name:'💬 WhatsApp Order', link:'https://wa.me/'+wa, keys:['whatsapp','chat','contact','order','pay','mpesa']},
+  ];
+  let matches = pages.filter(p=> p.name.toLowerCase().includes(q) || p.keys.some(k=>q.includes(k) || k.includes(q)));
+  if(matches.length>0){ box.style.display='flex'; box.innerHTML = matches.map(m=>`<a href="${m.link}">${m.name} →</a>`).join(''); if(!foundCard) box.scrollIntoView({behavior:'smooth',block:'center'}); }
+  else { box.style.display='flex'; box.innerHTML = `<a href="https://wa.me/${wa}?text=Hi, I searched for ${q} but didn't find it">Not found? Ask on WhatsApp for "${q}" →</a>`; }
+  if(foundCard){ document.querySelector('.grid').scrollIntoView({behavior:'smooth',block:'start'}); }
+}
+function dismissBanner(){
+  let id = document.getElementById('annBanner').dataset.annId || 'all';
+  let key = 'jp_seen_ann_' + (_currentUser ? _currentUser.uid : 'guest');
+  try{ let seen = JSON.parse(localStorage.getItem(key)||'[]'); if(!seen.includes(id)) seen.push(id); localStorage.setItem(key, JSON.stringify(seen)); }catch(e){}
+  document.getElementById('annBanner').style.display='none';
+}
+async function openAnnouncements(){
+  document.getElementById('annModal').style.display='flex';
+  if(window._markInboxRead) await window._markInboxRead();
+  let key = 'jp_seen_ann_' + (_currentUser ? _currentUser.uid : 'guest');
+  try{
+    let ids = (window._ANN||[]).map(a=>a.id);
+    let seen = JSON.parse(localStorage.getItem(key)||'[]');
+    ids.forEach(id=>{ if(!seen.includes(id)) seen.push(id); });
+    localStorage.setItem(key, JSON.stringify(seen));
+    let b=document.getElementById('bellBadge'); b.style.display='none'; b.innerText='0';
+  }catch(e){}
+  if(window._refreshAnnouncements) window._refreshAnnouncements();
+}
+function closeAnnouncements(){ document.getElementById('annModal').style.display='none'; }
+function renderPopular(){
+  let el=document.getElementById('popularGrid');
+  if(!_popularServices.length){ el.innerHTML="<p style='text-align:center'>No services yet. Add from Admin.</p>"; return; }
+  let logged = isLoggedIn();
+  document.getElementById('memberHint').style.display = logged ? 'block' : 'none';
+  document.getElementById('guestHint').style.display = logged ? 'none' : 'block';
+  let wa=window._WA||"254714838764";
+  el.innerHTML = _popularServices.map(s=>{
+    let title=s.serviceTitle||s.name||'Service'; let img=s.image||'images/photo 1.jpg'; let desc=s.description||''; let price=Number(s.price||0);
+    let showPrice = logged ? memberPrice(price) : price;
+    let priceHTML = logged ? `<span class="price">From KSh ${showPrice}</span><span class="price-old">KSh ${price}</span><span class="member-badge">👑 -10%</span>` : `<span class="price">From KSh ${price}</span>`;
+    let orderText = logged ? `I want a ${title} - Member Price KSh ${showPrice} (10% OFF)` : `I want a ${title}`;
+    return `<div class="card"><div class="card-top" style="padding:0"><img src="${img}" alt="" loading="lazy" decoding="async" style="width:100%;height:150px;object-fit:cover;display:block" onerror="this.src='images/photo 1.jpg'"></div><div class="card-body"><h3>${title}</h3><p>${desc}</p>${logged?'':`<p style="font-size:12px;color:#0a7a0a;margin:0">💡 Login for 10% OFF - Pay KSh ${memberPrice(price)}</p>`}<div class="price-row">${priceHTML}<a class="order-btn" href="https://wa.me/${wa}?text=${encodeURIComponent(orderText)}">Order →</a></div></div></div>`;
+  }).join('');
+}
+(function(){ let c=getCache('jp_cache_services'); if(c && c.length){ _popularServices=c; renderPopular(); } })();
+updateAuthButton();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,collection,getDocs,doc,getDoc,setDoc,addDoc,serverTimestamp,query,where,updateDoc,limit} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const firebaseConfig = { apiKey: "AIzaSyBDCFTZgCmWysGm_x1cH94xR0hSYgUsSLc", authDomain: "jay-pee-24867.firebaseapp.com", projectId: "jay-pee-24867", storageBucket: "jay-pee-24867.firebasestorage.app", messagingSenderId: "999056409829", appId: "1:999056409829:web:5f243af858bc236afe400c" };
+const app=initializeApp(firebaseConfig); const db=getFirestore(app); const auth=getAuth(app);
+window._auth=auth; window._db=db;
+window.trackSearch = async (term)=>{ try{ await addDoc(collection(db,"searches"),{term:String(term).toLowerCase().trim(), at:serverTimestamp(), page:"index.html"}); }catch(e){} };
+window.trackOrder = async (serviceName)=>{ try{ await addDoc(collection(db,"orders"),{service:serviceName||"WhatsApp Chat", at:serverTimestamp(), page:"index.html"}); }catch(e){} };
+window.trackPageView = async ()=>{ try{ await addDoc(collection(db,"page_views"),{page:"index.html", at:serverTimestamp()}); }catch(e){} };
+if(window.requestIdleCallback){ requestIdleCallback(()=>trackPageView(),{timeout:3000}); } else { setTimeout(trackPageView,2000); }
+document.addEventListener('click', (e)=>{
+  let orderBtn = e.target.closest('.order-btn');
+  if(orderBtn){ let card = orderBtn.closest('.card'); let title = card ? (card.querySelector('h3')?.innerText||'Service') : 'Service'; window.trackOrder(title + (isLoggedIn()?' - Member 10% OFF':'')); return; }
+  let waOrder = e.target.closest('[data-wa-order]'); if(waOrder){ window.trackOrder('General Order - Home Hero'); return; }
+  let wa = e.target.closest('[data-wa]'); if(wa){ window.trackOrder('WhatsApp Chat - Home'); return; }
+});
+let photos = ["images/photo 1.jpg","images/photo2.jpg","images/photo3.jpg","images/photo4.jpg","images/photo5.jpg","images/photo6.jpg"];
+let current = 0; const slideImg = document.getElementById("slideshow");
+function splitPhotos(str){ if(!str) return []; str = str.trim(); if(str.includes("|||")) return str.split("|||").map(x=>x.trim()).filter(Boolean); if(str.includes("data:image")){ let parts = str.split(","); let out=[]; let buf=""; for(let p of parts){ p=p.trim(); if(p.startsWith("data:image")){ if(buf) out.push(buf); buf=p; } else if(buf.startsWith("data:image")){ buf += ","+p; } else if(p) out.push(p); } if(buf) out.push(buf); return out.filter(Boolean); } return str.split(",").map(x=>x.trim()).filter(Boolean); }
+function startSlideshow(){ if(!photos.length) return; slideImg.onerror = ()=>{ current=(current+1)%photos.length; slideImg.src=photos[current]; }; setInterval(()=>{ current=(current+1)%photos.length; slideImg.src=photos[current]; },3500); }
+function preloadPhotos(){ photos.slice(1).forEach(src=>{ let im=new Image(); im.decoding='async'; im.src=src; }); }
+function setText(id, v){ if(v && document.getElementById(id)) document.getElementById(id).innerText = v; }
+function setHTML(id, v){ if(v && document.getElementById(id)) document.getElementById(id).innerHTML = v; }
+function esc(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function isLive(a){ return a.active===true || a.active==='yes' || a.active==='true' || a.active===1; }
+function getSeenKey(){ return 'jp_seen_ann_' + (_currentUser ? _currentUser.uid : 'guest'); }
+function getSeenIds(){ try{ return JSON.parse(localStorage.getItem(getSeenKey())||'[]'); }catch(e){ return []; } }
+window._ANN=[]; window._INBOX=[];
+window._markInboxRead = async function(){
+  if(!_currentUser) return;
+  try{ for(let n of window._INBOX){ if(!n.read){ await updateDoc(doc(db,"user_notifications",n.id),{read:true}); n.read=true; } } }catch(e){ console.log(e); }
+};
+async function loadInbox(){
+  window._INBOX=[];
+  if(!_currentUser) return [];
+  try{
+    const q = query(collection(db,"user_notifications"), where("userId","==",_currentUser.uid));
+    const snap = await getDocs(q);
+    snap.forEach(d=> window._INBOX.push({id:d.id, ...d.data()}));
+    window._INBOX.sort((a,b)=> (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  }catch(e){ console.log("inbox load",e.message); }
+  return window._INBOX;
+}
+async function loadAnnouncements(){
+  try{
+    const snap = await getDocs(collection(db,"announcements"));
+    let all=[]; snap.forEach(d=> all.push({id:d.id, ...d.data()}));
+    let live = all.filter(a=> isLive(a));
+    live.sort((a,b)=> (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+    let logged = !!_currentUser;
+    let visible = live.filter(a=>{
+      let aud = a.audience || 'all';
+      if(aud==='all') return true;
+      if(aud==='members' || aud==='members_inbox') return logged;
+      return true;
+    });
+    let inbox = await loadInbox();
+    let inboxVisible = inbox.filter(n=>{
+      if(n.announcementId){
+        let parent = live.find(a=>a.id===n.announcementId);
+        if(!parent) return false;
+        if(!isLive(parent)) return false;
+      }
+      return true;
+    });
+    let merged = [...visible];
+    inboxVisible.forEach(n=>{
+      if(n.announcementId && merged.find(m=>m.id===n.announcementId)) return;
+      merged.push({id: n.announcementId || n.id, title:n.title, message:n.message, link:n.link||'services.html', audience:n.audience||'members_inbox', memberDiscount:n.memberDiscount||false, originalPrice:n.originalPrice||0, memberPrice:n.memberPrice||0, isInbox:true, inboxId:n.id, read:n.read});
+    });
+    window._ANN = merged;
+    document.getElementById('annModalSub').innerText = logged ? 'Latest news for you - Members get 10% OFF on all services 👑' : 'Latest news from Jay Pee - Login to get 10% OFF + Members Only announcements.';
+    if(!merged.length){
+      document.getElementById('annBanner').style.display='none';
+      document.getElementById('bellBadge').style.display='none';
+      document.getElementById('annList').innerHTML = logged ? '<p>No announcements for members yet.</p>' : '<p>No public announcements right now. Login to see Members Only announcements.</p>';
+      return;
+    }
+    let seen = getSeenIds();
+    let unseen = merged.filter(a=> {
+      if(a.isInbox) return !a.read && !seen.includes(a.id);
+      return !seen.includes(a.id);
+    });
+    let badge = document.getElementById('bellBadge');
+    if(unseen.length){ badge.style.display='flex'; badge.innerText = unseen.length > 9 ? '9+' : unseen.length; }
+    else { badge.style.display='none'; }
+    let latest = merged.find(a=> !seen.includes(a.id)) || merged[0];
+    if(latest && !seen.includes(latest.id)){
+      let banner = document.getElementById('annBanner');
+      banner.dataset.annId = latest.id;
+      let discEl=document.getElementById('annBannerDiscount');
+      if(latest.memberDiscount){
+        if(logged){
+          let mp = latest.memberPrice || memberPrice(latest.originalPrice);
+          discEl.innerText=`👑 Members: KSh ${mp} (was ${latest.originalPrice}) -10% OFF`; discEl.style.display='inline-block';
+        } else {
+          discEl.innerText='💡 Login for 10% OFF'; discEl.style.display='inline-block';
+        }
+      } else { discEl.style.display='none'; }
+      document.getElementById('annBannerText').innerText = '📢 ' + (latest.title||'New announcement');
+      document.getElementById('annBannerLink').href = latest.link || 'services.html';
+      banner.style.display='flex';
+    } else {
+      document.getElementById('annBanner').style.display='none';
+    }
+    document.getElementById('annList').innerHTML = merged.map(a=>{
+      let discHTML='';
+      if(a.memberDiscount){
+        if(logged){
+          let mp = a.memberPrice || memberPrice(a.originalPrice);
+          discHTML = `<p style="color:#0a7a0a;font-weight:800">👑 Members Price: KSh ${mp} <span style="color:#999;text-decoration:line-through;font-weight:400">was KSh ${a.originalPrice}</span> - 10% OFF for you!</p>`;
+        } else {
+          discHTML = `<p style="color:#555">💡 Login to get 10% OFF - Members pay KSh ${a.memberPrice||memberPrice(a.originalPrice)} instead of KSh ${a.originalPrice}</p>`;
+        }
+      }
+      let audLabel = a.audience==='members' ? '👥 Members Only' : a.audience==='members_inbox' ? '🔔 Members + Saved Inbox' : '🌍 Everyone';
+      return `<div class="ann-item"><b>${esc(a.title)}</b><span style="font-size:11px;background:#EEF1FF;color:#4f6bff;padding:3px 8px;border-radius:999px;margin-left:6px">${audLabel}</span><p>${esc(a.message||'')}</p>${discHTML}<a href="${esc(a.link||'services.html')}" style="display:inline-block;background:#070b1f;color:#fff;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:800">View →</a></div>`;
+    }).join('');
+  }catch(e){ console.log(e); }
+}
+window._refreshAnnouncements = loadAnnouncements;
+function applySettings(s){
+  let wa = s.g_whatsapp || "254714838764"; window._WA = wa;
+  let mpesa = s.g_mpesa || "0714838764";
+  setText("h_badge", s.h_badge); setText("h_title1", s.h_title1); setText("h_titleSpan", s.h_titleSpan); setText("h_title2", s.h_title2);
+  setHTML("h_text1", s.h_text1); setHTML("h_text2", s.h_text2);
+  if(s.h_trust){ let parts = s.h_trust.split("|").map(x=>x.trim()).filter(Boolean); if(parts.length) document.getElementById("h_trust").innerHTML = parts.map(p=>`<span>${esc(p)}</span>`).join(""); }
+  setText("capName", s.g_founder); setText("capRole", s.g_role);
+  setText("h_popTitle", s.h_popTitle); setText("h_popSub", s.h_popSub); setText("h_whyTitle", s.h_whyTitle);
+  if(s.h_ctaTitle) document.getElementById("h_ctaTitle").innerText = s.h_ctaTitle;
+  setText("h_ctaText", s.h_ctaText); setText("h_footerTag", s.h_footerTag);
+  if(s.g_company) document.getElementById("footCompany").innerText = s.g_company;
+  if(s.g_locationShort) document.getElementById("footPay").innerText = "Pay via M-Pesa "+mpesa+" | Delivery Online | "+s.g_locationShort;
+  document.querySelectorAll("[data-wa]").forEach(a=> a.href = "https://wa.me/"+wa);
+  document.querySelectorAll("[data-wa-order]").forEach(a=> a.href = "https://wa.me/"+wa+"?text="+encodeURIComponent("Hi Jay Pee! I want to order"));
+  if(s.h_photos){ let p = splitPhotos(s.h_photos); if(p.length) photos = p; }
+  if(photos.length) slideImg.src = photos[0];
+  preloadPhotos();
+  // FAQ auto-sync from Settings
+  if(window._refreshFAQ) window._refreshFAQ(null, s, null);
+  try{ window.dispatchEvent(new CustomEvent('jp_settings_updated',{detail:s})); }catch(e){}
+}
+async function loadFaqsFromFirebase(){
+  try{
+    const snap = await getDocs(collection(db,"faqs"));
+    let faqs=[]; snap.forEach(d=> faqs.push({id:d.id, ...d.data()}));
+    try{ localStorage.setItem('jp_cache_faqs', JSON.stringify({t:Date.now(), v:faqs})); }catch(e){}
+    if(window._refreshFAQ) window._refreshFAQ(null, null, faqs);
+    return faqs;
+  }catch(e){ return []; }
+}
+async function loadAll(){
+  let cachedSettings = getCache('jp_cache_settings');
+  if(cachedSettings) applySettings(cachedSettings); else preloadPhotos();
+  try{
+    const snap = await getDoc(doc(db,"settings","site"));
+    let s = snap.exists() ? snap.data() : {};
+    setCache('jp_cache_settings', s);
+    applySettings(s);
+  }catch(e){ console.log(e); }
+  startSlideshow();
+  loadAnnouncements();
+  loadFaqsFromFirebase();
+  try{
+    // Fetch ALL services for FAQ, not just 6 - FAQ needs all prices
+    const snap = await getDocs(collection(db,"services"));
+    let allServices=[]; snap.forEach(d=> allServices.push(d.data()));
+    let fresh = allServices.slice(0,6);
+    if(fresh.length){ _popularServices=fresh; setCache('jp_cache_services', allServices); renderPopular(); }
+    if(allServices.length && window._refreshFAQ) window._refreshFAQ(allServices, null, null);
+  }catch(e){ if(!_popularServices.length) document.getElementById('popularGrid').innerHTML = "<p style='text-align:center'>Could not load services.</p>"; }
+}
+loadAll();
+window.openAuth = (mode) => { document.getElementById('authModal').style.display='flex'; if(mode==='login') showLogin(); else showSignup(); };
+window.closeAuth = () => document.getElementById('authModal').style.display='none';
+window.showLogin = () => { document.getElementById('signupBox').style.display='none'; document.getElementById('forgotBox').style.display='none'; document.getElementById('loginBox').style.display='block'; document.getElementById('authMsg').innerText=''; };
+window.showSignup = () => { document.getElementById('loginBox').style.display='none'; document.getElementById('forgotBox').style.display='none'; document.getElementById('signupBox').style.display='block'; document.getElementById('authMsg').innerText=''; };
+window.showForgot = () => {
+  document.getElementById('signupBox').style.display='none';
+  document.getElementById('loginBox').style.display='none';
+  document.getElementById('forgotBox').style.display='block';
+  let e = document.getElementById('li_email').value;
+  if(e) document.getElementById('fp_email').value = e;
+  document.getElementById('fpMsg').innerText='';
+  document.getElementById('authMsg').innerText='';
+};
+window.forgotPass = () => showForgot();
+window.doForgot = async () => {
+  const email = document.getElementById('fp_email').value.trim();
+  const msg = document.getElementById('fpMsg');
+  const btn = document.getElementById('fpBtn');
+  if(!email){ msg.style.color='red'; msg.innerText='Type your account email first'; return; }
+  btn.innerText='Sending...'; btn.disabled=true;
+  try{
+    await sendPasswordResetEmail(auth, email);
+    msg.style.color='green';
+    msg.innerText='✅ Reset link SENT to '+email+'! Check Inbox + Spam, click the link to set a new password.';
+    btn.innerText='Resend Link'; btn.disabled=false;
+  }catch(e){
+    console.log(e);
+    msg.style.color='red';
+    if(e.code==='auth/user-not-found') msg.innerText='❌ No account with this email. Did you sign up with a different email? Try Sign Up.';
+    else if(e.code==='auth/invalid-email') msg.innerText='❌ Invalid email - check spelling.';
+    else if(e.code==='auth/too-many-requests') msg.innerText='❌ Too many tries. Wait 5 mins and try again.';
+    else if(e.code==='auth/missing-email') msg.innerText='❌ Type your email first.';
+    else msg.innerText='❌ FAILED: '+e.message;
+    btn.innerText='Send Reset Link →'; btn.disabled=false;
+  }
+};
+window.doSignup = async () => {
+  const name=document.getElementById('su_name').value.trim(); const phone=document.getElementById('su_phone').value.trim(); const email=document.getElementById('su_email').value.trim(); const loc=document.getElementById('su_location').value.trim(); const pass=document.getElementById('su_pass').value; const msg=document.getElementById('authMsg');
+  if(!name||!phone||!email){ msg.style.color='red'; msg.innerText='Fill Name + Phone + Email'; return; }
+  if(pass.length<6){ msg.style.color='red'; msg.innerText='Password must be 6+ characters'; return; }
+  try{ document.getElementById('suBtn').innerText='Creating...'; const cred=await createUserWithEmailAndPassword(auth,email,pass); await setDoc(doc(db,"customers",cred.user.uid),{name,phone,email,location:loc,createdAt:new Date(),role:"customer"}); markHasAccount(); msg.style.color='green'; msg.innerText='✅ Account created! Welcome '+name+' - You now get 10% OFF!'; setTimeout(()=>closeAuth(),1200); }catch(e){ msg.style.color='red'; msg.innerText=e.message.replace('Firebase: ',''); document.getElementById('suBtn').innerText='Create Account →'; }
+};
+window.doLogin = async () => {
+  const email=document.getElementById('li_email').value.trim(); const pass=document.getElementById('li_pass').value; const msg=document.getElementById('authMsg');
+  try{ document.getElementById('liBtn').innerText='Logging in...'; await signInWithEmailAndPassword(auth,email,pass); markHasAccount(); msg.style.color='green'; msg.innerText='✅ Logged in! 10% OFF applied.'; setTimeout(()=>closeAuth(),800); }catch(e){ msg.style.color='red'; msg.innerText='Wrong email or password'; document.getElementById('liBtn').innerText='Login →'; }
+};
+window.doLogout = async () => { await signOut(auth); location.reload(); };
+onAuthStateChanged(auth, async (user)=>{
+  _currentUser = user || null;
+  let avatarIcon=document.getElementById('avatarIcon'); let avatarLetter=document.getElementById('avatarLetter'); let avatarPhoto=document.getElementById('avatarPhoto'); let loginText=document.getElementById('loginTabText'); let loginBtn=document.getElementById('loginBtnHeader');
+  if(user){
+    markHasAccount();
+    let name=user.email.split('@')[0]; let photoURL=user.photoURL||null;
+    try{ const snap=await getDoc(doc(db,"customers",user.uid)); if(snap.exists()){ let d=snap.data(); if(d.name) name=d.name; if(d.photoURL) photoURL=d.photoURL; if(d.profilePic) photoURL=d.profilePic; } }catch(e){}
+    if(photoURL){ avatarIcon.style.display='none'; avatarLetter.style.display='none'; avatarPhoto.src=photoURL; avatarPhoto.style.display='block'; }
+    else { avatarIcon.style.display='none'; avatarPhoto.style.display='none'; avatarLetter.innerText=name.charAt(0).toUpperCase(); avatarLetter.style.display='flex'; }
+    loginText.innerText=name.split(' ')[0]; loginBtn.classList.add('logged-in'); loginBtn.classList.remove('signup-mode');
+    const g=document.getElementById('userGreeting'); if(g){ g.innerText='Hi, '+name+' 👑'; g.style.display='block'; }
+  } else {
+    avatarIcon.style.display='flex'; avatarLetter.style.display='none'; avatarPhoto.style.display='none'; loginBtn.classList.remove('logged-in');
+    const g=document.getElementById('userGreeting'); if(g) g.style.display='none';
+    document.getElementById('memberHint').style.display='none';
+    document.getElementById('guestHint').style.display='block';
+    updateAuthButton();
+  }
+  renderPopular();
+  loadAnnouncements();
+});
+</script>
+<!-- GOOGLE SEO - HIDDEN - Will auto-update via FAQ in future, static fallback for Google now -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question","name": "What does Jay Pee Company Limited do?","acceptedAnswer": {"@type": "Answer","text": "We are a website developer, app developer, CV writer, social media manager and virtual assistant company in Kenya. We build business websites, mobile apps, professional CVs, posters, logos, videos, and we help with KRA, HELB, eCitizen and NTSA services."}},
+    {"@type": "Question","name": "How much does a website cost in Kenya?","acceptedAnswer": {"@type": "Answer","text": "Our business websites in Kenya start from KSh 4,999. Message us on WhatsApp for price and delivery time. Members get 10% OFF."}},
+    {"@type": "Question","name": "How do I order a website, CV or poster?","acceptedAnswer": {"@type": "Answer","text": "Tap Chat on WhatsApp, tell us what you need, we reply with price, you pay via M-Pesa, we send a preview, then we deliver. You order in 2 minutes."}},
+    {"@type": "Question","name": "How do I pay? Do you accept M-Pesa?","acceptedAnswer": {"@type": "Answer","text": "Yes, we accept M-Pesa to 0714 838 764. You get a preview before you pay the full amount. No hidden fees."}},
+    {"@type": "Question","name": "How fast is delivery?","acceptedAnswer": {"@type": "Answer","text": "Most CVs, posters and logos are delivered same-day. Business websites take 1-3 days."}},
+    {"@type": "Question","name": "Do you write ATS-friendly CVs that get interviews?","acceptedAnswer": {"@type": "Answer","text": "Yes. We write professional, ATS-friendly CVs and cover letters in Kenya that pass Applicant Tracking Systems and get you interviews. Delivered in 24 hours."}},
+    {"@type": "Question","name": "Can you manage my Instagram, TikTok and Facebook for me?","acceptedAnswer": {"@type": "Answer","text": "Yes. Our social media management service in Kenya handles posting, captions, replying to followers and growing your page."}},
+    {"@type": "Question","name": "Do you build mobile apps in Kenya?","acceptedAnswer": {"@type": "Answer","text": "Yes. We build simple, clean mobile apps for shops, schools, churches and businesses in Kenya, with WhatsApp ordering built in."}},
+    {"@type": "Question","name": "Do you help with KRA, HELB, eCitizen and NTSA?","acceptedAnswer": {"@type": "Answer","text": "Yes. We help with KRA PIN, KRA Returns, HELB, eCitizen, NTSA and more - online, fast, without queues."}},
+    {"@type": "Question","name": "Where is Jay Pee Company Limited located?","acceptedAnswer": {"@type": "Answer","text": "We are based in Runyenjes, Embu County, Kenya, and serve all of Kenya online via WhatsApp, 24/7."}},
+    {"@type": "Question","name": "Do I get a preview before I pay?","acceptedAnswer": {"@type": "Answer","text": "Yes. We send you a preview first. You pay after you love it."}},
+    {"@type": "Question","name": "How do I get the 10% member discount?","acceptedAnswer": {"@type": "Answer","text": "Create a free account and log in. You automatically get 10% OFF on all services."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Jay Pee Company Limited",
+  "description": "Website Developer in Kenya, App Developer, CV Writing, Social Media Management, Virtual Assistant, Poster & Logo Design, Video Editing, KRA HELB eCitizen NTSA Services",
+  "telephone": "+254714838764",
+  "address": {"@type": "PostalAddress","addressLocality": "Runyenjes","addressRegion": "Embu County","addressCountry": "KE"},
+  "areaServed": "Kenya",
+  "priceRange": "KSh 4999 - KSh 50000",
+  "paymentAccepted": "M-Pesa",
+  "openingHours": "Mo-Su 00:00-23:59"
+}
+</script>
+</body>
+</html>

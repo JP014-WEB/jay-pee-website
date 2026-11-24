@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Work - Jay Pee ltd</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#070b1f;--navy2:#1a2145;--blue:#4f6bff;--purple:#8b5cf6;--gold:#ffcc00;--green:#25D366;--light:#f5f5f5;--muted:#555}
+html{font-size:clamp(14px,1.1vw + 12px,16px);-webkit-text-size-adjust:100%}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:#111;line-height:1.6}
+a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+/* HEADER - SAME AS index.html + services.html - 2 ROWS ON PHONE */
+.top-nav{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:clamp(6px,1.2vw,10px);padding:clamp(6px,1vw,10px) clamp(10px,2vw,15px);box-shadow:0 2px 10px rgba(0,0,0,.3);flex-wrap:wrap}
+.top-nav img{width:clamp(52px,10vw,110px);height:auto;object-fit:contain}
+.header-row1,.header-row2{display:contents}
+.nav-company{flex:1 1 auto;text-align:center;line-height:1.1;min-width:0}
+.nav-company h3{font-size:clamp(18px,3vw,26px);font-weight:900;letter-spacing:clamp(1px,0.4vw,4px)}
+.nav-company p{font-size:clamp(7px,1.2vw,10px);font-weight:700;letter-spacing:clamp(1px,0.5vw,5px);color:#8b9dff}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.nav-links a{color:#fff;font-weight:700;font-size:clamp(13px,1.4vw,14px);padding:7px 12px;background:var(--navy2);border-radius:20px;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:var(--blue)}
+.hamburger{display:none}
+.auth-tabs{display:flex;gap:6px;align-items:center;flex:0 0 auto;order:99}
+.auth-tabs button{white-space:nowrap;border:none;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:clamp(12px,1.4vw,13px)}
+.login-tab{display:flex !important;align-items:center;gap:7px;background:#fff !important;color:#070b1f !important;padding:6px 13px 6px 6px !important;border-radius:999px}
+.login-tab.signup-mode{background:#25D366 !important;color:#fff !important}
+.login-tab .avatar-icon{width:26px;height:26px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto;border:1px solid #ddd}
+.login-tab .avatar-icon svg{width:22px;height:22px;display:block}
+.login-tab .avatar-letter{width:26px;height:26px;border-radius:50%;background:#4f6bff;color:#fff;display:none;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex:0 0 auto}
+.login-tab .avatar-photo{width:26px;height:26px;border-radius:50%;object-fit:cover;display:none;flex:0 0 auto}
+.login-tab.logged-in{background:#e6ffe6 !important;color:#070b1f !important}
+#userGreeting{color:#ffcc00;font-weight:800;font-size:clamp(11px,1.4vw,13px);white-space:nowrap}
+.bell-btn{position:relative;background:#fff;color:#070b1f;border:none;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:14px;flex:0 0 auto}
+.bell-badge{position:absolute;top:-6px;right:-6px;background:#ff4444;color:#fff;font-size:11px;font-weight:900;min-width:20px;height:20px;border-radius:999px;display:none;align-items:center;justify-content:center;padding:0 5px}
+.wrap{max-width:1100px;margin:0 auto;padding:clamp(20px,3vw,28px) clamp(12px,2vw,20px)}
+.badge{display:inline-block;background:#EEF1FF;color:var(--blue);padding:6px 12px;border-radius:999px;font-size:clamp(12px,1.6vw,13px);font-weight:700}
+.member-banner{display:none;background:linear-gradient(90deg,#ffcc00,#ff9900);color:#070b1f;border-radius:14px;padding:14px 16px;text-align:center;font-weight:800;font-size:clamp(13px,1.8vw,14px);margin:14px 0}
+.search-bar{max-width:1100px;margin:18px auto;display:flex;gap:8px;background:#fff;border:1px solid #ddd;border-radius:999px;padding:5px 5px 5px 16px;align-items:center}
+.search-bar input{flex:1;border:0;outline:none;background:transparent;font-size:clamp(14px,1.8vw,15px);padding:8px 0;min-width:0}
+.search-bar button{background:linear-gradient(90deg,#4f6bff,#8b5cf6);color:#fff;border:0;padding:10px 20px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
+.filters{display:flex;gap:10px;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:12px 5px;margin:15px 0;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filters button{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:11px 18px;border-radius:999px;border:1.5px solid #ddd;background:#fff;font-weight:800;font-size:clamp(13px,1.8vw,15px);color:#111;cursor:pointer;white-space:nowrap}
+.filters button span{font-size:17px}
+.filters button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.section-title{font-size:clamp(19px,4vw,22px);color:var(--navy);margin:32px 0 15px}
+.section-title span{background:#EEF1FF;color:var(--blue);padding:4px 12px;border-radius:999px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,18px)}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.card img,.card video{width:100%;height:220px;object-fit:cover}
+.card-body{padding:clamp(14px,2vw,18px)}.card-body h3{font-size:clamp(16px,2vw,17px)}.card-body p{color:#555;font-size:clamp(13px,1.8vw,14px);margin:8px 0}
+.price{color:green;font-weight:700;font-size:clamp(15px,2vw,18px)}
+.price-old{color:#999;text-decoration:line-through;font-size:13px;font-weight:400;margin-left:6px}
+.member-badge{display:inline-block;background:#e6ffe6;color:#0a7a0a;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:900;margin-left:6px}
+.member-hint{font-size:12px;color:#0a7a0a;font-weight:700;margin:6px 0}
+.guest-hint{font-size:12px;color:#555;margin:6px 0}
+.guest-hint b{color:#0a7a0a;cursor:pointer}
+.order-btn{display:block;text-align:center;background:var(--green);color:#fff;padding:12px;border-radius:8px;font-weight:700;margin-top:10px;border:0;width:100%;cursor:pointer;font-size:15px}
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,18px)}
+.service-block{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);border:1px solid #eee;display:flex;flex-direction:column}
+.service-block .top{height:110px;background:linear-gradient(135deg,#070b1f,#4f6bff);color:#fff;display:flex;align-items:center;justify-content:center;font-size:48px;overflow:hidden}
+.service-block .top img{width:100%;height:100%;object-fit:cover}
+.service-block .body{padding:clamp(16px,2vw,20px);flex:1;display:flex;flex-direction:column}
+.service-block .body h3{color:var(--navy);font-size:clamp(17px,2vw,19px);line-height:1.3}
+.service-block .body p{color:#555;font-size:clamp(13px,1.8vw,14px);margin:8px 0}
+.service-block .tag{display:inline-block;background:#EEF1FF;color:#4f6bff;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800;width:fit-content}
+.service-block .price{color:green;font-weight:800;font-size:clamp(15px,2vw,16px);margin-top:auto;padding-top:12px}
+.service-block button{background:#25D366;color:#fff;padding:12px;border-radius:10px;font-weight:800;border:0;cursor:pointer;margin-top:10px;width:100%;font-size:15px}
+.tools-list{list-style:none;margin:8px 0;font-size:13px;color:#333}
+.tools-list li{padding:3px 0}
+.tools-list li:before{content:"✅ "; }
+.featured-video{width:100%;height:200px;border:0}
+.cta{background:var(--navy);color:#fff;border-radius:20px;padding:clamp(20px,3vw,28px);text-align:center;margin-top:30px}.cta h2 span{color:var(--gold)}
+#ask{background:#fff;padding:clamp(16px,2vw,22px);border-radius:14px;margin-top:30px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+#ask input,#ask textarea{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:8px;font-size:15px}
+footer{background:#111;color:#fff;text-align:center;padding:22px 15px}footer a{color:#fff;font-weight:700;margin:0 8px}
+.float-wa{position:fixed;right:16px;bottom:16px;background:var(--green);color:#fff;padding:13px 16px;border-radius:999px;font-weight:800;z-index:200}
+.auth-input{width:100%;padding:12px;margin:6px 0 10px;border:1.5px solid #e1e1e1;border-radius:10px;font-size:15px}
+.auth-label{font-size:12px;font-weight:800;color:#111}
+.auth-btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.featured-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:750px){
+  .top-nav{flex-direction:column;flex-wrap:nowrap;padding:0;gap:0;align-items:stretch}
+  .top-nav img{width:42px;flex:0 0 auto}
+  .header-row1{display:flex !important;width:100%;align-items:center;gap:8px;padding:8px 10px 6px}
+  .nav-company{text-align:left;flex:1 1 auto;min-width:0}
+  .nav-company h3{font-size:17px}
+  .nav-company p{font-size:8px}
+  .auth-tabs{order:99;flex:0 0 auto}
+  .login-tab{padding:5px 10px 5px 5px !important;font-size:12px !important}
+  #userGreeting{display:none !important}
+  .header-row2{display:flex !important;width:100%;align-items:center;gap:6px;padding:0 10px 10px}
+  .nav-links{display:flex !important;flex:1 1 auto !important;min-width:0 !important;width:auto !important;flex-direction:row !important;flex-wrap:nowrap !important;overflow-x:auto !important;background:transparent;padding:0;gap:6px;box-shadow:none;border-radius:0;scrollbar-width:none;justify-content:flex-start;-webkit-overflow-scrolling:touch;align-items:center}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{flex:0 0 auto !important;width:auto !important;padding:8px 12px;font-size:12px;white-space:nowrap;background:#1a2145}
+  .nav-links a.active{background:#4f6bff}
+  .nav-links.show{flex-direction:row !important;overflow-x:auto !important;background:transparent;padding:0;box-shadow:none;border-radius:0}
+  .bell-btn{flex:0 0 auto !important;padding:6px 10px;font-size:13px;align-self:center}
+  .hamburger{display:flex !important;background:var(--blue);color:#fff;border:0;font-size:16px;padding:6px 10px;border-radius:10px;cursor:pointer;align-items:center;justify-content:center;flex:0 0 auto !important;align-self:center}
+  .grid{grid-template-columns:1fr}.featured-grid{grid-template-columns:1fr}.wrap{padding:20px 12px 24px}
+  #authModal > div{padding:18px 14px !important;margin:10px !important}
+  .auth-input,input,textarea{font-size:16px !important}
+}
+@media(max-width:380px){ #userGreeting{display:none !important} .login-tab{padding:5px 10px 5px 5px !important} .nav-links a{padding:7px 10px;font-size:11px} .bell-btn{padding:5px 8px;font-size:12px} .hamburger{padding:5px 8px;font-size:15px} }
+</style>
+</head>
+<body>
+  <header class="top-nav">
+  <div class="header-row1">
+  <a href="index.html"><img src="images/logo.png" alt="Jay Pee Logo" loading="eager" decoding="async"></a>
+<div class="nav-company"><h3>JAY PEE</h3><p>MEDIA HUB LTD</p></div>
+  <div class="auth-tabs">
+    <span id="userGreeting" style="display:none"></span>
+    <button id="loginBtnHeader" class="login-tab signup-mode" onclick="handleLoginTab()">
+      <span class="avatar-icon" id="avatarIcon"><svg viewBox="0 0 24 24" fill="#9aa0a6" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#e8e8e8"/><circle cx="12" cy="9" r="3.5" fill="#9aa0a6"/><path d="M4.5 20c1.2-3.2 4-4.8 7.5-4.8s6.3 1.6 7.5 4.8c-2.2 1.4-4.7 2-7.5 2s-5.3-.6-7.5-2z" fill="#9aa0a6"/></svg></span>
+      <span class="avatar-letter" id="avatarLetter">J</span>
+      <img id="avatarPhoto" class="avatar-photo" alt="">
+      <span id="loginTabText">Sign Up</span>
+    </button>
+  </div>
+  </div>
+  <div class="header-row2">
+  <nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html" class="active">Portfolio</a><a href="about.html">About</a></nav>
+  <button class="bell-btn" id="bellBtn" onclick="openAnnouncements()">🔔 <span id="bellBadge" class="bell-badge">0</span></button>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+  </div>
+</header>
+<div id="annModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;padding:16px"><div style="background:#fff;width:100%;max-width:460px;border-radius:18px;padding:22px;position:relative;max-height:90vh;overflow-y:auto"><span onclick="closeAnnouncements()" style="position:absolute;right:16px;top:10px;cursor:pointer;font-size:22px">✕</span><h2 style="margin:0;color:#070b1f">🔔 Announcements</h2><p style="font-size:13px;color:#666">Latest news from Jay Pee.</p><div id="annList" style="margin-top:14px">Loading...</div></div></div>
+<div class="wrap">
+  <h1 style="text-align:center;">Our Work</h1>
+  <p style="text-align:center;color:#555">Real work we have done for clients in Kenya. Websites, posters, logos, CVs and videos. Your project can be next.</p>
+  <div style="text-align:center;margin-top:10px"><span class="badge">OUR WORK • REAL RESULTS</span></div>
+  <p id="memberHint" style="display:none;text-align:center;color:#0a7a0a;font-weight:800;font-size:14px;margin-top:10px">👑 You are logged in - You get 10% OFF on ALL work below!</p>
+  <p id="guestHint" style="text-align:center;color:#555;font-size:13px;margin-top:10px">💡 <b onclick="openAuth('login')" style="color:#0a7a0a;cursor:pointer">Login / Sign Up (free)</b> to get 10% OFF as a member!</p>
+  <div id="memberBanner" class="member-banner"></div>
+  <div class="search-bar"><input id="search" placeholder="Search... e.g. CV, Logo, Church Poster" oninput="filterWorks()"><button onclick="filterWorks(true)">Search</button></div>
+ <div class="filters">
+  <button class="active" onclick="setCat('All',this)"><span>✨</span> All Work</button>
+  <button onclick="setCat('Poster',this)"><span>🖼️</span> Photos / Posters</button>
+  <button onclick="setCat('Logo',this)"><span>🎨</span> Logos</button>
+  <button onclick="setCat('Website',this)"><span>🌐</span> Websites</button>
+  <button onclick="setCat('Video',this)"><span>🎬</span> Videos</button>
+  <button onclick="setCat('CV',this)"><span>📄</span> CVs</button>
+</div>
+  <h3 class="section-title">🖼️ Photos & Designs <span id="photoCount"></span></h3>
+  <div id="photoGrid" class="grid">Loading photos... Upload from Admin to show here.</div>
+  <h3 class="section-title">🎬 Videos <span id="videoCount"></span></h3>
+  <div id="videoGrid" class="grid">Loading videos... Upload from Admin to show here.</div>
+  <h3 class="section-title">⭐ Featured Projects <span>Auto Updates From Admin</span></h3>
+  <div id="featuredList" class="featured-grid">Loading featured projects...</div>
+  <p style="text-align:center;font-size:13px;color:#888;margin-top:8px">Updated automatically when you update Services in Admin. No need to update here.</p>
+  <div id="ask"><h3>Have a Question? Ask Jay Pee</h3>
+  <input id="qName" placeholder="Your Name"><input id="qPhone" placeholder="Your Phone / Email">
+  <textarea id="qText" placeholder="Type your question... e.g. How much is a logo?"></textarea>
+  <button onclick="askQuestion()" style="width:100%;padding:13px;background:linear-gradient(90deg,#4f6bff,#8b5cf6);color:#fff;border:0;border-radius:30px;font-weight:800;cursor:pointer">Ask Question</button><p id="qMsg"></p></div>
+  <div class="cta"><h2>Like What You See? <span>Let's Create Yours.</span></h2><p>Order in 1 minute on WhatsApp. No sign up needed.</p><a href="https://wa.me/254714838764?text=Hi%20Jay%20Pee,%20I%20saw%20your%20portfolio" data-wa-cta style="display:inline-block;background:var(--green);padding:13px 22px;border-radius:30px;font-weight:800">Order on WhatsApp</a></div>
+ <div style="text-align:center; margin: 30px;">
+    <a href="services.html" style="display:inline-block;background:#070b1f;color:#fff!important;padding:14px 28px;border-radius:30px;font-weight:900;font-size:16px;text-decoration:none;">Order A Service →</a>
+    <br><br>
+    <a href="index.html" style="display:inline-block;background:#fff;color:#070b1f!important;padding:13px 28px;border-radius:30px;font-weight:900;font-size:16px;border:2px solid #070b1f;text-decoration:none;">← Back to Home</a>
+  </div>
+</div>
+<footer><p>JAY PEE MEDIA HUB - <span style="color:var(--gold)">Design • Print • Web</span></p><p><a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a></p><p>© 2026 Jay Pee Company Limited - Eldoret, Kenya</p></footer>
+<a class="float-wa" href="https://wa.me/254714838764" data-wa-float>💬 WhatsApp</a>
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;width:100%;max-width:430px;border-radius:18px;padding:24px;position:relative;max-height:92vh;overflow-y:auto">
+    <span onclick="closeAuth()" style="position:absolute;right:16px;top:10px;cursor:pointer;font-size:22px">✕</span>
+    <div id="signupBox">
+      <h2 style="margin:0;color:#070b1f">Create Account <span style="font-size:11px;background:#e6ffe6;color:#0a7a0a;padding:4px 8px;border-radius:20px">OPTIONAL</span></h2>
+      <p style="font-size:13px;color:#666">Optional - You can still order on WhatsApp without an account. Members get 10% OFF!</p>
+      <label class="auth-label">Full Name *</label><input id="su_name" class="auth-input" placeholder="Mary Wanjiku">
+      <label class="auth-label">WhatsApp / Phone *</label><input id="su_phone" class="auth-input" placeholder="0714838764">
+      <label class="auth-label">Email *</label><input id="su_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <label class="auth-label">Location (Optional)</label><input id="su_location" class="auth-input" placeholder="Nairobi / Bomet">
+      <label class="auth-label">Password *</label><input id="su_pass" type="password" class="auth-input" placeholder="Min 6 characters">
+      <button onclick="doSignup()" id="suBtn" class="auth-btn" style="background:#070b1f;color:#fff">Create Account →</button>
+      <p style="text-align:center;font-size:13px;margin-top:12px">Already have account? <b onclick="showLogin()" style="color:#25D366;cursor:pointer">Login</b></p>
+      <p onclick="closeAuth()" style="text-align:center;font-size:13px;color:#888;cursor:pointer">Skip for now - Order on WhatsApp →</p>
+    </div>
+    <div id="loginBox" style="display:none">
+      <h2 style="margin:0;color:#070b1f">Welcome Back</h2>
+      <p style="font-size:13px;color:#666">Login to order faster + get 10% OFF as a member</p>
+      <label class="auth-label">Email *</label><input id="li_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <label class="auth-label">Password *</label><input id="li_pass" type="password" class="auth-input" placeholder="Your password">
+      <button onclick="doLogin()" id="liBtn" class="auth-btn" style="background:#25D366;color:#fff">Login →</button>
+      <p onclick="showForgot()" style="text-align:center;font-size:13px;color:#25D366;cursor:pointer;margin-top:10px">Forgot Password?</p>
+      <p style="text-align:center;font-size:13px;margin-top:10px">No account? <b onclick="showSignup()" style="color:#25D366;cursor:pointer">Sign Up (Optional)</b></p>
+    </div>
+    <div id="forgotBox" style="display:none">
+      <h2 style="margin:0;color:#070b1f">Reset Password 🔑</h2>
+      <p style="font-size:13px;color:#666">We will send a <b>RESET LINK</b> to your email. Click it to create a new password. We cannot send your old password - Firebase does not store it.</p>
+      <label class="auth-label">Your Account Email *</label><input id="fp_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <button onclick="doForgot()" id="fpBtn" class="auth-btn" style="background:#070b1f;color:#fff">Send Reset Link →</button>
+      <p id="fpMsg" style="font-size:13px;text-align:center;margin-top:10px"></p>
+      <div style="background:#fff7e6;padding:10px;border-radius:10px;font-size:12px;color:#555;margin-top:10px;line-height:1.5">⚠️ Check <b>Inbox + Spam + Promotions</b>. Link expires in 1 hour.<br>If you signed up with a different email, you won't get it - try your other email.</div>
+      <p style="text-align:center;font-size:13px;margin-top:12px"><b onclick="showLogin()" style="color:#25D366;cursor:pointer">← Back to Login</b></p>
+      <p style="text-align:center;font-size:13px;margin-top:8px">No account? <b onclick="showSignup()" style="color:#25D366;cursor:pointer">Sign Up</b></p>
+    </div>
+    <p id="authMsg" style="font-size:13px;text-align:center;margin-top:10px"></p>
+  </div>
+</div>
+<script>
+let WA_NUMBER = "254714838764";
+let _lastTrackedSearch = "";
+let _searchTimer = null;
+let _currentUser = null;
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('show')}
+function isLoggedIn(){ return !!_currentUser; }
+function memberPrice(orig){ return Math.round(Number(orig||0)*0.9); }
+function hasAccountBefore(){ try{ return localStorage.getItem('jp_has_account')==='1'; }catch(e){ return false; } }
+function markHasAccount(){ try{ localStorage.setItem('jp_has_account','1'); }catch(e){} }
+function updateAuthButton(){ let btn=document.getElementById('loginBtnHeader'); let txt=document.getElementById('loginTabText'); if(_currentUser) return; if(hasAccountBefore()){ txt.innerText='Login'; btn.classList.remove('signup-mode'); } else { txt.innerText='Sign Up'; btn.classList.add('signup-mode'); } }
+function handleLoginTab(){ if(_currentUser){ if(confirm('You are logged in as '+(_currentUser.email||'')+'\n\nTap OK to Logout?')){ doLogout(); } return; } if(hasAccountBefore()) openAuth('login'); else openAuth('signup'); }
+function getCache(key){ try{ let r=JSON.parse(localStorage.getItem(key)||'null'); if(!r) return null; if(Date.now()-r.t>300000) return null; return r.v; }catch(e){ return null; } }
+function setCache(key,v){ try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), v:v})); }catch(e){} }
+function closeAnnouncements(){ document.getElementById('annModal').style.display='none'; }
+async function openAnnouncements(){ document.getElementById('annModal').style.display='flex'; if(window._refreshAnnouncements) await window._refreshAnnouncements(); }
+function orderByIndex(listName, i){
+  let arr = listName==='work' ? window._WORKS : window._FEATURED;
+  let item = arr[i]; if(!item) return;
+  let title = item.title || item.portfolioTitle || item.serviceTitle || item.name || 'Service';
+  let price = Number(item.price||0);
+  let logged=isLoggedIn();
+  let showPrice= logged ? memberPrice(price) : price;
+  if(window.trackOrder) window.trackOrder(title+' - KSh '+showPrice+(logged?' - Member 10% OFF':''));
+  let text = logged ? `Hi Jay Pee, I want this: ${title} - Member Price KSh ${showPrice} (10% OFF - was KSh ${price})` : `Hi Jay Pee, I want this: ${title} - KSh ${price}`;
+  window.location.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
+}
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('[data-wa-cta]') && window.trackOrder) window.trackOrder('WhatsApp Chat - Portfolio CTA');
+  if(e.target.closest('[data-wa-float]') && window.trackOrder) window.trackOrder('WhatsApp Chat - Portfolio Float');
+});
+updateAuthButton();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,collection,getDocs,addDoc,serverTimestamp,doc,getDoc,setDoc,query,limit} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const firebaseConfig = { apiKey: "AIzaSyBDCFTZgCmWysGm_x1cH94xR0hSYgUsSLc", authDomain: "jay-pee-24867.firebaseapp.com", projectId: "jay-pee-24867", storageBucket: "jay-pee-24867.firebasestorage.app", messagingSenderId: "999056409829", appId: "1:999056409829:web:5f243af858bc236afe400c" };
+const app=initializeApp(firebaseConfig); const db=getFirestore(app); const auth=getAuth(app);
+window._auth=auth; window._db=db;
+window.trackSearch = async (term)=>{ try{ await addDoc(collection(db,"searches"),{term:String(term).toLowerCase().trim(), at:serverTimestamp(), page:"portfolio.html"}); }catch(e){} };
+window.trackOrder = async (serviceName)=>{ try{ await addDoc(collection(db,"orders"),{service:serviceName||"WhatsApp Chat", at:serverTimestamp(), page:"portfolio.html"}); }catch(e){} };
+window.trackPageView = async ()=>{ try{ await addDoc(collection(db,"page_views"),{page:"portfolio.html", at:serverTimestamp()}); }catch(e){} };
+if(window.requestIdleCallback){ requestIdleCallback(()=>trackPageView(),{timeout:3000}); } else { setTimeout(trackPageView,2000); }
+let allWorks=[]; let currentCat='All'; let featuredServices=[];
+window._WORKS=[]; window._FEATURED=[];
+function ytId(url){ if(!url) return ""; if(url.includes('youtu.be/')) return url.split('youtu.be/')[1].split(/[?&]/)[0]; if(url.includes('v=')) return url.split('v=')[1].split('&')[0]; if(url.includes('/embed/')) return url.split('/embed/')[1].split(/[?&]/)[0]; if(url.includes('/shorts/')) return url.split('/shorts/')[1].split(/[?&]/)[0]; return ""; }
+function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function isLive(a){ return a.active===true || a.active==='yes' || a.active==='true'; }
+async function loadMemberBanner(){
+  try{
+    const snap = await getDocs(collection(db,"announcements"));
+    let all=[]; snap.forEach(d=> all.push({id:d.id, ...d.data()}));
+    let live = all.filter(a=> isLive(a)).sort((a,b)=> (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+    let logged = !!_currentUser;
+    let visible = live.filter(a=>{ let aud=a.audience||'all'; if(aud==='all') return true; if(aud==='members'||aud==='members_inbox') return logged; return true; });
+    if(!visible.length){ document.getElementById('memberBanner').style.display='none'; return; }
+    let withDisc = visible.find(a=>a.memberDiscount);
+    let latest = withDisc || visible[0];
+    let banner=document.getElementById('memberBanner');
+    if(latest.memberDiscount){
+      if(logged){ let mp = latest.memberPrice || Math.round(Number(latest.originalPrice||0)*0.9); banner.innerHTML = `📢 ${latest.title} <br>👑 <b>Members: KSh ${mp} (was KSh ${latest.originalPrice}) - 10% OFF for you!</b>`; }
+      else { banner.innerHTML = `📢 ${latest.title} <br>💡 <b onclick="openAuth('login')" style="cursor:pointer">Login to get 10% OFF - Members pay KSh ${latest.memberPrice||''}</b>`; }
+    } else { banner.innerHTML = `📢 ${latest.title}`; }
+    banner.style.display='block';
+    let list=document.getElementById('annList'); if(list) list.innerHTML = visible.map(a=>`<div style="background:#f8fafc;border:1px solid #eee;border-radius:12px;padding:14px;margin-bottom:10px"><b>${escHtml(a.title||'')}</b><p style="font-size:13px;color:#555;margin:6px 0">${escHtml(a.message||'')}</p></div>`).join('');
+    let badge=document.getElementById('bellBadge'); if(badge){ badge.style.display='flex'; badge.innerText= visible.length>9?'9+':visible.length; }
+  }catch(e){ console.log(e); }
+}
+window._refreshAnnouncements = loadMemberBanner;
+async function loadGlobal(){
+  try{
+    const snap=await getDoc(doc(db,"settings","site"));
+    if(snap.exists() && snap.data().g_whatsapp){
+      WA_NUMBER=snap.data().g_whatsapp;
+      let cta=document.querySelector('[data-wa-cta]'); if(cta) cta.href="https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hi Jay Pee, I saw your portfolio");
+      let fl=document.querySelector('[data-wa-float]'); if(fl) fl.href="https://wa.me/"+WA_NUMBER;
+    }
+  }catch(e){}
+}
+async function load(){
+  await loadGlobal();
+  try{ const snap=await getDocs(query(collection(db,"portfolio"), limit(50))); allWorks=[]; snap.forEach(d=>allWorks.push({id:d.id,...d.data()})); window._WORKS=allWorks; setCache('jp_cache_portfolio', allWorks); render(); }catch(e){ if(!allWorks.length){ document.getElementById('photoGrid').innerHTML='<p>Add your firebaseConfig to show uploads here.</p>'; document.getElementById('videoGrid').innerHTML=''; } }
+  loadMemberBanner();
+}
+async function loadFeatured(){
+  try{
+    const snap = await getDocs(query(collection(db,"services"), limit(50)));
+    featuredServices = [];
+    snap.forEach(d=> featuredServices.push({id:d.id, ...d.data()}));
+    window._FEATURED=featuredServices;
+    setCache('jp_cache_services_all', featuredServices);
+    renderFeatured();
+  }catch(e){ if(!featuredServices.length) document.getElementById('featuredList').innerHTML='<p>Could not load featured projects.</p>'; }
+}
+function renderFeatured(){
+  let q=document.getElementById('search').value.toLowerCase();
+  let filtered = featuredServices.filter(s=>{
+    if(s.showPortfolio==='no') return false;
+    let cat = s.category || 'Other';
+    let name = (s.portfolioTitle || s.serviceTitle || s.name || '').toLowerCase();
+    let desc = (s.description||'').toLowerCase();
+    return (currentCat==='All'||cat===currentCat) && (name.includes(q)||desc.includes(q)||cat.toLowerCase().includes(q));
+  });
+  if(!filtered.length){ document.getElementById('featuredList').innerHTML='<p>No featured projects in this category yet. Add from Admin.</p>'; return; }
+  let logged=isLoggedIn();
+  let html = "";
+  filtered.forEach(s=>{
+    let idx = featuredServices.indexOf(s);
+    let nameToShow = s.portfolioTitle || s.serviceTitle || s.name || 'Service';
+    let emojiToShow = s.emoji || '✨';
+    let catLabel = (s.category || 'Other').toUpperCase();
+    let topHTML = s.image ? `<div class="top"><img data-feat-img="${idx}" alt="${escHtml(nameToShow)}" loading="lazy" decoding="async"></div>` : `<div class="top">${escHtml(emojiToShow)}</div>`;
+    let toolsHTML = "";
+    if(s.tools){
+      let items = String(s.tools).split(',').map(t=>t.trim()).filter(t=>t);
+      if(items.length) toolsHTML = `<ul class="tools-list">${items.map(t=>`<li>${escHtml(t)}</li>`).join('')}</ul>`;
+    }
+    let vid = ytId(s.videoUrl || s.video || '');
+    let videoHTML = vid ? `<iframe class="featured-video" src="https://www.youtube.com/embed/${vid}" loading="lazy" allowfullscreen></iframe>` : ``;
+    let price=Number(s.price||0); let showPrice= logged ? memberPrice(price) : price;
+    let priceHTML = logged ? `<div class="price">From KSh ${showPrice} <span class="price-old">KSh ${price}</span><span class="member-badge">👑 -10%</span></div><p class="member-hint">👑 Members save KSh ${price-showPrice}</p>` : `<div class="price">From KSh ${price}</div><p class="guest-hint">💡 <b onclick="openAuth('login')">Login</b> for 10% OFF - Pay KSh ${showPrice}</p>`;
+    html += `<div class="service-block" data-cat="${escHtml(s.category||'')}">
+      ${topHTML}
+      <div class="body"><span class="tag">${escHtml(catLabel)}</span>
+      <h3>${escHtml(nameToShow)}</h3>
+      <p>${escHtml(s.description||'')}</p>
+      ${toolsHTML}
+      ${videoHTML}
+      ${priceHTML}
+      <button onclick="orderByIndex('featured',${idx})">I Want This →</button></div>
+    </div>`;
+  });
+  document.getElementById('featuredList').innerHTML = html;
+  document.querySelectorAll('[data-feat-img]').forEach(el=>{
+    let i=parseInt(el.getAttribute('data-feat-img')); el.src=featuredServices[i]?.image||''; el.onerror=()=>{ el.src='images/photo 1.jpg'; };
+  });
+}
+function cardHTML(w, idx){
+  let media = "";
+  if(w.type==='video'){
+    let vid = ytId(w.fileUrl||'');
+    if(vid){ media = `<iframe src="https://www.youtube.com/embed/${vid}" loading="lazy" style="width:100%;height:220px;border:0" allowfullscreen></iframe>`; }
+    else { media = `<video data-work-video="${idx}" controls preload="none" style="width:100%;height:220px;object-fit:cover"></video>`; }
+  } else {
+    media = `<img data-work-img="${idx}" alt="${escHtml(w.title)}" loading="lazy" decoding="async" style="width:100%;height:220px;object-fit:cover">`;
+  }
+  let price=Number(w.price||0); let logged=isLoggedIn(); let showPrice= logged ? memberPrice(price) : price;
+  let priceHTML = logged ? `<span class="price">From KSh ${showPrice} <span class="price-old">KSh ${price}</span><span class="member-badge">👑 -10%</span></span>` : `<span class="price">From KSh ${price}</span>`;
+  let hintHTML = logged ? `<p class="member-hint">👑 Members: You pay KSh ${showPrice}</p>` : `<p class="guest-hint">💡 <b onclick="openAuth('login')">Login</b> for 10% OFF - Pay KSh ${showPrice}</p>`;
+  return `<div class="card">${media}<div class="card-body"><span class="badge">${escHtml(w.category)}</span><h3>${escHtml(w.title)}</h3><p>${escHtml(w.description||'')}</p>${hintHTML}<div style="display:flex;justify-content:space-between;align-items:center">${priceHTML}</div><button class="order-btn" onclick="orderByIndex('work',${idx})">Order on WhatsApp</button></div></div>`;
+}
+function render(forceTrack){
+  let q=document.getElementById('search').value.toLowerCase().trim();
+  if(q && window.trackSearch){
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(()=>{ if(q!==_lastTrackedSearch && q.length>=2){ _lastTrackedSearch=q; window.trackSearch(q); } }, forceTrack ? 0 : 1200);
+  }
+  document.getElementById('memberHint').style.display = isLoggedIn() ? 'block' : 'none';
+  document.getElementById('guestHint').style.display = isLoggedIn() ? 'none' : 'block';
+  let filtered=allWorks.filter(w=>(currentCat==='All'||w.category===currentCat)&&((w.title||'').toLowerCase().includes(q)||(w.description||'').toLowerCase().includes(q)||(w.category||'').toLowerCase().includes(q)));
+  let photos=filtered.filter(w=>w.type!=='video'); let videos=filtered.filter(w=>w.type==='video');
+  document.getElementById('photoGrid').innerHTML=photos.length?photos.map(w=>cardHTML(w, allWorks.indexOf(w))).join(''):'<p>No photos in this category yet. Upload from Admin.</p>';
+  document.getElementById('videoGrid').innerHTML=videos.length?videos.map(w=>cardHTML(w, allWorks.indexOf(w))).join(''):'<p>No videos in this category yet. Upload from Admin.</p>';
+  document.querySelectorAll('[data-work-img]').forEach(el=>{
+    let i=parseInt(el.getAttribute('data-work-img')); el.src=allWorks[i]?.fileUrl||''; el.onerror=()=>{ el.src='images/photo 1.jpg'; };
+  });
+  document.querySelectorAll('[data-work-video]').forEach(el=>{
+    let i=parseInt(el.getAttribute('data-work-video')); el.src=allWorks[i]?.fileUrl||'';
+  });
+  document.getElementById('photoCount').innerText=photos.length+' items'; document.getElementById('videoCount').innerText=videos.length+' items';
+  renderFeatured();
+}
+window.filterWorks=(forceTrack)=>render(forceTrack);
+window.setCat=(c,btn)=>{currentCat=c; document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); render();};
+window.askQuestion=async()=>{ let n=document.getElementById('qName').value,p=document.getElementById('qPhone').value,t=document.getElementById('qText').value; if(!t) return alert('Type your question'); await addDoc(collection(db,"questions"),{name:n,contact:p,question:t,at:serverTimestamp(),replied:false}); document.getElementById('qMsg').innerText='Sent! Jay Pee will reply soon on WhatsApp.'; document.getElementById('qText').value=''; };
+(function(){ let c=getCache('jp_cache_portfolio'); if(c && c.length){ allWorks=c; window._WORKS=c; render(); } let s=getCache('jp_cache_services_all'); if(s && s.length){ featuredServices=s; window._FEATURED=s; renderFeatured(); } })();
+load();
+loadFeatured();
+window.openAuth = (mode) => { document.getElementById('authModal').style.display='flex'; if(mode==='login') showLogin(); else showSignup(); };
+window.closeAuth = () => document.getElementById('authModal').style.display='none';
+window.showLogin = () => { document.getElementById('signupBox').style.display='none'; document.getElementById('forgotBox').style.display='none'; document.getElementById('loginBox').style.display='block'; document.getElementById('authMsg').innerText=''; };
+window.showSignup = () => { document.getElementById('loginBox').style.display='none'; document.getElementById('forgotBox').style.display='none'; document.getElementById('signupBox').style.display='block'; document.getElementById('authMsg').innerText=''; };
+window.showForgot = () => { document.getElementById('signupBox').style.display='none'; document.getElementById('loginBox').style.display='none'; document.getElementById('forgotBox').style.display='block'; let e=document.getElementById('li_email').value; if(e) document.getElementById('fp_email').value=e; document.getElementById('fpMsg').innerText=''; document.getElementById('authMsg').innerText=''; };
+window.forgotPass = () => showForgot();
+window.doForgot = async () => {
+  const email=document.getElementById('fp_email').value.trim(); const msg=document.getElementById('fpMsg'); const btn=document.getElementById('fpBtn');
+  if(!email){ msg.style.color='red'; msg.innerText='Type your account email first'; return; }
+  btn.innerText='Sending...'; btn.disabled=true;
+  try{ await sendPasswordResetEmail(auth,email); msg.style.color='green'; msg.innerText='✅ Reset link SENT to '+email+'! Check Inbox + Spam, click the link to set a new password.'; btn.innerText='Resend Link'; btn.disabled=false; }
+  catch(e){ msg.style.color='red'; if(e.code==='auth/user-not-found') msg.innerText='❌ No account with this email. Did you sign up with a different email? Try Sign Up.'; else if(e.code==='auth/invalid-email') msg.innerText='❌ Invalid email - check spelling.'; else if(e.code==='auth/too-many-requests') msg.innerText='❌ Too many tries. Wait 5 mins and try again.'; else msg.innerText='❌ FAILED: '+e.message; btn.innerText='Send Reset Link →'; btn.disabled=false; }
+};
+window.doSignup = async () => {
+  const name=document.getElementById('su_name').value.trim(); const phone=document.getElementById('su_phone').value.trim(); const email=document.getElementById('su_email').value.trim(); const loc=document.getElementById('su_location').value.trim(); const pass=document.getElementById('su_pass').value; const msg=document.getElementById('authMsg');
+  if(!name||!phone||!email){ msg.style.color='red'; msg.innerText='Fill Name + Phone + Email'; return; }
+  if(pass.length<6){ msg.style.color='red'; msg.innerText='Password must be 6+ characters'; return; }
+  try{ document.getElementById('suBtn').innerText='Creating...'; const cred=await createUserWithEmailAndPassword(auth,email,pass); await setDoc(doc(db,"customers",cred.user.uid),{name,phone,email,location:loc,createdAt:new Date(),role:"customer"}); markHasAccount(); msg.style.color='green'; msg.innerText='✅ Account created! Welcome '+name+' - You now get 10% OFF!'; setTimeout(()=>closeAuth(),1200); }catch(e){ msg.style.color='red'; msg.innerText=e.message.replace('Firebase: ',''); document.getElementById('suBtn').innerText='Create Account →'; }
+};
+window.doLogin = async () => {
+  const email=document.getElementById('li_email').value.trim(); const pass=document.getElementById('li_pass').value; const msg=document.getElementById('authMsg');
+  try{ document.getElementById('liBtn').innerText='Logging in...'; await signInWithEmailAndPassword(auth,email,pass); markHasAccount(); msg.style.color='green'; msg.innerText='✅ Logged in! 10% OFF applied.'; setTimeout(()=>closeAuth(),800); }catch(e){ msg.style.color='red'; msg.innerText='Wrong email or password'; document.getElementById('liBtn').innerText='Login →'; }
+};
+window.doLogout = async () => { await signOut(auth); location.reload(); };
+onAuthStateChanged(auth, async (user)=>{
+  _currentUser = user || null;
+  let avatarIcon=document.getElementById('avatarIcon'); let avatarLetter=document.getElementById('avatarLetter'); let avatarPhoto=document.getElementById('avatarPhoto'); let loginText=document.getElementById('loginTabText'); let loginBtn=document.getElementById('loginBtnHeader');
+  if(user){
+    markHasAccount();
+    let name=user.email.split('@')[0]; let photoURL=user.photoURL||null;
+    try{ const snap=await getDoc(doc(db,"customers",user.uid)); if(snap.exists()){ let d=snap.data(); if(d.name) name=d.name; if(d.photoURL) photoURL=d.photoURL; if(d.profilePic) photoURL=d.profilePic; } }catch(e){}
+    if(photoURL){ avatarIcon.style.display='none'; avatarLetter.style.display='none'; avatarPhoto.src=photoURL; avatarPhoto.style.display='block'; }
+    else { avatarIcon.style.display='none'; avatarPhoto.style.display='none'; avatarLetter.innerText=name.charAt(0).toUpperCase(); avatarLetter.style.display='flex'; }
+    loginText.innerText=name.split(' ')[0]; loginBtn.classList.add('logged-in'); loginBtn.classList.remove('signup-mode');
+    const g=document.getElementById('userGreeting'); if(g){ g.innerText='Hi, '+name+' 👑'; g.style.display='block'; }
+  } else {
+    avatarIcon.style.display='flex'; avatarLetter.style.display='none'; avatarPhoto.style.display='none'; loginBtn.classList.remove('logged-in');
+    const g=document.getElementById('userGreeting'); if(g) g.style.display='none';
+    updateAuthButton();
+  }
+  render();
+  loadMemberBanner();
+});
+</script>
+</body>
+</html>

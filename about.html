@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About Jay Pee Company Limited | Website Developer, App Developer & CV Writer in Kenya</title>
+<meta name="description" content="Jay Pee Company Limited is a website developer, app developer, CV writer, social media manager and virtual assistant company in Kenya. We do it for you online - fast, affordable, delivered on WhatsApp.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#070b1f;--navy2:#1a2145;--blue:#4f6bff;--purple:#8b5cf6;--gold:#ffcc00;--green:#25D366;--light:#f5f5f5;--muted:#555}
+html{font-size:clamp(14px,1.1vw + 12px,16px);-webkit-text-size-adjust:100%}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:#111;line-height:1.6}
+a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+.top-nav{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:clamp(6px,1.2vw,10px);padding:clamp(6px,1vw,10px) clamp(10px,2vw,15px);box-shadow:0 2px 10px rgba(0,0,0,.3);flex-wrap:wrap}
+.top-nav img{width:clamp(52px,10vw,110px);height:auto;object-fit:contain}
+.header-row1,.header-row2{display:contents}
+.nav-company{flex:1 1 auto;text-align:center;line-height:1.1;min-width:0}
+.nav-company h3{font-size:clamp(18px,3vw,26px);font-weight:900;letter-spacing:clamp(1px,0.4vw,4px)}
+.nav-company p{font-size:clamp(7px,1.2vw,10px);font-weight:700;letter-spacing:clamp(1px,0.5vw,5px);color:#8b9dff}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.nav-links a{color:#fff!important;font-weight:700;font-size:clamp(13px,1.4vw,14px);padding:7px 12px;background:var(--navy2)!important;border-radius:20px;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:var(--blue)!important}
+.hamburger{display:none}
+.auth-tabs{display:flex;gap:6px;align-items:center;flex:0 0 auto;order:99}
+.auth-tabs button{white-space:nowrap;border:none;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:clamp(12px,1.4vw,13px)}
+.login-tab{display:flex !important;align-items:center;gap:7px;background:#fff !important;color:#070b1f !important;padding:6px 13px 6px 6px !important;border-radius:999px}
+.login-tab.signup-mode{background:#25D366 !important;color:#fff !important}
+.login-tab .avatar-icon{width:26px;height:26px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto;border:1px solid #ddd}
+.login-tab .avatar-icon svg{width:22px;height:22px;display:block}
+.login-tab .avatar-letter{width:26px;height:26px;border-radius:50%;background:#4f6bff;color:#fff;display:none;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex:0 0 auto}
+.login-tab .avatar-photo{width:26px;height:26px;border-radius:50%;object-fit:cover;display:none;flex:0 0 auto}
+.login-tab.logged-in{background:#e6ffe6 !important;color:#070b1f !important}
+#userGreeting{color:#ffcc00;font-weight:800;font-size:clamp(11px,1.4vw,13px);white-space:nowrap}
+.bell-btn{position:relative;background:#fff;color:#070b1f;border:none;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:14px;flex:0 0 auto}
+.bell-badge{position:absolute;top:-6px;right:-6px;background:#ff4444;color:#fff;font-size:11px;font-weight:900;min-width:20px;height:20px;border-radius:999px;display:none;align-items:center;justify-content:center;padding:0 5px}
+.search-bar-wrap{background:#fff;border-bottom:1px solid #eee;padding:10px 15px;position:sticky;top:60px;z-index:90}
+.search-bar{max-width:1100px;margin:0 auto;display:flex;gap:8px;background:#f5f5f5;border:1px solid #ddd;border-radius:999px;padding:5px 5px 5px 16px;align-items:center}
+.search-bar input{flex:1;border:0;outline:none;background:transparent;font-size:clamp(14px,1.8vw,15px);padding:8px 0;min-width:0}
+.search-bar button{background:linear-gradient(90deg,#4f6bff,#8b5cf6)!important;color:#fff!important;border:0;padding:10px 20px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
+.search-results{max-width:1100px;margin:8px auto 0;display:none;gap:8px;flex-wrap:wrap}
+.search-results a{background:#070b1f!important;color:#fff!important;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700}
+.wrap{max-width:1100px;margin:0 auto;padding:24px clamp(12px,2vw,20px) 36px}
+.member-banner{display:none;background:linear-gradient(90deg,#ffcc00,#ff9900);color:#070b1f;border-radius:14px;padding:14px 16px;text-align:center;font-weight:800;font-size:clamp(13px,1.8vw,14px);margin-bottom:16px}
+.member-card{background:#e6ffe6;border:1px solid #0a7a0a;border-radius:14px;padding:14px;margin-top:14px;font-size:14px;color:#0a7a0a;font-weight:700}
+.member-card b{color:#070b1f}
+.guest-card{background:#f8f9ff;border:1px solid #EEF1FF;border-radius:14px;padding:14px;margin-top:14px;font-size:14px;color:#333}
+.guest-card b{color:#0a7a0a;cursor:pointer}
+.section{background:#fff;border-radius:18px;padding:clamp(20px,3vw,30px);margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.hero{display:flex;gap:clamp(16px,3vw,28px);align-items:center}
+.hero-text{flex:1.2;min-width:0}
+.badge{display:inline-block;background:#EEF1FF;color:var(--blue);padding:7px 14px;border-radius:999px;font-size:clamp(12px,1.6vw,13px);font-weight:800;margin-bottom:12px}
+.hero-text h1{font-size:clamp(26px,6vw,34px);line-height:1.15;color:var(--navy)}
+.hero-text h1 span{color:var(--blue)}
+.hero-text p{color:#444;font-size:clamp(14px,2vw,16px);margin:10px 0}
+.hero-img{flex:1;min-width:0}
+.hero-img img{width:100%;height:460px;object-fit:cover;object-position:top;border-radius:18px}
+.caption{background:#fff;margin:-30px 16px 0;position:relative;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;box-shadow:0 10px 25px rgba(0,0,0,.15)}
+.split{display:flex;gap:clamp(16px,3vw,28px);align-items:center}
+.split.reverse{flex-direction:row-reverse}
+.split-img{flex:1;min-width:0}
+.split-img img{width:100%;height:340px;object-fit:cover;border-radius:16px}
+.split-text{flex:1.2;min-width:0}
+.split-text h2{font-size:clamp(22px,5vw,26px);color:var(--navy);margin-bottom:10px}
+.split-text h2 span{color:var(--blue)}
+.split-text p{color:#444;font-size:clamp(14px,2vw,15px);margin:8px 0}
+.check-list{list-style:none;margin-top:12px}
+.check-list li{background:#f8f9ff;border:1px solid #EEF1FF;padding:11px 14px;border-radius:10px;margin-bottom:8px;font-size:clamp(13px,1.8vw,14px);color:#333}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.btn-primary{background:linear-gradient(90deg,#4f6bff,#8b5cf6)!important;color:#fff!important;padding:14px 24px;border-radius:30px;font-weight:800;font-size:clamp(14px,1.8vw,15px);border:0;cursor:pointer;box-shadow:0 6px 18px rgba(79,107,255,.35)}
+.btn-secondary{background:var(--navy)!important;color:#fff!important;padding:14px 24px;border-radius:30px;font-weight:800;font-size:clamp(14px,1.8vw,15px);border:0;cursor:pointer}
+.btn-ghost{background:#fff!important;color:var(--navy)!important;border:2px solid var(--navy)!important;padding:12px 22px;border-radius:30px;font-weight:800;font-size:clamp(14px,1.8vw,15px);cursor:pointer}
+.btn-green{background:var(--green)!important;color:#fff!important;padding:14px 24px;border-radius:30px;font-weight:800;font-size:clamp(14px,1.8vw,15px);border:0;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stats div{background:var(--navy);color:#fff;padding:clamp(14px,2vw,20px);border-radius:14px;text-align:center}
+.stats b{font-size:clamp(20px,4vw,24px);color:var(--gold);display:block}
+.stats span{font-size:clamp(12px,1.6vw,13px);color:#CBD5E1}
+.head{text-align:center;margin-bottom:20px}.head h2{font-size:clamp(22px,5vw,28px);color:var(--navy)}.head h2 span{color:var(--blue)}.head p{color:var(--muted);max-width:700px;margin:8px auto 0}
+.mission{background:linear-gradient(135deg,#070b1f,#1a2145);color:#fff;border-radius:18px;padding:clamp(20px,3vw,30px);text-align:center}
+.mission h2{font-size:clamp(22px,5vw,26px)}.mission h2 span{color:var(--gold)}.mission p{color:#CBD5E1;font-size:clamp(14px,2vw,16px);max-width:750px;margin:12px auto 0}
+.info-table{width:100%;border-collapse:collapse;font-size:clamp(13px,1.8vw,14px)}
+.info-table td{padding:12px 10px;border-bottom:1px solid #eee}
+.info-table td:first-child{font-weight:800;color:var(--navy);width:32%}
+.cta{background:var(--navy);color:#fff;border-radius:20px;padding:clamp(20px,3vw,30px);text-align:center}.cta h2{font-size:clamp(22px,5vw,27px)}.cta h2 span{color:var(--gold)}.cta p{color:#CBD5E1;margin:10px 0 20px}.cta .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+footer{background:#111;color:#fff;text-align:center;padding:28px 15px}footer .tagline{color:var(--gold)}footer p{font-size:clamp(13px,1.8vw,14px);color:#ccc;margin:5px 0}footer a{color:#fff!important;font-weight:700;margin:0 8px}footer .foot-grid{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin:14px 0;text-align:left}footer .foot-grid div{font-size:13px;color:#ccc}footer .foot-grid b{color:#fff;display:block;margin-bottom:4px}
+.float-wa{position:fixed;right:16px;bottom:16px;background:var(--green);color:#fff;padding:13px 16px;border-radius:999px;font-weight:800;z-index:200;box-shadow:0 10px 25px rgba(0,0,0,.25)}
+.auth-input{width:100%;padding:12px;margin:6px 0 10px;border:1.5px solid #e1e1e1;border-radius:10px;font-size:15px}
+.auth-label{font-size:12px;font-weight:800;color:#111}
+.auth-btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:750px){
+.top-nav{flex-direction:column;flex-wrap:nowrap;padding:0;gap:0;align-items:stretch}
+.top-nav img{width:42px;flex:0 0 auto}
+.header-row1{display:flex !important;width:100%;align-items:center;gap:8px;padding:8px 10px 6px}
+.nav-company{text-align:left;flex:1 1 auto;min-width:0}
+.nav-company h3{font-size:17px}
+.nav-company p{font-size:8px}
+.auth-tabs{order:99;flex:0 0 auto}
+.login-tab{padding:5px 10px 5px 5px !important;font-size:12px !important}
+#userGreeting{display:none !important}
+.header-row2{display:flex !important;width:100%;align-items:center;gap:6px;padding:0 10px 10px}
+.nav-links{display:flex !important;flex:1 1 auto !important;min-width:0 !important;width:auto !important;flex-direction:row !important;flex-wrap:nowrap !important;overflow-x:auto !important;background:transparent;padding:0;gap:6px;box-shadow:none;border-radius:0;scrollbar-width:none;justify-content:flex-start;-webkit-overflow-scrolling:touch;align-items:center}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{flex:0 0 auto !important;width:auto !important;padding:8px 12px;font-size:12px;white-space:nowrap;background:#1a2145}
+.nav-links a.active{background:#4f6bff !important}
+.nav-links.show{flex-direction:row !important;overflow-x:auto !important;background:transparent;padding:0;box-shadow:none;border-radius:0}
+.bell-btn{flex:0 0 auto !important;padding:6px 10px;font-size:13px;align-self:center}
+.hamburger{display:flex !important;background:var(--blue);color:#fff;border:0;font-size:16px;padding:6px 10px;border-radius:10px;cursor:pointer;align-items:center;justify-content:center;flex:0 0 auto !important;align-self:center}
+.search-bar-wrap{position:static;padding:8px 10px}.search-bar button{padding:10px 14px;font-size:13px}
+.wrap{padding:18px 12px 28px}.section{padding:20px 15px}
+.hero,.split{flex-direction:column;text-align:center}.split.reverse{flex-direction:column}.hero-img,.split-img{width:100%}.hero-img img{height:auto;aspect-ratio:4/5}.split-img img{height:280px}.btn-row{justify-content:center}.stats{grid-template-columns:1fr 1fr}
+.info-table td{display:block;width:100%!important}.info-table td:first-child{padding-bottom:0}
+#authModal > div{padding:18px 14px !important;margin:10px !important}
+.auth-input,input{font-size:16px !important}
+}
+@media(max-width:380px){ #userGreeting{display:none !important} .stats{grid-template-columns:1fr} .login-tab{padding:5px 10px 5px 5px !important} .nav-links a{padding:7px 10px;font-size:11px} .bell-btn{padding:5px 8px;font-size:12px} .hamburger{padding:5px 8px;font-size:15px} }
+</style>
+</head>
+<body>
+<header class="top-nav">
+<div class="header-row1">
+<a href="index.html"><img src="images/logo.png" alt="Jay Pee Logo" loading="eager" decoding="async"></a>
+<div class="nav-company"><h3>JAY PEE</h3><p>MEDIA HUB LTD</p></div>
+<div class="auth-tabs">
+  <span id="userGreeting" style="display:none"></span>
+  <button id="loginBtnHeader" class="login-tab signup-mode" onclick="handleLoginTab()">
+    <span class="avatar-icon" id="avatarIcon"><svg viewBox="0 0 24 24" fill="#9aa0a6" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#e8e8e8"/><circle cx="12" cy="9" r="3.5" fill="#9aa0a6"/><path d="M4.5 20c1.2-3.2 4-4.8 7.5-4.8s6.3 1.6 7.5 4.8c-2.2 1.4-4.7 2-7.5 2s-5.3-.6-7.5-2z" fill="#9aa0a6"/></svg></span>
+    <span class="avatar-letter" id="avatarLetter">J</span>
+    <img id="avatarPhoto" class="avatar-photo" alt="">
+    <span id="loginTabText">Sign Up</span>
+  </button>
+</div>
+</div>
+<div class="header-row2">
+<nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html" class="active">About</a></nav>
+<button class="bell-btn" id="bellBtn" onclick="openAnnouncements()">🔔 <span id="bellBadge" class="bell-badge">0</span></button>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+</div>
+</header>
+<div id="annModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;padding:16px"><div style="background:#fff;width:100%;max-width:460px;border-radius:18px;padding:22px;position:relative;max-height:90vh;overflow-y:auto"><span onclick="closeAnnouncements()" style="position:absolute;right:16px;top:10px;cursor:pointer;font-size:22px">✕</span><h2 style="margin:0;color:#070b1f">🔔 Announcements</h2><p style="font-size:13px;color:#666">Latest news from Jay Pee.</p><div id="annList" style="margin-top:14px">Loading...</div></div></div>
+<div class="search-bar-wrap"><div class="search-bar"><span>🔍</span><input id="siteSearch" placeholder="Search services, pages... e.g. CV, Website, Portfolio, About" oninput="doSearch(this.value)"><button onclick="doSearch(document.getElementById('siteSearch').value,true)">Search</button></div><div class="search-results" id="searchResults"></div></div>
+<div class="wrap">
+  <div id="memberBanner" class="member-banner"></div>
+  <div class="section"><div class="hero"><div class="hero-text">
+    <span class="badge" id="a_badge">✦ ABOUT US • JAY PEE COMPANY LIMITED</span>
+    <h1><span id="a_title1">Get To Know Jay Pee Company Limited</span> <span id="a_titleSpan">Website Developer & Digital Services Company in Kenya</span></h1>
+    <p id="a_text1">Welcome to Jay Pee Company Limited. We are not just designers - we are a full digital services company that genuinely cares about your brand, your business, and your success.</p>
+    <p id="a_text2">Every poster, website, app, video and CV we deliver is done with care, because your work represents you - and it represents us too. We do it for you, online, fast and affordably.</p>
+    <div id="memberCard" class="member-card" style="display:none">👑 <b>You are a Member!</b> You get 10% OFF on ALL services. Tap Chat below and say "Member Discount" - we will apply it.</div>
+    <div id="guestCard" class="guest-card">💡 <b onclick="openAuth('login')">Login / Sign Up (free)</b> to become a Member and get 10% OFF on ALL services + Members Only announcements!</div>
+    <div class="btn-row"><a href="https://wa.me/254714838764?text=Hi%20Jay%20Pee!%20I%20want%20to%20order" class="btn-green" data-wa-chat>💬 Chat With Us</a><a href="services.html" class="btn-primary">See Our Services →</a></div>
+  </div>
+  <div class="hero-img"><img id="a_heroPhoto" src="images/photo5.jpg" alt="Jay Pee Company Limited" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='images/photo5.jpg'"><div class="caption"><div><b id="capName">Jay Pee Company Limited</b><br><span style="color:#555;font-size:13px" id="capRole">Website • App • Design • Media</span></div><div style="color:#ffcc00">★★★★★</div></div></div></div></div>
+  <div class="section" style="padding:20px"><div class="stats" id="a_stats">
+    <div><b>4.9 / 5</b><span>⭐ Customer Rating</span></div>
+    <div><b>Same-Day</b><span>⚡ Fast Delivery</span></div>
+    <div><b>100% Online</b><span>🌍 All Kenya via WhatsApp</span></div>
+    <div><b>M-Pesa</b><span>💳 Easy Payment</span></div>
+  </div>
+  <div id="memberStatsNote" style="display:none;text-align:center;color:#0a7a0a;font-weight:800;font-size:14px;margin-top:12px">👑 Members: 10% OFF active on your account</div>
+  </div>
+  <div class="section"><div class="split"><div class="split-img"><img id="a_whoPhoto" src="images/photo2.jpg" alt="Jay Pee Company Limited" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='images/photo2.jpg'"></div><div class="split-text">
+    <h2>Hi, We Are <span id="whoName">Jay Pee 👋</span></h2>
+    <p id="a_who1">Jay Pee Company Limited is a digital services company based in <b>Siongiroi, Bomet County</b>, serving all of Kenya online. We help businesses, students, churches and personal brands look professional online and offline.</p>
+    <p id="a_who2">We started by helping friends with posters and CVs, now we help clients all over Kenya through WhatsApp.</p>
+    <p id="a_who3">Whether you are starting a small business, applying for a job, or growing your church or brand - we are here to make you look professional, without stress and without big costs.</p>
+    <div class="btn-row"><a href="portfolio.html" class="btn-secondary">See Our Work →</a><a href="https://wa.me/254714838764" class="btn-ghost" data-wa>💬 WhatsApp Us</a></div>
+  </div></div></div>
+  <div class="section"><div class="split reverse"><div class="split-img"><img id="a_whatPhoto" src="images/photo3.jpg" alt="What We Do" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='images/photo3.jpg'"></div><div class="split-text">
+    <h2>What We <span>Do</span></h2><p>Everything you need in one place - professional, fast and affordable. We do it for you:</p>
+    <ul class="check-list" id="a_whatList"><li>✅ <b>Website Development</b> - Modern, fast websites that work perfectly on phone</li><li>✅ <b>App Development</b> - Simple, clean mobile apps for your business</li><li>✅ <b>CV Writing</b> - Professional, ATS-friendly CVs that get you interviews</li><li>✅ <b>Social Media Management</b> - We manage your Instagram, TikTok and Facebook for you</li><li>✅ <b>Virtual Assistant</b> - Data entry, typing, research and online tasks, done for you</li><li>✅ <b>Posters & Logos</b> - Designs that make people stop and look</li><li>✅ <b>Video Editing</b> - Clean Reels, TikToks & YouTube videos</li><li>✅ <b>Online Services</b> - KRA, HELB, eCitizen, NTSA, CV Writing</li></ul>
+    <div class="btn-row"><a href="services.html" class="btn-primary">See Prices & Order →</a></div>
+  </div></div></div>
+  <div class="section"><div class="split"><div class="split-img"><img id="a_whyPhoto" src="images/photo4.jpg" alt="Why Choose Us" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='images/photo4.jpg'"></div><div class="split-text">
+    <h2>Why Choose <span>Us?</span></h2>
+    <ul class="check-list" id="a_whyList"><li>⚡ <b>Fast Delivery</b> - We don't keep you waiting for days</li><li>💰 <b>Fair Prices</b> - Good work that students and small businesses can afford</li><li>📱 <b>Easy To Reach</b> - Order in 1 click on WhatsApp, no long forms</li><li>❤️ <b>We Care About Your Brand</b> - We treat your business like our own</li><li id="memberWhyLi" style="display:none">👑 <b>Members Get 10% OFF</b> - Login and save on every service, automatically</li></ul>
+    <p id="a_whyText">Your satisfaction is our reputation. If you are not happy, we revise it - because we want you to come back and recommend us.</p>
+    <p id="memberWhyNote" style="display:none;color:#0a7a0a;font-weight:800">👑 As a logged-in member, your 10% OFF is already active - just order on Services / Portfolio and your WhatsApp message will show the discounted price.</p>
+  </div></div></div>
+  <div class="mission"><h2>Our Mission 🎯</h2><p id="a_mission">"Our goal is simple: To help small businesses in Kenya look <b>BIG</b> online, without spending big money."</p><p style="font-size:14px;margin-top:10px" id="a_missionBy">- Jay Pee Company Limited</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px"><a href="services.html" class="btn-primary">Start Your Project →</a><a href="index.html" class="btn-secondary">← Back to Home</a></div></div>
+  <div class="section" style="margin-top:20px"><div class="head"><h2>Official <span>Information</span></h2></div>
+    <table class="info-table">
+      <tr><td>Company Name</td><td id="a_infoCompany">Jay Pee Company Limited</td></tr>
+      <tr><td>Services</td><td id="a_infoFounder">Website Developer, App Developer, CV Writer, Social Media Manager, Virtual Assistant, Design & Video</td></tr>
+      <tr><td>Home Base</td><td id="a_infoBase">Siongiroi, Bomet County, Kenya • Serving All of Kenya Online</td></tr>
+      <tr><td>Working Hours</td><td id="a_infoHours">Available 24/7 - Order Anytime on WhatsApp</td></tr>
+      <tr><td>Payment</td><td id="a_infoPayment">M-Pesa - 0714 838 764 • Preview Before Full Payment</td></tr>
+      <tr><td>Delivery</td><td id="a_infoDelivery">100% Online via WhatsApp • Delivery time depends on project size</td></tr>
+    </table>
+    <p id="memberPaymentNote" style="display:none;text-align:center;color:#0a7a0a;font-weight:800;margin-top:12px">👑 Members pay 10% less - Your discount is applied when you order via Services / Portfolio while logged in.</p>
+  </div>
+  <div class="cta"><h2 id="a_ctaTitle">Ready To Work With Us? <span>Let's Start Today.</span></h2><p id="a_ctaText">Tell us what you need - we will reply with price & delivery time in minutes.</p><p id="memberCtaNote" style="display:none;color:#ffcc00;font-weight:800">👑 Members: Tap Chat - Your 10% OFF is already active!</p><div class="btns"><a href="https://wa.me/254714838764" class="btn-primary" data-wa>💬 Chat on WhatsApp</a><a href="services.html" class="btn-secondary">See Prices →</a><a href="portfolio.html" class="btn-ghost" style="background:#fff">See Portfolio →</a></div></div>
+</div>
+<footer>
+  <p><b>JAY PEE COMPANY LIMITED</b></p>
+  <p class="tagline">Online Shop - All Services In One Place</p>
+  <div class="foot-grid">
+    <div><b>Quick Links</b><a href="index.html">Home</a> • <a href="services.html">Services</a> • <a href="portfolio.html">Portfolio</a> • <a href="about.html">About</a></div>
+    <div><b>Our Services</b><br>Websites • Posters • Logos • Videos<br>CVs • KRA / HELB / eCitizen / NTSA</div>
+    <div><b>Contact Us</b><br><span id="footContact">WhatsApp: 0714 838 764</span><br><span id="footLoc">Siongiroi, Bomet • Available 24/7</span></div>
+  </div>
+  <p id="footPay">Pay via M-Pesa | Delivery Online | Siongiroi, Bomet County, Kenya</p>
+  <p>© 2026 Jay Pee Company Limited. All Rights Reserved.</p>
+</footer>
+<a class="float-wa" href="https://wa.me/254714838764" data-wa>💬 WhatsApp</a>
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;width:100%;max-width:430px;border-radius:18px;padding:24px;position:relative;max-height:92vh;overflow-y:auto">
+    <span onclick="closeAuth()" style="position:absolute;right:16px;top:10px;cursor:pointer;font-size:22px">✕</span>
+    <div id="signupBox">
+      <h2 style="margin:0;color:#070b1f">Create Account <span style="font-size:11px;background:#e6ffe6;color:#0a7a0a;padding:4px 8px;border-radius:20px">OPTIONAL</span></h2>
+      <p style="font-size:13px;color:#666">Optional - You can still order on WhatsApp without an account. Members get 10% OFF!</p>
+      <label class="auth-label">Full Name *</label><input id="su_name" class="auth-input" placeholder="Mary Wanjiku">
+      <label class="auth-label">WhatsApp / Phone *</label><input id="su_phone" class="auth-input" placeholder="0714838764">
+      <label class="auth-label">Email *</label><input id="su_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <label class="auth-label">Location (Optional)</label><input id="su_location" class="auth-input" placeholder="Nairobi / Bomet">
+      <label class="auth-label">Password *</label><input id="su_pass" type="password" class="auth-input" placeholder="Min 6 characters">
+      <button onclick="doSignup()" id="suBtn" class="auth-btn" style="background:#070b1f;color:#fff">Create Account →</button>
+      <p style="text-align:center;font-size:13px;margin-top:12px">Already have account? <b onclick="showLogin()" style="color:#25D366;cursor:pointer">Login</b></p>
+      <p onclick="closeAuth()" style="text-align:center;font-size:13px;color:#888;cursor:pointer">Skip for now - Order on WhatsApp →</p>
+    </div>
+    <div id="loginBox" style="display:none">
+      <h2 style="margin:0;color:#070b1f">Welcome Back</h2>
+      <p style="font-size:13px;color:#666">Login to order faster + get 10% OFF as a member</p>
+      <label class="auth-label">Email *</label><input id="li_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <label class="auth-label">Password *</label><input id="li_pass" type="password" class="auth-input" placeholder="Your password">
+      <button onclick="doLogin()" id="liBtn" class="auth-btn" style="background:#25D366;color:#fff">Login →</button>
+      <p onclick="showForgot()" style="text-align:center;font-size:13px;color:#25D366;cursor:pointer;margin-top:10px">Forgot Password?</p>
+      <p style="text-align:center;font-size:13px;margin-top:10px">No account? <b onclick="showSignup()" style="color:#25D366;cursor:pointer">Sign Up (Optional)</b></p>
+    </div>
+    <div id="forgotBox" style="display:none">
+      <h2 style="margin:0;color:#070b1f">Reset Password 🔑</h2>
+      <p style="font-size:13px;color:#666">We will send a <b>RESET LINK</b> to your email. Click it to create a new password. We cannot send your old password - Firebase does not store it.</p>
+      <label class="auth-label">Your Account Email *</label><input id="fp_email" type="email" class="auth-input" placeholder="you@gmail.com">
+      <button onclick="doForgot()" id="fpBtn" class="auth-btn" style="background:#070b1f;color:#fff">Send Reset Link →</button>
+      <p id="fpMsg" style="font-size:13px;text-align:center;margin-top:10px"></p>
+      <div style="background:#fff7e6;padding:10px;border-radius:10px;font-size:12px;color:#555;margin-top:10px;line-height:1.5">⚠️ Check <b>Inbox + Spam + Promotions</b>. Link expires in 1 hour.<br>If you signed up with a different email, you won't get it - try your other email.</div>
+      <p style="text-align:center;font-size:13px;margin-top:12px"><b onclick="showLogin()" style="color:#25D366;cursor:pointer">← Back to Login</b></p>
+      <p style="text-align:center;font-size:13px;margin-top:8px">No account? <b onclick="showSignup()" style="color:#25D366;cursor:pointer">Sign Up</b></p>
+    </div>
+    <p id="authMsg" style="font-size:13px;text-align:center;margin-top:10px"></p>
+  </div>
+</div>
+<script>
+let _lastTrackedSearch = "";
+let _searchTimer = null;
+let _currentUser = null;
+let _founderName = "Jay Pee";
+function isLoggedIn(){ return !!_currentUser; }
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('show')}
+function hasAccountBefore(){ try{ return localStorage.getItem('jp_has_account')==='1'; }catch(e){ return false; } }
+function markHasAccount(){ try{ localStorage.setItem('jp_has_account','1'); }catch(e){} }
+function updateAuthButton(){ let btn=document.getElementById('loginBtnHeader'); let txt=document.getElementById('loginTabText'); if(_currentUser) return; if(hasAccountBefore()){ txt.innerText='Login'; btn.classList.remove('signup-mode'); } else { txt.innerText='Sign Up'; btn.classList.add('signup-mode'); } }
+function handleLoginTab(){ if(_currentUser){ if(confirm('You are logged in as '+(_currentUser.email||'')+'\n\nTap OK to Logout?')){ doLogout(); } return; } if(hasAccountBefore()) openAuth('login'); else openAuth('signup'); }
+// --- FIX: Global helpers so applySettings works ---
+function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function setText(id,v){ if(v && document.getElementById(id)) document.getElementById(id).innerText=v; }
+function setHTML(id,v){ if(v && document.getElementById(id)) document.getElementById(id).innerHTML=v; }
+function setPhoto(id, src, fallback){ let el=document.getElementById(id); if(!el || !src) return; el.onerror=()=>{ el.onerror=null; el.src=fallback; }; el.src=src; }
+function getCache(key){ try{ let r=JSON.parse(localStorage.getItem(key)||'null'); if(!r) return null; if(Date.now()-r.t>0) return null; return r.v; }catch(e){ return null; } }
+function setCache(key,v){ try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), v:v})); }catch(e){} }
+function closeAnnouncements(){ document.getElementById('annModal').style.display='none'; }
+async function openAnnouncements(){ document.getElementById('annModal').style.display='flex'; if(window._refreshAnnouncements) await window._refreshAnnouncements(); }
+function doSearch(q, forceTrack){
+  q=q.toLowerCase().trim();
+  let box=document.getElementById('searchResults');
+  if(!q){box.style.display='none';box.innerHTML='';return;}
+  if(window.trackSearch){
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(()=>{ if(q!==_lastTrackedSearch && q.length>=2){ _lastTrackedSearch=q; window.trackSearch(q); } }, forceTrack ? 0 : 1200);
+  }
+  let wa = window._WA || "254714838764";
+  let pages=[
+    {name:'🏠 Home',link:'index.html',keys:['home','main']},
+    {name:'🛍️ All Services',link:'services.html',keys:['service','services','price','prices','order']},
+    {name:'🌐 Website Design',link:'services.html',keys:['website','web','site']},
+    {name:'🎨 Posters & Logos',link:'services.html',keys:['poster','logo','flyer','design']},
+    {name:'🎬 Video Editing',link:'services.html',keys:['video','reel','tiktok','edit']},
+    {name:'📄 KRA / HELB / eCitizen',link:'services.html',keys:['kra','helb','ecitizen','ntsa','government','pin']},
+    {name:'📝 CV Writing',link:'services.html',keys:['cv','resume','job','interview']},
+    {name:'📱 Social Media',link:'services.html',keys:['social','media','branding','instagram']},
+    {name:'🖼️ Portfolio',link:'portfolio.html',keys:['portfolio','work','samples','examples']},
+    {name:'👤 About - Jay Pee',link:'about.html',keys:['about','john','paul','jay pee','who','founder','company','siongiroi','bomet']},
+    {name:'💬 WhatsApp Order',link:'https://wa.me/'+wa,keys:['whatsapp','chat','contact','order','pay','mpesa']},
+  ];
+  let matches=pages.filter(p=>p.name.toLowerCase().includes(q)||p.keys.some(k=>q.includes(k)||k.includes(q)));
+  if(matches.length>0){box.style.display='flex';box.innerHTML=matches.map(m=>`<a href="${m.link}">${m.name} →</a>`).join('');}
+  else{box.style.display='flex';box.innerHTML=`<a href="https://wa.me/${wa}?text=Hi, I searched for ${q}">Not found? Ask on WhatsApp for "${q}" →</a>`;}
+}
+function updateMemberUI(){
+  let logged=isLoggedIn();
+  document.getElementById('memberCard').style.display = logged ? 'block' : 'none';
+  document.getElementById('guestCard').style.display = logged ? 'none' : 'block';
+  document.getElementById('memberStatsNote').style.display = logged ? 'block' : 'none';
+  document.getElementById('memberWhyLi').style.display = logged ? 'block' : 'none';
+  document.getElementById('memberWhyNote').style.display = logged ? 'block' : 'none';
+  document.getElementById('memberPaymentNote').style.display = logged ? 'block' : 'none';
+  document.getElementById('memberCtaNote').style.display = logged ? 'block' : 'none';
+  let wa = window._WA || "254714838764";
+  document.querySelectorAll("[data-wa-chat]").forEach(a=>{ a.href = logged ? "https://wa.me/"+wa+"?text="+encodeURIComponent(`Hi ${_founderName}! I want to order as a MEMBER - Please apply my 10% OFF`) : "https://wa.me/"+wa+"?text="+encodeURIComponent(`Hi ${_founderName}! I want to order`); });
+  document.querySelectorAll("[data-wa]").forEach(a=>{ if(a.classList.contains('float-wa')){ a.href="https://wa.me/"+wa; return; } a.href = logged ? "https://wa.me/"+wa+"?text="+encodeURIComponent(`Hi ${_founderName}! I am a MEMBER - Please apply my 10% OFF on my order`) : "https://wa.me/"+wa; });
+}
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('[data-wa-chat]') && window.trackOrder) window.trackOrder('WhatsApp Chat - About Hero' + (isLoggedIn()?' - Member 10% OFF':''));
+  else if(e.target.closest('[data-wa]') && window.trackOrder) window.trackOrder('WhatsApp Chat - About' + (isLoggedIn()?' - Member 10% OFF':''));
+});
+updateAuthButton();
+function applySettings(s, fromCache){
+  let wa = s.g_whatsapp || "254714838764"; window._WA = wa;
+  let mpesa = s.g_mpesa || "0714838764";
+  _founderName = s.g_founder || "Jay Pee";
+  setText("a_badge", s.a_badge); setText("a_title1", s.a_title1); setText("a_titleSpan", s.a_titleSpan);
+  setText("a_text1", s.a_text1); setText("a_text2", s.a_text2);
+  setPhoto("a_heroPhoto", s.a_heroPhoto, "images/photo5.jpg");
+  setPhoto("a_whoPhoto", s.a_whoPhoto, "images/photo2.jpg");
+  setPhoto("a_whatPhoto", s.a_whatPhoto, "images/photo3.jpg");
+  setPhoto("a_whyPhoto", s.a_whyPhoto, "images/photo4.jpg");
+  setText("capName", s.g_founder); setText("capRole", s.g_role); setText("whoName", (s.g_founder||"Jay Pee")+" 👋");
+  setHTML("a_who1", s.a_who1); setHTML("a_who2", s.a_who2); setHTML("a_who3", s.a_who3);
+  if(s.a_whatList){ let lines = s.a_whatList.split("\n").map(x=>x.trim()).filter(Boolean); document.getElementById("a_whatList").innerHTML = lines.map(l=>`<li>${escHtml(l)}</li>`).join(""); }
+  if(s.a_whyList){ let lines = s.a_whyList.split("\n").map(x=>x.trim()).filter(Boolean); document.getElementById("a_whyList").innerHTML = lines.map(l=>`<li>${escHtml(l)}</li>`).join(""); if(isLoggedIn()){ let li=document.createElement('li'); li.innerHTML='👑 <b>Members Get 10% OFF</b> - Login and save on every service'; document.getElementById("a_whyList").appendChild(li); } }
+  setText("a_whyText", s.a_whyText); setHTML("a_mission", s.a_mission); setText("a_missionBy", s.a_missionBy);
+  setText("a_infoCompany", s.a_infoCompany); setText("a_infoFounder", s.a_infoFounder); setText("a_infoBase", s.a_infoBase); setText("a_infoHours", s.a_infoHours); setText("a_infoPayment", s.a_infoPayment); setText("a_infoDelivery", s.a_infoDelivery);
+  setText("a_ctaTitle", s.a_ctaTitle); setText("a_ctaText", s.a_ctaText);
+  if(s.a_stats){ let lines = s.a_stats.split("\n").map(x=>x.trim()).filter(Boolean); if(lines.length){ document.getElementById("a_stats").innerHTML = lines.map(l=>{ let parts=l.split("|"); return `<div><b>${escHtml((parts[0]||"").trim())}</b><span>${escHtml((parts[1]||"").trim())}</span></div>`; }).join(""); } }
+  if(s.g_locationShort){ document.getElementById("footLoc").innerText = s.g_locationShort+" • Available 24/7"; document.getElementById("footPay").innerText = "Pay via M-Pesa | Delivery Online | "+s.g_locationShort; }
+  document.getElementById("footContact").innerText = "WhatsApp: "+mpesa;
+  updateMemberUI();
+}
+(function(){ let c=getCache('jp_cache_settings_about'); if(c) applySettings(c,true); })();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,doc,getDoc,setDoc,addDoc,serverTimestamp,collection,getDocs} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const firebaseConfig = { apiKey: "AIzaSyBDCFTZgCmWysGm_x1cH94xR0hSYgUsSLc", authDomain: "jay-pee-24867.firebaseapp.com", projectId: "jay-pee-24867", storageBucket: "jay-pee-24867.firebasestorage.app", messagingSenderId: "999056409829", appId: "1:999056409829:web:5f243af858bc236afe400c" };
+const app=initializeApp(firebaseConfig); const db=getFirestore(app); const auth=getAuth(app);
+window._auth=auth; window._db=db;
+window.trackSearch = async (term)=>{ try{ await addDoc(collection(db,"searches"),{term:String(term).toLowerCase().trim(), at:serverTimestamp(), page:"about.html"}); }catch(e){} };
+window.trackOrder = async (serviceName)=>{ try{ await addDoc(collection(db,"orders"),{service:serviceName||"WhatsApp Chat", at:serverTimestamp(), page:"about.html"}); }catch(e){} };
+window.trackPageView = async ()=>{ try{ await addDoc(collection(db,"page_views"),{page:"about.html", at:serverTimestamp()}); }catch(e){} };
+if(window.requestIdleCallback){ requestIdleCallback(()=>trackPageView(),{timeout:3000}); } else { setTimeout(trackPageView,2000); }
+async function loadMemberBanner(){
+  try{
+    const snap = await getDocs(collection(db,"announcements"));
+    let all=[]; snap.forEach(d=> all.push({id:d.id, ...d.data()}));
+    let live = all.filter(a=> a.active===true || a.active==='yes' || a.active==='true').sort((a,b)=> (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+    let logged = !!_currentUser;
+    let visible = live.filter(a=>{ let aud=a.audience||'all'; if(aud==='all') return true; if(aud==='members'||aud==='members_inbox') return logged; return true; });
+    if(!visible.length){ document.getElementById('memberBanner').style.display='none'; return; }
+    let withDisc = visible.find(a=>a.memberDiscount);
+    let latest = withDisc || visible[0];
+    let banner=document.getElementById('memberBanner');
+    if(latest.memberDiscount){
+      if(logged){ let mp = latest.memberPrice || Math.round(Number(latest.originalPrice||0)*0.9); banner.innerHTML = `📢 ${latest.title} <br>👑 <b>Members: KSh ${mp} (was KSh ${latest.originalPrice}) - 10% OFF for you!</b> <a href="${latest.link||'services.html'}" style="background:#070b1f;color:#fff;padding:6px 14px;border-radius:20px;margin-left:8px">View →</a>`; }
+      else { banner.innerHTML = `📢 ${latest.title} <br>💡 <b onclick="openAuth('login')" style="cursor:pointer">Login to get 10% OFF - Members pay KSh ${latest.memberPrice||''}</b>`; }
+    } else { banner.innerHTML = `📢 ${latest.title} <a href="${latest.link||'services.html'}" style="background:#070b1f;color:#fff;padding:6px 14px;border-radius:20px;margin-left:8px">View →</a>`; }
+    banner.style.display='block';
+    let list=document.getElementById('annList'); if(list) list.innerHTML = visible.map(a=>`<div style="background:#f8fafc;border:1px solid #eee;border-radius:12px;padding:14px;margin-bottom:10px"><b>${escHtml(a.title||'')}</b><p style="font-size:13px;color:#555;margin:6px 0">${escHtml(a.message||'')}</p><a href="${a.link||'services.html'}" style="display:inline-block;background:#070b1f;color:#fff;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:800">View →</a></div>`).join('');
+    let badge=document.getElementById('bellBadge'); if(badge){ badge.style.display='flex'; badge.innerText= visible.length>9?'9+':visible.length; }
+  }catch(e){ console.log(e); }
+}
+window._refreshAnnouncements = loadMemberBanner;
+async function load(){
+  try{
+    const snap = await getDoc(doc(db,"settings","site"));
+    if(!snap.exists()) return;
+    let s = snap.data();
+    setCache('jp_cache_settings_about', s);
+    applySettings(s,false);
+  }catch(e){ console.log(e); }
+}
+load();
+window.openAuth = (mode) => { document.getElementById('authModal').style.display='flex'; if(mode==='login') showLogin(); else showSignup(); };
+window.closeAuth = () => document.getElementById('authModal').style.display='none';
+window.showLogin = () => { document.getElementById('signupBox').style.display='none'; document.getElementById('forgotBox').style.display='none'; document.getElementById('loginBox').style.display='block'; document.getElementById('authMsg').innerText=''; };
+window.showSignup = () => { document.getElementById('loginBox').style.display='none'; document.getElementById('forgotBox').style.display='none'; document.getElementById('signupBox').style.display='block'; document.getElementById('authMsg').innerText=''; };
+window.showForgot = () => { document.getElementById('signupBox').style.display='none'; document.getElementById('loginBox').style.display='none'; document.getElementById('forgotBox').style.display='block'; let e=document.getElementById('li_email').value; if(e) document.getElementById('fp_email').value=e; document.getElementById('fpMsg').innerText=''; document.getElementById('authMsg').innerText=''; };
+window.forgotPass = () => showForgot();
+window.doForgot = async () => {
+  const email=document.getElementById('fp_email').value.trim(); const msg=document.getElementById('fpMsg'); const btn=document.getElementById('fpBtn');
+  if(!email){ msg.style.color='red'; msg.innerText='Type your account email first'; return; }
+  btn.innerText='Sending...'; btn.disabled=true;
+  try{ await sendPasswordResetEmail(auth,email); msg.style.color='green'; msg.innerText='✅ Reset link SENT to '+email+'! Check Inbox + Spam, click the link to set a new password.'; btn.innerText='Resend Link'; btn.disabled=false; }
+  catch(e){ msg.style.color='red'; if(e.code==='auth/user-not-found') msg.innerText='❌ No account with this email. Did you sign up with a different email? Try Sign Up.'; else if(e.code==='auth/invalid-email') msg.innerText='❌ Invalid email - check spelling.'; else if(e.code==='auth/too-many-requests') msg.innerText='❌ Too many tries. Wait 5 mins and try again.'; else msg.innerText='❌ FAILED: '+e.message; btn.innerText='Send Reset Link →'; btn.disabled=false; }
+};
+window.doSignup = async () => {
+  const name=document.getElementById('su_name').value.trim(); const phone=document.getElementById('su_phone').value.trim(); const email=document.getElementById('su_email').value.trim(); const loc=document.getElementById('su_location').value.trim(); const pass=document.getElementById('su_pass').value; const msg=document.getElementById('authMsg');
+  if(!name||!phone||!email){ msg.style.color='red'; msg.innerText='Fill Name + Phone + Email'; return; }
+  if(pass.length<6){ msg.style.color='red'; msg.innerText='Password must be 6+ characters'; return; }
+  try{ document.getElementById('suBtn').innerText='Creating...'; const cred=await createUserWithEmailAndPassword(auth,email,pass); await setDoc(doc(db,"customers",cred.user.uid),{name,phone,email,location:loc,createdAt:new Date(),role:"customer"}); markHasAccount(); msg.style.color='green'; msg.innerText='✅ Account created! Welcome '+name+' - You now get 10% OFF!'; setTimeout(()=>closeAuth(),1200); }catch(e){ msg.style.color='red'; msg.innerText=e.message.replace('Firebase: ',''); document.getElementById('suBtn').innerText='Create Account →'; }
+};
+window.doLogin = async () => {
+  const email=document.getElementById('li_email').value.trim(); const pass=document.getElementById('li_pass').value; const msg=document.getElementById('authMsg');
+  try{ document.getElementById('liBtn').innerText='Logging in...'; await signInWithEmailAndPassword(auth,email,pass); markHasAccount(); msg.style.color='green'; msg.innerText='✅ Logged in! 10% OFF applied.'; setTimeout(()=>closeAuth(),800); }catch(e){ msg.style.color='red'; msg.innerText='Wrong email or password'; document.getElementById('liBtn').innerText='Login →'; }
+};
+window.doLogout = async () => { await signOut(auth); location.reload(); };
+onAuthStateChanged(auth, async (user)=>{
+  _currentUser = user || null;
+  let avatarIcon=document.getElementById('avatarIcon'); let avatarLetter=document.getElementById('avatarLetter'); let avatarPhoto=document.getElementById('avatarPhoto'); let loginText=document.getElementById('loginTabText'); let loginBtn=document.getElementById('loginBtnHeader');
+  if(user){
+    markHasAccount();
+    let name=user.email.split('@')[0]; let photoURL=user.photoURL||null;
+    try{ const snap=await getDoc(doc(db,"customers",user.uid)); if(snap.exists()){ let d=snap.data(); if(d.name) name=d.name; if(d.photoURL) photoURL=d.photoURL; if(d.profilePic) photoURL=d.profilePic; } }catch(e){}
+    if(photoURL){ avatarIcon.style.display='none'; avatarLetter.style.display='none'; avatarPhoto.src=photoURL; avatarPhoto.style.display='block'; }
+    else { avatarIcon.style.display='none'; avatarPhoto.style.display='none'; avatarLetter.innerText=name.charAt(0).toUpperCase(); avatarLetter.style.display='flex'; }
+    loginText.innerText=name.split(' ')[0]; loginBtn.classList.add('logged-in'); loginBtn.classList.remove('signup-mode');
+    const g=document.getElementById('userGreeting'); if(g){ g.innerText='Hi, '+name+' 👑'; g.style.display='block'; }
+  } else {
+    avatarIcon.style.display='flex'; avatarLetter.style.display='none'; avatarPhoto.style.display='none'; loginBtn.classList.remove('logged-in');
+    const g=document.getElementById('userGreeting'); if(g) g.style.display='none';
+    updateAuthButton();
+  }
+  updateMemberUI();
+  loadMemberBanner();
+});
+</script>
+</body>
+</html>
