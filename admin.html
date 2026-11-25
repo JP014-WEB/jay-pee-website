@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard - Jay Pee Media Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial;background:#EEF1F6;margin:0;padding:0;color:#111}
+.admin-header{background:#070b1f;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .logo{width:44px;height:44px;background:linear-gradient(135deg,#4f6bff,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+.brand h1{font-size:18px;margin:0;line-height:1.1}
+.brand p{font-size:10px;color:#8b9dff;margin:2px 0 0;letter-spacing:1px}
+.user-info{font-size:12px;color:#5e6771;text-align:right}
+.user-info b{color:#fff}
+.tabs-wrap{background:#fff;padding:10px 14px;display:flex;gap:8px;overflow-x:auto;position:sticky;top:72px;z-index:99;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tab-btn{flex:1;min-width:105px;padding:11px 8px;border:2px solid #EEF1FF;background:#F8F9FF;border-radius:12px;cursor:pointer;font-weight:800;font-size:13px;color:#333;white-space:nowrap}
+.tab-btn.active{background:#070b1f;color:#fff;border-color:#070b1f}
+.tab-btn small{display:block;font-weight:400;font-size:10px;opacity:.7;margin-top:2px}
+.page{max-width:840px;margin:0 auto;padding:18px 14px 40px}
+.tab-page{display:none}
+.tab-page.active{display:block}
+.page-head{background:#fff;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:5px solid #4f6bff}
+.page-head h2{margin:0;font-size:20px;color:#070b1f}
+.page-head p{margin:6px 0 0;color:#666;font-size:13px;line-height:1.5}
+.card{background:#fff;padding:20px;border-radius:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.card h3{margin:0 0 4px;font-size:17px}
+.card-desc{font-size:12px;color:#666;margin:0 0 8px;line-height:1.5}
+.card label{font-size:12px;font-weight:800;color:#333;display:block;margin-top:14px;text-transform:uppercase;letter-spacing:.3px}
+input{width:100%;padding:12px;margin:6px 0;border:1.5px solid #e1e1e1;border-radius:10px;font-size:15px}
+input:focus,textarea:focus,select:focus{border-color:#4f6bff;outline:none}
+textarea{width:100%;padding:12px;margin:6px 0;border:1.5px solid #e1e1e1;border-radius:10px;font-size:14px;line-height:1.5}
+select{width:100%;padding:12px;margin:6px 0;border:1.5px solid #e1e1e1;border-radius:10px;font-size:15px}
+button{width:100%;padding:14px;background:#070b1f;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer}
+button:hover{opacity:.92}
+.success{color:green;text-align:center;font-weight:bold;font-size:13px}
+.hint{font-size:12px;color:#555;background:#f5f7ff;padding:10px;border-radius:10px;margin-top:10px;line-height:1.5}
+.del-btn{background:#ff4444 !important}
+.dup-btn{background:#25D366 !important}
+.tool-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tool-row button{flex:1;min-width:110px;padding:10px;font-size:13px}
+.section-title{text-align:center;margin:24px 0 12px;font-size:17px}
+.save-bar{position:sticky;bottom:12px;background:#070b1f;color:#fff;padding:12px 14px;border-radius:14px;display:flex;gap:10px;align-items:center;justify-content:space-between;box-shadow:0 10px 25px rgba(0,0,0,.3);margin-top:16px}
+.save-bar span{font-size:13px;font-weight:700}
+.save-bar button{width:auto;padding:12px 20px;background:#25D366;margin:0}
+.logout-btn{width:auto;padding:8px 14px;background:#ff4444 !important;border-radius:10px;font-size:12px}
+.top-bar{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px 14px;border-radius:12px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);gap:10px}
+.top-bar p{margin:0;font-size:12px;color:#666}
+.dash-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+.dash-card{background:#fff;padding:18px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent}
+.dash-card:hover{border-color:#4f6bff}
+.dash-card b{font-size:16px;display:block;color:#070b1f}
+.dash-card span{font-size:12px;color:#666}
+.traffic-stat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.traffic-stat div{background:#fff;padding:14px;border-radius:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.traffic-stat b{font-size:22px;display:block;color:#070b1f}
+.traffic-stat span{font-size:11px;color:#666}
+.customer-row{background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px}
+.customer-row b{font-size:15px}
+.customer-row p{font-size:13px;color:#555;margin:4px 0}
+.mini-btn{width:auto;padding:8px 12px;font-size:12px;margin:0}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);padding:16px}
+.login-card{background:#fff;width:100%;max-width:420px;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.login-header{background:linear-gradient(135deg,#6a11cb,#2575fc);padding:32px 24px;text-align:center;color:#fff}
+.login-header .logo{width:64px;height:64px;background:#fff;color:#2575fc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;margin:0 auto 12px}
+.login-header h1{font-size:22px;margin:0}
+.login-header p{font-size:13px;opacity:.9;margin-top:6px}
+.login-body{padding:28px 24px}
+.login-body h2{font-size:18px;margin:0 0 6px}
+.login-body .sub{font-size:13px;color:#666;margin-bottom:20px}
+.login-body label{font-size:13px;font-weight:600;color:#333;display:block;margin:14px 0 6px;text-transform:none;letter-spacing:0}
+.login-body input{width:100%;padding:13px 14px;border:1.5px solid #e1e1e1;border-radius:12px;font-size:15px;outline:none}
+.login-body input:focus{border-color:#2575fc}
+.pass-wrap{position:relative}
+.pass-wrap span{position:absolute;right:12px;top:21px;cursor:pointer;font-size:13px;color:#2575fc;font-weight:700}
+.row{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+.row a{font-size:13px;color:#2575fc;text-decoration:none;font-weight:600;cursor:pointer}
+.row label{margin:0;font-weight:400;font-size:13px;display:flex;gap:6px;align-items:center}
+.row label input{width:auto;margin:0}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#6a11cb,#2575fc);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px}
+.btn:disabled{opacity:.6}
+.error{background:#ffe8e8;color:#c00;padding:10px;border-radius:10px;font-size:13px;display:none;margin-top:12px}
+.success-box{background:#e6ffe6;color:#0a7a0a;padding:10px;border-radius:10px;font-size:13px;display:none;margin-top:12px}
+.footer{text-align:center;font-size:12px;color:#888;margin-top:18px;padding-top:16px;border-top:1px solid #eee}
+.step{display:none}
+.step.active{display:block}
+.back{font-size:13px;color:#666;cursor:pointer;margin-top:12px;text-align:center;display:block}
+.code-input{letter-spacing:2px;text-align:center;font-size:16px;font-weight:700}
+#adminContent{display:none}
+.file-input{border:2px dashed #4f6bff !important;background:#F8F9FF}
+.ann-card{border-left:5px solid #ffcc00 !important}
+.ann-off{opacity:.6;border-left-color:#999 !important}
+.faq-row{background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px}
+.faq-row.off{opacity:.55}
+.switch{position:relative;display:inline-block;width:52px;height:28px}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#ccc;border-radius:34px;transition:.3s}
+.slider:before{position:absolute;content:"";height:20px;width:20px;left:4px;bottom:4px;background:#fff;border-radius:50%;transition:.3s}
+.switch input:checked + .slider{background:#25D366}
+.switch input:checked + .slider:before{transform:translateX(24px)}
+.graph-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;margin-top:8px}
+.graph-legend span{display:flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+@media(max-width:600px){.brand h1{font-size:15px}.user-info{display:none}.tab-btn{min-width:95px;font-size:12px}.save-bar{flex-direction:column;align-items:stretch;text-align:center}.dash-grid{grid-template-columns:1fr}.traffic-stat{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="loginCard" class="login-wrap"><div class="login-card"><div class="login-header"><div class="logo">A</div><h1>Admin Dashboard</h1><p>Secure Login • Only Authorized Admin</p></div><div class="login-body"><div class="step active" id="step-login"><h2>Welcome Back 👋</h2><p class="sub">Login to manage prices, services & orders</p><label>Username / Email</label><input type="email" id="adminEmail" placeholder="e.g. admin@yourbusiness.com" autocomplete="username"><label>Password</label><div class="pass-wrap"><input type="password" id="adminPassword" placeholder="Enter your password" autocomplete="current-password"><span onclick="togglePass('adminPassword')">Show</span></div><div class="row"><label><input type="checkbox" id="remember"> Remember me</label><a onclick="showStep('step-forgot')">Forgot Password?</a></div><button class="btn" id="loginBtn" onclick="login()">Login to Dashboard →</button><div class="error" id="loginError"></div><div class="success-box" id="loginSuccess"></div><div class="footer">Protected by Firebase Authentication<br>© 2026 Your Business</div></div><div class="step" id="step-forgot"><h2>Forgot Password?</h2><p class="sub">We will send a verification code to your admin email.</p><label>Admin Email</label><input type="email" id="resetEmail" placeholder="Enter your admin email"><button class="btn" onclick="sendCode()">Send Verification Code →</button><div class="error" id="forgotError"></div><div class="success-box" id="forgotSuccess"></div><div class="hint">📧 Check inbox / spam.</div><span class="back" onclick="showStep('step-login')">← Back to Login</span></div><div class="step" id="step-code"><h2>Enter Verification Code</h2><p class="sub">Paste code from your email link.</p><label>Verification Code</label><input type="text" id="verifyCode" class="code-input" placeholder="Paste code here"><button class="btn" onclick="verifyCodeStep()">Verify Code →</button><div class="error" id="codeError"></div><div class="hint">Code is after <b>oobCode=</b> in email link</div><span class="back" onclick="showStep('step-forgot')">← Resend Code</span></div><div class="step" id="step-newpass"><h2>Set New Password</h2><p class="sub">Create strong new password</p><label>New Password</label><div class="pass-wrap"><input type="password" id="newPass" placeholder="Min 6 characters"><span onclick="togglePass('newPass')">Show</span></div><label>Confirm New Password</label><input type="password" id="confirmPass" placeholder="Repeat new password"><button class="btn" onclick="setNewPassword()">Save New Password →</button><div class="error" id="newPassError"></div><div class="success-box" id="newPassSuccess"></div><span class="back" onclick="showStep('step-login')">← Back to Login</span></div></div></div></div>
+<div id="adminContent">
+<div class="admin-header"><div class="brand"><div class="logo">JP</div><div><h1>JAY PEE MEDIA HUB</h1><p>ADMIN DASHBOARD • OFFICIAL</p></div></div><div class="user-info">Logged in as<br><b id="loggedUser"></b></div></div>
+<div class="tabs-wrap">
+<button class="tab-btn active" data-tab="tab-dash" onclick="showTab('tab-dash',this)">📊 Dashboard<small>Overview</small></button>
+<button class="tab-btn" data-tab="tab-traffic" onclick="showTab('tab-traffic',this)">🚦 Traffic<small>Users • Searches • Orders</small></button>
+<button class="tab-btn" data-tab="tab-announce" onclick="showTab('tab-announce',this)">📢 Announcements<small>Notify Users</small></button>
+<button class="tab-btn" data-tab="tab-faq" onclick="showTab('tab-faq',this)">❓ FAQ Manager<small>Auto + Custom Q&A</small></button>
+<button class="tab-btn" data-tab="tab-global" onclick="showTab('tab-global',this)">🌍 Global<small>WhatsApp • M-Pesa</small></button>
+<button class="tab-btn" data-tab="tab-home" onclick="showTab('tab-home',this)">🏠 Home<small>index.html</small></button>
+<button class="tab-btn" data-tab="tab-about" onclick="showTab('tab-about',this)">👤 About<small>about.html</small></button>
+<button class="tab-btn" data-tab="tab-services" onclick="showTab('tab-services',this)">🛍️ Services<small>Services + Featured</small></button>
+<button class="tab-btn" data-tab="tab-portfolio" onclick="showTab('tab-portfolio',this)">🖼️ Portfolio<small>Gallery</small></button>
+</div>
+<div class="page">
+<div class="top-bar"><p>💡 Edit one tab, click <b>Save</b> at bottom of that tab. Website updates automatically.</p><button class="logout-btn" onclick="logout()">Logout</button></div>
+<div id="tab-dash" class="tab-page active">
+<div class="page-head"><h2>📊 Dashboard</h2><p>Welcome back. Tap a card to edit that page.</p></div>
+<div class="dash-grid">
+<div class="dash-card" onclick="goTab('tab-traffic')" style="border:2px solid #ff4444"><b>🚦 Traffic Management</b><span id="dashTrafficSummary">Loading traffic...</span></div>
+<div class="dash-card" onclick="goTab('tab-announce')" style="border:2px solid #ffcc00"><b>📢 Announcements</b><span id="dashAnnSummary">Loading announcements...</span></div>
+<div class="dash-card" onclick="goTab('tab-faq')" style="border:2px solid #4f6bff"><b>❓ FAQ Manager</b><span id="dashFaqSummary">Loading FAQ...</span></div>
+<div class="dash-card" onclick="goTab('tab-global')"><b>🌍 Global Settings</b><span>WhatsApp, M-Pesa, Name, Location →</span></div>
+<div class="dash-card" onclick="goTab('tab-home')"><b>🏠 Home Page</b><span>Hero, slideshow photos, CTA →</span></div>
+<div class="dash-card" onclick="goTab('tab-about')"><b>👤 About Page</b><span>Story, mission, official info →</span></div>
+<div class="dash-card" onclick="goTab('tab-services')"><b>🛍️ Services</b><span>Add / edit price, photo, video, tools →</span></div>
+<div class="dash-card" onclick="goTab('tab-portfolio')"><b>🖼️ Portfolio Gallery</b><span>Extra photos & videos →</span></div>
+<div class="dash-card" onclick="window.open('index.html','_blank')"><b>👀 View Website</b><span>Open your live site →</span></div>
+</div>
+<div class="card"><h3>How to use</h3><p class="card-desc">1. Tap Traffic to see customers, searches, WhatsApp orders & questions • 2. Tap Announcements to notify all users • 3. Tap FAQ to control questions • 4. Tap Services to change price - FAQ price updates automatically • 5. Always click Save at bottom of that tab.</p></div>
+</div>
+<div id="tab-traffic" class="tab-page">
+<div class="page-head" style="border-color:#ff4444"><h2>🚦 Traffic Management</h2><p>See who is using your site, what they search, what they order, what they ask. Auto-refreshes every 30 sec. <b>Recent Searches, Orders, Questions & Page Views older than 24hrs are auto-deleted.</b></p><button onclick="loadTraffic()" style="background:#ff4444;margin-top:10px">🔄 Refresh Traffic</button><p id="trafficUpdated" style="font-size:12px;color:#888;margin-top:8px"></p><p id="cleanupInfo" style="font-size:12px;color:#0a7a0a;font-weight:700"></p></div>
+<div class="traffic-stat">
+<div><b id="statCustomers">0</b><span>👥 Total Customers</span></div>
+<div><b id="statSearches">0</b><span>🔍 Total Searches (Last 24h)</span></div>
+<div><b id="statOrders">0</b><span>💬 WhatsApp Orders (Last 24h)</span></div>
+<div><b id="statQuestions">0</b><span>❓ Questions Asked</span></div>
+</div>
+<div class="traffic-stat">
+<div><b id="statTodaySignups">0</b><span>🆕 Signups Today</span></div>
+<div><b id="statTodaySearches">0</b><span>🔍 Searches Today</span></div>
+<div><b id="statTodayOrders">0</b><span>💬 Orders Today</span></div>
+<div><b id="statBlocked">0</b><span>🚫 Blocked Users</span></div>
+</div>
+<div class="card"><h3>📈 Most Searched (Last 24h)</h3><div id="topSearches">Loading...</div></div>
+<div class="card"><h3>🏆 Most Ordered Services (Last 24h)</h3><div id="topOrders">Loading...</div></div>
+<div class="card"><h3>🔍 Recent Searches (Auto-deletes after 24h)</h3><div id="recentSearches">Loading...</div></div>
+<div class="card"><h3>💬 Recent WhatsApp Orders (Auto-deletes after 24h)</h3><div id="recentOrders">Loading...</div></div>
+<div class="card"><h3>👀 Page Views (Last 24h)</h3><div id="pageViews">Loading...</div></div>
+<div class="card"><h3>👥 All Customers</h3><input id="customerSearch" placeholder="Search customer..." oninput="renderCustomers()"><div id="customersList" style="margin-top:12px">Loading customers...</div></div>
+<div class="card"><h3>🚫 Blocked Users</h3><div id="blockedList">Loading...</div></div>
+<div class="card"><h3>❓ Asked Questions</h3><div id="questionsList">Loading questions...</div></div>
+<div class="card"><h3>🕒 Recent Activity</h3><div id="activityFeed">Loading...</div></div>
+<div class="card" style="border:2px solid #4f6bff"><h3>📊 Graph - Most Ordered Services + Liked vs Not Liked</h3><p class="card-desc">Auto-updates as people navigate / order / like. Green = Orders, Blue = Liked, Red = Not Liked. Data from last 24h orders + service_likes.</p><canvas id="trafficChart" width="760" height="320" style="width:100%;height:auto;background:#f8fafc;border-radius:12px"></canvas><div class="graph-legend"><span><span class="dot" style="background:#25D366"></span> Orders</span><span><span class="dot" style="background:#4f6bff"></span> Liked 👍</span><span><span class="dot" style="background:#ff4444"></span> Not Liked 👎</span></div><div id="graphSummary" style="font-size:13px;margin-top:10px;color:#333"></div><button onclick="loadTraffic()" style="background:#4f6bff;margin-top:10px">🔄 Refresh Graph</button></div>
+<div class="card" style="border:2px solid #4f6bff"><h3>👍❤️ Service Likes - Detailed Table (Admin Only)</h3><p class="card-desc">Every Like / Dislike from services.html. 1 account = 1 vote. Shows member email if logged in, else guest.</p><div id="likesTable">Loading likes...</div></div>
+</div>
+<div id="tab-faq" class="tab-page">
+<div class="page-head" style="border-color:#4f6bff"><h2>❓ FAQ Manager - You Control FAQ</h2><p><b>AUTO:</b> When you add/edit a Service, FAQ auto-creates <i>"How much does [Service] cost?"</i> with live price. When you change Global (M-Pesa, WhatsApp, Location), FAQ answers update too.<br><b>MANUAL:</b> Add your own questions below. Turn OFF any question to hide it from Home instantly.</p><p id="faqStatus" style="font-size:13px;font-weight:800;margin-top:10px"></p></div>
+<div class="card" style="border:2px solid #4f6bff"><h3>➕ Add Custom Question</h3>
+<label>Question</label><input id="faq_q" placeholder="e.g. Do you deliver outside Kenya?">
+<label>Answer</label><textarea id="faq_a" rows="3" placeholder="Yes, we deliver online worldwide via WhatsApp..."></textarea>
+<label>Category</label><select id="faq_cat"><option value="service">🛠️ Services</option><option value="price">💰 Prices & Payment</option><option value="order">🛒 How To Order</option></select>
+<label>Icon (Emoji)</label><input id="faq_icon" value="❓" placeholder="❓">
+<label>Tag</label><input id="faq_tag" value="FAQ" placeholder="FAQ">
+<label>Show on Home?</label><select id="faq_active"><option value="yes">✅ YES - Show Now</option><option value="no">⏸️ NO - Hidden / Draft</option></select>
+<button onclick="addFaq()" style="background:#4f6bff;margin-top:10px">➕ Add Question →</button><p id="faqMsg" style="font-size:13px;font-weight:800;margin-top:10px"></p>
+<div class="hint">Tip: To hide a default question (e.g. "Do I get preview?"), add a Custom Question with the EXACT same question text and set Show = NO. FAQ will hide it.</div>
+</div>
+<div class="card"><h3>🤖 Auto Questions From Services (Live Prices)</h3><p class="card-desc">These are NOT saved - they are generated from your Services. Change price in Services tab → this list updates on refresh.</p><div id="faqAutoList">Loading services...</div></div>
+<div class="card"><h3>📋 Your Custom Questions</h3><p class="card-desc">Green switch = LIVE on Home. Grey = Hidden.</p><div id="faqCustomList">Loading...</div></div>
+</div>
+<div id="tab-announce" class="tab-page">
+<div class="page-head" style="border-color:#ffcc00"><h2>📢 Announcements - You Control Who Sees It</h2><p><b>🌍 Everyone</b> = Banner + Bell for visitors + members. <b>👥 Members Only</b> = Only logged-in members. <b>🔔 Members + Saved Inbox</b> = Members get it even if they were offline - it waits in their inbox until they login.</p><p id="annStatus" style="font-size:13px;font-weight:800;margin-top:10px"></p></div>
+<div class="card" style="border:2px solid #ffcc00"><h3>➕ New Announcement</h3>
+<label>Title</label><input id="ann_title" placeholder="🆕 NEW: Business Website - From KSh 4999">
+<label>Message</label><textarea id="ann_msg" rows="3" placeholder="We just added Business Website Package! Order today..."></textarea>
+<label>Who Sees This? - YOU REGULATE</label><select id="ann_audience"><option value="all">🌍 Everyone - Public Banner + Bell</option><option value="members">👥 Members Only - Logged-in users only</option><option value="members_inbox">🔔 Members Only + Saved Inbox - Even if offline now, they get it when they login later</option></select>
+<label>Type</label><select id="ann_type"><option value="new_service">🆕 New Service</option><option value="offer">💰 Offer / Discount</option><option value="general">📢 General News</option><option value="important">⚠️ Important</option></select>
+<label>Button Link</label><input id="ann_link" value="services.html">
+<label>👑 Member Discount - 10% OFF?</label><select id="ann_discount"><option value="no">❌ No discount - Same price for all</option><option value="yes">✅ YES - Members get 10% OFF</option></select>
+<label>Original Price (KSh) - Only if discount = YES, for auto-calculation</label><input id="ann_price" type="number" placeholder="e.g. 5000 - Members will see 4500">
+<label>Show to users?</label><select id="ann_active"><option value="yes">✅ YES - Show Now</option><option value="no">⏸️ NO - Draft / Hidden</option></select>
+<button id="annPublishBtn" onclick="addAnnouncement()" style="background:#ff9900;margin-top:10px">📢 Publish Announcement →</button>
+<button onclick="testAnnouncement()" style="background:#070b1f;margin-top:8px">🧪 Test Publish - Creates a test announcement to prove it works</button>
+<div class="hint">If Publish fails, the red error below will tell you the real reason. Most common: Firebase Rules block <b>announcements</b>. Add the rules I gave you in chat.</div>
+<p id="annError" style="font-size:13px;font-weight:800;margin-top:10px"></p>
+</div>
+<div class="card"><h3>📋 Your Announcements</h3><p class="card-desc">Green = LIVE. Grey = Hidden. Tap Hide to remove from all users instantly.</p><div id="annList">Loading...</div></div>
+</div>
+<div id="tab-global" class="tab-page">
+<div class="page-head" style="border-color:#070b1f"><h2>🌍 Global Settings</h2><p>Changes <b>ALL pages at once</b> + FAQ answers (M-Pesa, WhatsApp, Location).</p></div>
+<div class="card"><h3>📞 Contact & Identity</h3>
+<label>WhatsApp Number</label><input id="g_whatsapp" value="254714838764">
+<label>M-Pesa Number</label><input id="g_mpesa" value="0714838764">
+<label>Company / Founder Name</label><input id="g_founder" value="Jay Pee Company Limited">
+<label>Company Role</label><input id="g_role" value="Website • App • Design • Media">
+<label>Company Name</label><input id="g_company" value="JAY PEE COMPANY LIMITED">
+<label>Location / Base (Full)</label><input id="g_location" value="Siongiroi, Bomet County, Kenya • Serving All of Kenya Online">
+<label>Location Short (Footer)</label><input id="g_locationShort" value="Siongiroi, Bomet County, Kenya">
+</div>
+<div class="save-bar"><span>🌍 Global</span><button onclick="saveGlobal()">💾 Save Global</button></div>
+<p id="msgGlobal" class="success"></p>
+</div>
+<div id="tab-home" class="tab-page">
+<div class="page-head"><h2>🏠 Home Page</h2><p>Only Home changes here.</p></div>
+<div class="card"><h3>✦ Hero Section</h3>
+<label>Hero Badge</label><input id="h_badge" value="✦ Trusted in Nairobi & All Kenya • Delivered Online">
+<label>Hero Title - Before Blue Word</label><input id="h_title1" value="Your Ideas,">
+<label>Hero Title - Blue Word</label><input id="h_titleSpan" value="Designed">
+<label>Hero Title - After Blue Word</label><input id="h_title2" value="& Delivered Online.">
+<label>Hero Text 1</label><textarea id="h_text1" rows="3">Hi, we are Jay Pee Company Limited - your website developer, app developer, CV writer, social media manager and virtual assistant in Kenya. Need a website that sells, a poster that stops the scroll, or a video that goes viral? Or help with KRA, HELB, eCitizen or a winning CV?</textarea>
+<label>Hero Text 2</label><textarea id="h_text2" rows="3">You order in 2 minutes on WhatsApp. We design, build and deliver, and you pay via M-Pesa. Fast, affordable, and stress-free — for businesses, students & creators. We do it for you.</textarea>
+<label>Trust Line (separate with | )</label><input id="h_trust" value="⭐ 4.9/5 customers | ⚡ Same-day delivery | 💳 M-Pesa Accepted">
+</div>
+<div class="card"><h3>🖼️ Hero Slideshow Photos</h3><label>Photos List (separated by |||)</label><textarea id="h_photos" rows="3">images/photo 1.jpg|||images/photo2.jpg|||images/photo3.jpg|||images/photo4.jpg|||images/photo5.jpg|||images/photo6.jpg</textarea>
+<label>OR 📸 Add Photos From Phone</label><input type="file" class="file-input" accept="image/*" multiple onchange="handleHomePhotos(this)">
+<div id="homePreview" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div>
+</div>
+<div class="card"><h3>🛍️ Popular Services & CTA</h3>
+<label>Popular Services - Title</label><input id="h_popTitle" value="Popular Services">
+<label>Popular Services - Subtitle</label><input id="h_popSub" value="Everything you need in one place. Tap any service to order instantly.">
+<label>Why Choose - Title</label><input id="h_whyTitle" value="Why Choose Jay Pee?">
+<label>CTA Title</label><input id="h_ctaTitle" value="Ready to Start? Let's Build Yours Today.">
+<label>CTA Text</label><textarea id="h_ctaText" rows="2">Tell us what you need - we will reply with price & delivery time in minutes.</textarea>
+<label>Footer Tagline</label><input id="h_footerTag" value="Online Shop - All Services In One Place">
+</div>
+<div class="save-bar"><span>🏠 Home</span><button onclick="saveHome()">💾 Save Home</button></div>
+</div>
+<div id="tab-about" class="tab-page">
+<div class="page-head" style="border-color:#8b5cf6"><h2>👤 About Page</h2><p>Only About changes here.</p></div>
+<div class="card"><h3>✦ Top - Hero</h3>
+<label>About Badge</label><input id="a_badge" value="✦ ABOUT US • JAY PEE COMPANY LIMITED">
+<label>About Hero Title</label><input id="a_title1" value="Get To Know Jay Pee Company Limited">
+<label>About Hero Title - Blue Word</label><input id="a_titleSpan" value="Website Developer & Digital Services Company in Kenya">
+<label>About Text 1</label><textarea id="a_text1" rows="2">Welcome to Jay Pee Company Limited. We are not just designers - we are a full digital services company that genuinely cares about your brand, your business, and your success.</textarea>
+<label>About Text 2</label><textarea id="a_text2" rows="2">Every poster, website, app, video and CV we deliver is done with care, because your work represents you - and it represents us too. We do it for you, online, fast and affordably.</textarea>
+<label>About Hero Photo</label><input id="a_heroPhoto" value="images/photo5.jpg">
+<label>OR 📸 Choose Hero Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handleAboutPhoto(this,'a_heroPhoto')">
+</div>
+<div class="card"><h3>📊 Stats</h3><label>Stats List</label><textarea id="a_stats" rows="4">4.9 / 5 | ⭐ Customer Rating
+Same-Day | ⚡ Fast Delivery
+100% Online | 🌍 All Kenya via WhatsApp
+M-Pesa | 💳 Easy Payment</textarea></div>
+<div class="card"><h3>👋 Who Are We</h3>
+<label>Who Are We - Photo</label><input id="a_whoPhoto" value="images/photo2.jpg">
+<label>OR 📸 Choose Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handleAboutPhoto(this,'a_whoPhoto')">
+<label>Text 1</label><textarea id="a_who1" rows="2">Jay Pee Company Limited is a digital services company based in Siongiroi, Bomet County, serving all of Kenya online. We help businesses, students, churches and personal brands look professional online and offline.</textarea>
+<label>Text 2</label><textarea id="a_who2" rows="2">We started by helping friends with posters and CVs, now we help clients all over Kenya through WhatsApp.</textarea>
+<label>Text 3</label><textarea id="a_who3" rows="2">Whether you are starting a small business, applying for a job, or growing your church or brand - we are here to make you look professional, without stress and without big costs.</textarea>
+</div>
+<div class="card"><h3>✅ What We Do + Why Choose Us</h3>
+<label>What We Do - Photo</label><input id="a_whatPhoto" value="images/photo3.jpg">
+<label>OR 📸 Choose Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handleAboutPhoto(this,'a_whatPhoto')">
+<label>What We Do - List</label><textarea id="a_whatList" rows="8">✅ Website Development - Modern, fast websites that work perfectly on phone
+✅ App Development - Simple, clean mobile apps for your business
+✅ CV Writing - Professional, ATS-friendly CVs that get you interviews
+✅ Social Media Management - We manage your Instagram, TikTok and Facebook for you
+✅ Virtual Assistant - Data entry, typing, research and online tasks, done for you
+✅ Posters & Logos - Designs that make people stop and look
+✅ Video Editing - Clean Reels, TikToks & YouTube videos
+✅ Online Services - KRA, HELB, eCitizen, NTSA, CV Writing</textarea>
+<label>Why Choose Us - Photo</label><input id="a_whyPhoto" value="images/photo4.jpg">
+<label>OR 📸 Choose Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handleAboutPhoto(this,'a_whyPhoto')">
+<label>Why Choose Us - List</label><textarea id="a_whyList" rows="4">⚡ Fast Delivery - We don't keep you waiting for days
+💰 Fair Prices - Good work that students and small businesses can afford
+📱 Easy To Reach - Order in 1 click on WhatsApp, no long forms
+❤️ We Care About Your Brand - We treat your business like our own</textarea>
+<label>Why Choose Us - Bottom Text</label><textarea id="a_whyText" rows="2">Your satisfaction is our reputation. If you are not happy, we revise it - because we want you to come back and recommend us.</textarea>
+</div>
+<div class="card"><h3>🎯 Mission + Official Info + CTA</h3>
+<label>Mission Text</label><textarea id="a_mission" rows="2">"Our goal is simple: To help small businesses in Kenya look BIG online, without spending big money."</textarea>
+<label>Mission Author</label><input id="a_missionBy" value="- Jay Pee Company Limited">
+<label>Official - Company Name</label><input id="a_infoCompany" value="Jay Pee Company Limited">
+<label>Official - Services</label><input id="a_infoFounder" value="Website Developer, App Developer, CV Writer, Social Media Manager, Virtual Assistant, Design & Video">
+<label>Official - Home Base</label><input id="a_infoBase" value="Siongiroi, Bomet County, Kenya • Serving All of Kenya Online">
+<label>Official - Working Hours</label><input id="a_infoHours" value="Available 24/7 - Order Anytime on WhatsApp">
+<label>Official - Payment</label><input id="a_infoPayment" value="M-Pesa - 0714 838 764 • Preview Before Full Payment">
+<label>Official - Delivery</label><input id="a_infoDelivery" value="100% Online via WhatsApp • Delivery time depends on project size">
+<label>About CTA Title</label><input id="a_ctaTitle" value="Ready To Work With Us? Let's Start Today.">
+<label>About CTA Text</label><textarea id="a_ctaText" rows="2">Tell us what you need - we will reply with price & delivery time in minutes.</textarea>
+</div>
+<div class="save-bar"><span>👤 About</span><button onclick="saveAbout()">💾 Save About</button></div>
+<p id="msgSettings" class="success"></p>
+</div>
+<div id="tab-services" class="tab-page">
+<div class="page-head" style="border-color:#2575fc"><h2>🛍️ Services</h2><p>One service = <b>Services + Portfolio Featured + Home Popular + FAQ Auto Question</b>.</p></div>
+<div class="card" style="border:2px solid #2575fc"><h3>➕ Add New Service</h3>
+<label>1. Name for SERVICES Page</label><input id="new_serviceTitle" placeholder="e.g. Business Website Package">
+<label>2. Name for PORTFOLIO Page</label><input id="new_portfolioTitle" placeholder="e.g. 1. Business Website">
+<label>3. Price (KSh)</label><input id="new_price" type="number" placeholder="e.g. 4999">
+<label>4. Description</label><textarea id="new_description" rows="3" placeholder="e.g. Website designed for a local business..."></textarea>
+<label>5. Category</label><select id="new_category"><option value="Website">🌐 Website</option><option value="Poster">🖼️ Poster</option><option value="Logo">🎨 Logo</option><option value="Video">🎬 Video</option><option value="CV">📄 CV</option><option value="Other">✨ Other</option></select>
+<label>6. Emoji</label><select id="new_emoji"><option value="🌐">🌐 Website</option><option value="🖼️">🖼️ Poster</option><option value="🎨">🎨 Logo</option><option value="🎬">🎬 Video</option><option value="📄">📄 CV</option><option value="✨">✨ Other</option></select>
+<label>7. 📸 Photo Link</label><input id="new_imageUrl" placeholder="https://i.ibb.co/xxx/photo.jpg">
+<label>OR 7b. 📸 Choose Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handleNewServicePhoto(this)">
+<p id="new_imagePreview" style="font-size:12px;color:green"></p>
+<img id="new_imagePreviewImg" style="display:none;width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:8px">
+<label>8. 🎬 Video Link (YouTube)</label><input id="new_videoUrl" placeholder="https://youtube.com/watch?v=...">
+<label>9. 🛠️ Tools / Included</label><textarea id="new_tools" rows="2" placeholder="e.g. Logo, 5 Pages, WhatsApp Button"></textarea>
+<label>10. Show in Portfolio Featured?</label><select id="new_showPortfolio"><option value="yes">Yes</option><option value="no">No - Services only</option></select>
+<label>11. 📢 Announce This New Service?</label><select id="new_announce"><option value="yes">✅ YES - Show banner + bell</option><option value="no">❌ NO - Just add silently</option></select>
+<label>12. Who Sees Announcement? - If Announce = YES</label><select id="new_announceAudience"><option value="all">🌍 Everyone</option><option value="members">👥 Members Only</option><option value="members_inbox">🔔 Members Only + Saved Inbox (even if offline)</option></select>
+<label>13. 👑 Member Discount - 10% OFF?</label><select id="new_announceDiscount"><option value="yes">✅ YES - Members pay 10% less (auto)</option><option value="no">❌ NO - Same price</option></select>
+<div class="hint">If Announce = YES + Discount = YES, members will see: <b>Members: KSh [price x 0.9] (10% OFF - was [price])</b></div>
+<button id="addBtn" onclick="addNewService()" style="background:#2575fc;margin-top:10px">Add New Service</button>
+<p id="addServiceError" style="font-size:13px;font-weight:800;margin-top:10px"></p>
+</div>
+<h3 class="section-title">✏️ Your Existing Services</h3>
+<div id="list">Loading services...</div><p id="msg" class="success"></p>
+</div>
+<div id="tab-portfolio" class="tab-page">
+<div class="page-head" style="border-color:#25D366"><h2>🖼️ Portfolio Gallery</h2><p>Extra work samples.</p></div>
+<div class="card" style="border:2px solid #25D366"><h3>➕ Add Portfolio Item</h3>
+<label>Title</label><input id="p_title" placeholder="e.g. Church Poster">
+<label>Type</label><select id="p_type"><option value="photo">📸 Photo / Design</option><option value="video">🎬 Video (YouTube)</option></select>
+<label>Category</label><select id="p_category"><option value="Poster">🖼️ Poster</option><option value="Logo">🎨 Logo</option><option value="Video">🎬 Video</option><option value="CV">📄 CV</option><option value="Other">✨ Other</option></select>
+<label>Price (KSh)</label><input id="p_price" type="number" placeholder="e.g. 499">
+<label>Description</label><textarea id="p_desc" rows="2"></textarea>
+<label>Photo Link OR YouTube Link</label><input id="p_link" placeholder="Paste imgbb link OR YouTube link">
+<label>OR 📸 Choose Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handlePortfolioPhoto(this)">
+<img id="p_previewImg" style="display:none;width:100%;max-height:150px;object-fit:cover;border-radius:10px;margin-top:8px">
+<button onclick="addPortfolio()" style="background:#25D366">Add to Portfolio Gallery →</button>
+</div>
+<div id="portfolioList">Loading portfolio...</div><p id="pmsg" class="success"></p>
+</div>
+</div>
+</div>
+<script>
+function showTab(id, btn){
+  document.querySelectorAll('.tab-page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else { let b=document.querySelector('[data-tab="'+id+'"]'); if(b) b.classList.add('active'); }
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='tab-traffic') loadTraffic();
+  if(id==='tab-announce') loadAnnouncements();
+  if(id==='tab-faq') loadFaqs();
+}
+function goTab(id){ showTab(id, null); }
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, addDoc, deleteDoc, getDoc, setDoc, query, orderBy, limit, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, verifyPasswordResetCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+const firebaseConfig = { apiKey: "AIzaSyBDCFTZgCmWysGm_x1cH94xR0hSYgUsSLc", authDomain: "jay-pee-24867.firebaseapp.com", projectId: "jay-pee-24867", storageBucket: "jay-pee-24867.firebasestorage.app", messagingSenderId: "999056409829", appId: "1:999056409829:web:5f243af858bc236afe400c" };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+let pendingCode = "";
+let allCustomers=[]; let allSearches=[]; let allOrders=[]; let allQuestions=[]; let allPageViews=[]; let allAnnouncements=[]; let allFaqs=[]; let allServicesCache=[]; let allLikes=[];
+window.showStep = function(id){ document.querySelectorAll('.step').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+window.togglePass = function(id){ const el=document.getElementById(id); el.type = el.type==='password' ? 'text' : 'password'; }
+function showErr(id,msg){ const e=document.getElementById(id); e.style.display='block'; e.innerText=msg; }
+function showOk(id,msg){ const e=document.getElementById(id); e.style.display='block'; e.innerText=msg; }
+window.login = async function(){ const email=document.getElementById('adminEmail').value.trim(); const pass=document.getElementById('adminPassword').value; if(!email||!pass){ showErr('loginError','Please enter email and password'); return; } document.getElementById('loginBtn').disabled=true; document.getElementById('loginBtn').innerText='Logging in...'; try{ await signInWithEmailAndPassword(auth,email,pass); }catch(e){ showErr('loginError','Wrong email or password.'); document.getElementById('loginBtn').disabled=false; document.getElementById('loginBtn').innerText='Login to Dashboard →'; } }
+window.sendCode = async function(){ const email=document.getElementById('resetEmail').value.trim(); if(!email){ showErr('forgotError','Enter your admin email first'); return; } try{ await sendPasswordResetEmail(auth,email); showOk('forgotSuccess','✅ Verification code sent to '+email); setTimeout(()=>showStep('step-code'),1200); }catch(e){ showErr('forgotError','Email not found.'); } }
+window.verifyCodeStep = async function(){ const code=document.getElementById('verifyCode').value.trim(); if(!code){ showErr('codeError','Paste code'); return; } try{ const email = await verifyPasswordResetCode(auth, code); pendingCode = code; showStep('step-newpass'); showOk('newPassSuccess','✅ Code verified for '+email); }catch(e){ showErr('codeError','Invalid or expired code.'); } }
+window.setNewPassword = async function(){ const np=document.getElementById('newPass').value; const cp=document.getElementById('confirmPass').value; if(np.length<6){ showErr('newPassError','Password must be at least 6 characters'); return; } if(np!==cp){ showErr('newPassError','Passwords do not match'); return; } try{ await confirmPasswordReset(auth, pendingCode, np); showOk('newPassSuccess','✅ Password changed!'); setTimeout(()=>showStep('step-login'),1500); }catch(e){ showErr('newPassError','Code expired.'); } }
+window.logout = async function(){ await signOut(auth); }
+onAuthStateChanged(auth,(user)=>{ if(user){ document.getElementById('loginCard').style.display='none'; document.getElementById('adminContent').style.display='block'; document.getElementById('loggedUser').innerText=user.email; loadSettings(); loadServices(); loadPortfolio(); loadTraffic(); loadAnnouncements(); loadFaqs(); setInterval(()=>{ if(document.getElementById('tab-traffic').classList.contains('active')) loadTraffic(); },30000); }else{ document.getElementById('loginCard').style.display='flex'; document.getElementById('adminContent').style.display='none'; } });
+function ytId(url){ if(!url) return ""; if(url.includes('youtu.be/')) return url.split('youtu.be/')[1].split(/[?&]/)[0]; if(url.includes('v=')) return url.split('v=')[1].split('&')[0]; if(url.includes('/embed/')) return url.split('/embed/')[1].split(/[?&]/)[0]; if(url.includes('/shorts/')) return url.split('/shorts/')[1].split(/[?&]/)[0]; return ""; }
+function esc(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function val(id){ return document.getElementById(id).value; }
+function setVal(id,v){ if(v!==undefined && document.getElementById(id)) document.getElementById(id).value = v; }
+function toMillis(ts){ if(!ts) return 0; if(typeof ts==='number') return ts < 10000000000 ? ts*1000 : ts; if(ts.toDate) { try{ return ts.toDate().getTime(); }catch(e){ return 0; } } if(ts.seconds) return ts.seconds*1000; if(ts._seconds) return ts._seconds*1000; if(ts instanceof Date) return ts.getTime(); let d=new Date(ts); return isNaN(d.getTime()) ? 0 : d.getTime(); }
+function fmtDate(ts){ let m=toMillis(ts); if(!m) return '-'; let d=new Date(m); return d.toLocaleDateString('en-KE',{day:'numeric',month:'short',year:'numeric'}) + ' ' + d.toLocaleTimeString('en-KE',{hour:'2-digit',minute:'2-digit'}); }
+function isToday(ts){ let m=toMillis(ts); if(!m) return false; let d=new Date(m); let now=new Date(); return d.getDate()===now.getDate() && d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear(); }
+function getTimeVal(o){ return toMillis(o.at||o.createdAt||o.timestamp||o.time||0); }
+function getSearchTerm(s){ return (s.term||s.query||s.text||s.search||s.keyword||'').toString().trim(); }
+function getOrderName(o){ return (o.service||o.title||o.message||o.serviceTitle||o.term||o.name||'WhatsApp Chat').toString().trim(); }
+function isLiveAnn(a){ return a.active===true || a.active==='yes' || a.active==='true' || a.active===1; }
+function audienceLabel(aud){ if(aud==='members') return '👥 Members Only'; if(aud==='members_inbox') return '🔔 Members + Saved Inbox'; return '🌍 Everyone'; }
+window.loadFaqs = async function(){
+  try{
+    const snap = await getDocs(collection(db,"faqs"));
+    allFaqs=[]; snap.forEach(d=> allFaqs.push({id:d.id, ...d.data()}));
+    let live = allFaqs.filter(f=> f.active!==false);
+    document.getElementById('dashFaqSummary').innerText = live.length + ' LIVE custom • ' + allFaqs.length + ' total custom + Auto from Services';
+    document.getElementById('faqStatus').innerText = live.length ? '🟢 '+live.length+' custom LIVE on Home' : '⏸️ No custom questions yet - Home shows Auto + Fallback';
+    document.getElementById('faqCustomList').innerHTML = allFaqs.length ? allFaqs.map(f=>{
+      let isOn = f.active!==false;
+      return '<div class="faq-row '+(isOn?'':'off')+'"><b>'+esc(f.question||f.q||'')+'</b> <span style="font-size:11px;background:#EEF1FF;color:#4f6bff;padding:3px 8px;border-radius:999px">'+esc(f.cat||'service')+' • '+esc(f.tag||'FAQ')+'</span><p style="font-size:13px;color:#555">'+esc(f.answer||f.a||'')+'</p><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label class="switch"><input type="checkbox" '+(isOn?'checked':'')+' onchange="toggleFaq(\''+f.id+'\',this.checked)"><span class="slider"></span></label><span style="font-size:12px;font-weight:800">'+(isOn?'✅ ON - Showing':'⏸️ OFF - Hidden')+'</span><button class="mini-btn" style="background:#ff4444" onclick="deleteFaq(\''+f.id+'\')">🗑️ Delete</button><button class="mini-btn" style="background:#070b1f" onclick="editFaq(\''+f.id+'\')">✏️ Edit</button></div></div>';
+    }).join('') : '<p>No custom questions yet. Add one above.</p>';
+  }catch(e){ document.getElementById('faqCustomList').innerHTML='<p style="color:red">Could not load FAQs: '+e.message+' - Create collection <b>faqs</b> in Firestore.</p>'; }
+  try{
+    const sSnap = await getDocs(collection(db,"services"));
+    let services=[]; sSnap.forEach(d=> services.push(d.data()));
+    allServicesCache = services;
+    document.getElementById('faqAutoList').innerHTML = services.length ? services.map(s=>{
+      let t=s.serviceTitle||s.name||'Service'; let p=Number(s.price||0);
+      return '<div class="faq-row"><b>How much does '+esc(t)+' cost?</b><p style="font-size:13px;color:#555">Auto answer: From KSh '+p.toLocaleString()+' - Members KSh '+Math.round(p*0.9).toLocaleString()+'</p><b>What is '+esc(t)+'?</b><p style="font-size:13px;color:#555">Auto answer from description</p></div>';
+    }).join('') : '<p>No services yet - add a service to auto-create FAQ.</p>';
+  }catch(e){ document.getElementById('faqAutoList').innerHTML='Could not load services.'; }
+};
+window.addFaq = async function(){
+  let q=document.getElementById('faq_q').value.trim(); let a=document.getElementById('faq_a').value.trim();
+  if(!q||!a){ document.getElementById('faqMsg').style.color='red'; document.getElementById('faqMsg').innerText='❌ Fill Question + Answer'; return; }
+  try{
+    await addDoc(collection(db,"faqs"),{question:q, answer:a, cat:document.getElementById('faq_cat').value, icon:document.getElementById('faq_icon').value||'❓', tag:document.getElementById('faq_tag').value||'FAQ', active:document.getElementById('faq_active').value==='yes', createdAt:serverTimestamp()});
+    document.getElementById('faq_q').value=''; document.getElementById('faq_a').value='';
+    document.getElementById('faqMsg').style.color='green'; document.getElementById('faqMsg').innerText='✅ Added! Home FAQ updates on refresh.';
+    loadFaqs();
+  }catch(e){ document.getElementById('faqMsg').style.color='red'; document.getElementById('faqMsg').innerText='❌ FAILED: '+e.message; }
+};
+window.toggleFaq = async function(id, on){ try{ await updateDoc(doc(db,"faqs",id),{active:on}); loadFaqs(); }catch(e){ alert('FAILED: '+e.message); } };
+window.deleteFaq = async function(id){ if(!confirm('Delete this FAQ question?')) return; try{ await deleteDoc(doc(db,"faqs",id)); loadFaqs(); }catch(e){ alert('FAILED: '+e.message); } };
+window.editFaq = async function(id){ let f=allFaqs.find(x=>x.id===id); if(!f) return; let nq=prompt('Edit Question:', f.question||''); if(nq===null) return; let na=prompt('Edit Answer:', f.answer||''); if(na===null) return; try{ await updateDoc(doc(db,"faqs",id),{question:nq, answer:na}); loadFaqs(); }catch(e){ alert('FAILED: '+e.message); } };
+async function cleanupOldTraffic(){
+  let cutoff = Date.now() - (24*60*60*1000);
+  let deleted = 0;
+  async function cleanColl(name){
+    try{
+      const snap = await getDocs(collection(db,name));
+      for(let d of snap.docs){
+        let data=d.data(); let t=getTimeVal(data);
+        if(t && t < cutoff){ await deleteDoc(doc(db,name,d.id)); deleted++; }
+      }
+    }catch(e){}
+  }
+  await cleanColl('searches'); await cleanColl('orders'); await cleanColl('whatsapp_clicks'); await cleanColl('whatsapp_orders'); await cleanColl('page_views'); await cleanColl('questions');
+  return deleted;
+}
+function drawTrafficGraph(orderCounts, likeMap){
+  let canvas=document.getElementById('trafficChart'); if(!canvas) return;
+  let ctx=canvas.getContext('2d'); let W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#f8fafc'; ctx.fillRect(0,0,W,H);
+  let labels=Object.keys(orderCounts);
+  if(!labels.length && !Object.keys(likeMap).length){ ctx.fillStyle='#666'; ctx.font='16px Arial'; ctx.textAlign='center'; ctx.fillText('No orders in last 24h yet - graph will appear when people order', W/2, H/2); return; }
+  if(!labels.length) labels=Object.keys(likeMap);
+  let maxVal=1; labels.forEach(l=>{ maxVal=Math.max(maxVal, orderCounts[l]||0, (likeMap[l]?.liked||0), (likeMap[l]?.disliked||0)); });
+  let barAreaW = (W-60)/labels.length; let baseY=H-40;
+  ctx.font='12px Arial'; ctx.textAlign='center'; ctx.fillStyle='#333';
+  labels.slice(0,8).forEach((label,i)=>{
+    let x=40 + i*barAreaW + barAreaW/2;
+    let oH=((orderCounts[label]||0)/maxVal)*(H-100);
+    let lH=((likeMap[label]?.liked||0)/maxVal)*(H-100);
+    let dH=((likeMap[label]?.disliked||0)/maxVal)*(H-100);
+    ctx.fillStyle='#25D366'; ctx.fillRect(x-28, baseY-oH, 16, oH);
+    ctx.fillStyle='#4f6bff'; ctx.fillRect(x-8, baseY-lH, 16, lH);
+    ctx.fillStyle='#ff4444'; ctx.fillRect(x+12, baseY-dH, 16, dH);
+    ctx.fillStyle='#111'; ctx.fillText(orderCounts[label]||0, x-20, baseY-oH-6);
+    ctx.fillStyle='#111'; ctx.fillText(likeMap[label]?.liked||0, x, baseY-lH-6);
+    ctx.fillStyle='#111'; ctx.fillText(likeMap[label]?.disliked||0, x+20, baseY-dH-6);
+    let short=label.length>12?label.substring(0,12)+'..':label;
+    ctx.fillStyle='#333'; ctx.fillText(short, x, baseY+18);
+  });
+  ctx.fillStyle='#888'; ctx.textAlign='left'; ctx.fillText('Top 8 services - last 24h', 12, 18);
+}
+async function loadSettings(){ try{ const snap = await getDoc(doc(db,"settings","site")); if(!snap.exists()) return; const s = snap.data(); Object.keys(s).forEach(k=> setVal(k, s[k])); }catch(e){ console.log(e); } }
+window.saveGlobal = async function(){ let data={}; ["g_whatsapp","g_mpesa","g_founder","g_role","g_company","g_location","g_locationShort"].forEach(id=> data[id]=val(id)); await setDoc(doc(db,"settings","site"), data, {merge:true}); document.getElementById("msgGlobal").innerText="Saved! ✅ Global only - FAQ updated too"; setTimeout(()=>{document.getElementById("msgGlobal").innerText="";},3000); };
+window.saveHome = async function(){ let data={}; ["h_badge","h_title1","h_titleSpan","h_title2","h_text1","h_text2","h_trust","h_photos","h_popTitle","h_popSub","h_whyTitle","h_ctaTitle","h_ctaText","h_footerTag"].forEach(id=> data[id]=val(id)); await setDoc(doc(db,"settings","site"), data, {merge:true}); alert("Home Saved! ✅"); };
+window.saveAbout = async function(){ let data={}; ["a_badge","a_title1","a_titleSpan","a_text1","a_text2","a_heroPhoto","a_stats","a_whoPhoto","a_who1","a_who2","a_who3","a_whatPhoto","a_whatList","a_whyPhoto","a_whyList","a_whyText","a_mission","a_missionBy","a_infoCompany","a_infoFounder","a_infoBase","a_infoHours","a_infoPayment","a_infoDelivery","a_ctaTitle","a_ctaText"].forEach(id=> data[id]=val(id)); await setDoc(doc(db,"settings","site"), data, {merge:true}); document.getElementById("msgSettings").innerText="Saved! ✅ About only"; setTimeout(()=>{document.getElementById("msgSettings").innerText="";},3000); };
+window.saveSettings = window.saveHome;
+function compressImage(file){ return new Promise((resolve)=>{ const reader=new FileReader(); reader.onload=(e)=>{ const img=new Image(); img.onload=()=>{ const canvas=document.createElement('canvas'); let w=img.width,h=img.height; const MAX=800; if(w>MAX){h=h*MAX/w;w=MAX;} canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h); resolve(canvas.toDataURL('image/jpeg',0.7)); }; img.src=e.target.result; }; reader.readAsDataURL(file); }); }
+window.handleNewServicePhoto=async function(input){ if(!input.files[0])return; document.getElementById('new_imagePreview').innerText="Compressing..."; const c=await compressImage(input.files[0]); document.getElementById('new_imageUrl').value=c; const p=document.getElementById('new_imagePreviewImg'); p.src=c; p.style.display='block'; document.getElementById('new_imagePreview').innerText="✅ Photo ready! ("+Math.round(c.length/1024)+" KB)"; };
+window.handlePortfolioPhoto=async function(input){ if(!input.files[0])return; const c=await compressImage(input.files[0]); document.getElementById('p_link').value=c; document.getElementById('p_type').value='photo'; const p=document.getElementById('p_previewImg'); p.src=c; p.style.display='block'; alert("✅ Photo ready! Now tap Add to Portfolio Gallery"); };
+window.handleHomePhotos=async function(input){ let cur=document.getElementById('h_photos').value.trim(); for(let f of input.files){ const c=await compressImage(f); cur = cur ? cur+"|||"+c : c; } document.getElementById('h_photos').value=cur; alert("✅ Photos added! Now tap Save Home"); };
+window.handleAboutPhoto=async function(input,targetId){ if(!input.files[0])return; const c=await compressImage(input.files[0]); document.getElementById(targetId).value=c; alert("✅ Photo ready! Now tap Save About"); };
+window.handleExistingServicePhoto=async function(input,id){ if(!input.files[0])return; const c=await compressImage(input.files[0]); document.getElementById("img-"+id).value=c; alert("✅ Photo ready! Now tap Save for this service"); };
+async function ensureCustomersLoaded(){
+  if(allCustomers.length) return allCustomers;
+  try{ const snap=await getDocs(collection(db,"customers")); allCustomers=[]; snap.forEach(d=> allCustomers.push({id:d.id,...d.data()})); }catch(e){}
+  return allCustomers;
+}
+async function createMemberNotifications(annId, annData){
+  let customers = await ensureCustomersLoaded();
+  let count=0;
+  for(let c of customers){
+    try{ await addDoc(collection(db,"user_notifications"),{announcementId:annId, userId:c.id, userEmail:c.email||"", title:annData.title, message:annData.message, type:annData.type||"general", link:annData.link||"services.html", audience:annData.audience||"members_inbox", memberDiscount:annData.memberDiscount||false, originalPrice:annData.originalPrice||0, memberPrice:annData.memberPrice||0, read:false, createdAt:serverTimestamp()}); count++; }catch(e){ console.log("notif fail for",c.id,e.message); }
+  }
+  return count;
+}
+async function deleteMemberNotifications(annId){
+  try{
+    const q = query(collection(db,"user_notifications"), where("announcementId","==",annId));
+    const snap = await getDocs(q);
+    for(let d of snap.docs){ await deleteDoc(doc(db,"user_notifications",d.id)); }
+  }catch(e){ console.log(e); }
+}
+window.loadAnnouncements = async function(){
+  try{
+    const snap = await getDocs(collection(db,"announcements"));
+    allAnnouncements=[]; snap.forEach(d=> allAnnouncements.push({id:d.id,...d.data()}));
+    allAnnouncements.sort((a,b)=> getTimeVal(b)-getTimeVal(a));
+    let live = allAnnouncements.filter(a=> isLiveAnn(a));
+    document.getElementById('dashAnnSummary').innerText = `${live.length} LIVE • ${allAnnouncements.length} total`;
+    document.getElementById('annStatus').innerText = live.length ? `🟢 ${live.length} LIVE right now` : `⏸️ No LIVE announcements - users see no banner`;
+    document.getElementById('annList').innerHTML = allAnnouncements.length ? allAnnouncements.map(a=>{
+      let liveFlag = isLiveAnn(a);
+      let disc = a.memberDiscount ? ` • 👑 10% OFF - Members KSh ${a.memberPrice||''} (was ${a.originalPrice||''})` : '';
+      return `<div class="card ${liveFlag?'ann-card':'ann-off'}"><b>${esc(a.title||'Announcement')} ${liveFlag?'🟢 LIVE':'⏸️ HIDDEN'}</b><p style="font-size:13px;color:#555">${esc(a.message||'')}</p><p style="font-size:12px;color:#888">${fmtDate(a.createdAt||a.at)} • ${audienceLabel(a.audience||'all')} • Type: ${esc(a.type||'general')}${disc}</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="mini-btn" style="background:${liveFlag?'#ff9900':'#25D366'}" onclick="toggleAnnouncement('${a.id}',${liveFlag})">${liveFlag?'⏸️ Hide':'✅ Show'}</button><button class="mini-btn" style="background:#ff4444" onclick="deleteAnnouncement('${a.id}')">🗑️ Delete</button></div></div>`;
+    }).join('') : '<p>No announcements yet.</p>';
+  }catch(e){
+    document.getElementById('annList').innerHTML='<p style="color:red">Could not load announcements: '+e.message+'</p>';
+    document.getElementById('annStatus').innerText='❌ Load failed: '+e.message;
+  }
+};
+window.addAnnouncement = async function(){
+  let btn=document.getElementById('annPublishBtn');
+  let errEl=document.getElementById('annError');
+  errEl.style.color='black'; errEl.innerText='Publishing... please wait...';
+  let title=document.getElementById('ann_title').value.trim();
+  let msg=document.getElementById('ann_msg').value.trim();
+  if(!title||!msg){ errEl.style.color='red'; errEl.innerText='❌ Fill Title + Message first'; return; }
+  let audience=document.getElementById('ann_audience').value;
+  let discount=document.getElementById('ann_discount').value==='yes';
+  let origPrice=Number(document.getElementById('ann_price').value||0);
+  let memberPrice = discount && origPrice ? Math.round(origPrice*0.9) : 0;
+  if(discount && !origPrice){ errEl.style.color='red'; errEl.innerText='❌ Discount = YES needs Original Price (e.g. 5000)'; return; }
+  btn.innerText='Publishing...'; btn.disabled=true;
+  try{
+    let data={title:title,message:msg,type:document.getElementById('ann_type').value,link:document.getElementById('ann_link').value.trim()||'services.html',audience:audience,memberDiscount:discount,originalPrice:origPrice,memberPrice:memberPrice,active:document.getElementById('ann_active').value==='yes',createdAt:serverTimestamp()};
+    let refDoc = await addDoc(collection(db,"announcements"), data);
+    let notifCount=0;
+    if(audience==='members_inbox' && data.active){
+      errEl.innerText='Announcement saved! Now sending to '+ (allCustomers.length||'all') +' members inbox...';
+      notifCount = await createMemberNotifications(refDoc.id, data);
+    }
+    document.getElementById('ann_title').value=''; document.getElementById('ann_msg').value=''; document.getElementById('ann_price').value='';
+    errEl.style.color='green'; errEl.innerText='✅ Published! Users will see it on Home now.'+(notifCount?` Sent to ${notifCount} members inbox.`:'');
+    alert('Announcement Published! ✅'+(notifCount?` Sent to ${notifCount} members.`:''));
+    loadAnnouncements();
+  }catch(e){
+    errEl.style.color='red';
+    errEl.innerText='❌ FAILED: '+e.message+' | FIX: Go to Firebase Console > Firestore Database > Rules > allow read/write for announcements + user_notifications for authenticated users.';
+    alert('FAILED to publish: '+e.message);
+  }
+  btn.innerText='📢 Publish Announcement →'; btn.disabled=false;
+};
+window.testAnnouncement = async function(){
+  document.getElementById('ann_title').value='🧪 TEST - Announcement Works!';
+  document.getElementById('ann_msg').value='This is a test. If you see this on Home, announcements are working. Delete this test from Admin.';
+  document.getElementById('ann_audience').value='all';
+  document.getElementById('ann_discount').value='no';
+  addAnnouncement();
+};
+window.toggleAnnouncement = async function(id,isLive){
+  try{ await updateDoc(doc(db,"announcements",id),{active:!isLive}); loadAnnouncements(); }catch(e){ alert('FAILED: '+e.message); }
+};
+window.deleteAnnouncement = async function(id){ if(!confirm('Delete this announcement? Users will no longer see it, and members inbox copies will also be deleted.')) return; try{ await deleteDoc(doc(db,"announcements",id)); await deleteMemberNotifications(id); loadAnnouncements(); }catch(e){ alert('FAILED: '+e.message); } };
+async function loadServices(){
+  const snap = await getDocs(collection(db,"services"));
+  let html = "";
+  snap.forEach(d=>{ const s = d.data(); let sTitle = s.serviceTitle || s.name || ''; let pTitle = s.portfolioTitle || s.name || ''; let vid = ytId(s.videoUrl || s.video || ''); html += `<div class="card"><h3>${esc(sTitle)} <span style="font-weight:400;font-size:13px;color:#888">| Portfolio: ${esc(pTitle)}</span></h3>${s.image ? `<img src="${s.image}" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px">` : `<p style="font-size:12px;color:#888">No photo yet</p>`}${vid ? `<iframe src="https://www.youtube.com/embed/${vid}" style="width:100%;height:200px;border:0;border-radius:10px;margin-top:8px" allowfullscreen></iframe>` : ``}
+    <label>Name for SERVICES Page</label><input type="text" id="stitle-${d.id}" value="${esc(sTitle)}"><label>Name for PORTFOLIO Page</label><input type="text" id="ptitle-${d.id}" value="${esc(pTitle)}"><label>Price (KSh)</label><input type="number" id="price-${d.id}" value="${s.price||0}"><label>Category</label><input type="text" id="cat-${d.id}" value="${esc(s.category||'Website')}"><label>Description</label><input type="text" id="desc-${d.id}" value="${esc(s.description||'')}"><label>Emoji</label><input type="text" id="emoji-${d.id}" value="${esc(s.emoji||'✨')}"><label>📸 Photo Link</label><input type="text" id="img-${d.id}" value="${esc(s.image||'')}"><label>OR 📸 Choose New Photo From Phone</label><input type="file" class="file-input" accept="image/*" onchange="handleExistingServicePhoto(this,'${d.id}')"><label>🎬 Video Link</label><input type="text" id="vid-${d.id}" value="${esc(s.videoUrl||s.video||'')}"><label>🛠️ Tools</label><input type="text" id="tools-${d.id}" value="${esc(s.tools||'')}"><label>Show in Portfolio?</label><select id="show-${d.id}"><option value="yes" ${s.showPortfolio!=='no'?'selected':''}>Yes</option><option value="no" ${s.showPortfolio==='no'?'selected':''}>No</option></select><div class="tool-row"><button onclick="saveService('${d.id}')" style="background:#2575fc">💾 Save</button><button onclick="duplicateService('${d.id}')" class="dup-btn">📄 Duplicate</button><button onclick="copyOrderLink('${d.id}')" style="background:#333">🔗 Copy WhatsApp Link</button><button onclick="deleteService('${d.id}')" class="del-btn">🗑️ Delete</button></div></div>`; });
+  document.getElementById("list").innerHTML = html || "<p style='text-align:center'>No services yet.</p>";
+}
+window.saveService = async function(id){ await updateDoc(doc(db,"services",id),{ serviceTitle: document.getElementById("stitle-"+id).value, portfolioTitle: document.getElementById("ptitle-"+id).value, price: Number(document.getElementById("price-"+id).value||0), category: document.getElementById("cat-"+id).value, description: document.getElementById("desc-"+id).value, emoji: document.getElementById("emoji-"+id).value, image: document.getElementById("img-"+id).value.trim(), videoUrl: document.getElementById("vid-"+id).value.trim(), tools: document.getElementById("tools-"+id).value, showPortfolio: document.getElementById("show-"+id).value }); document.getElementById("msg").innerText="Saved! ✅ FAQ price updated too"; setTimeout(()=>{document.getElementById("msg").innerText="";},3000); loadServices(); loadFaqs(); }
+window.deleteService = async function(id){ if(!confirm("Delete this service? Its FAQ question will also disappear from Home.")) return; await deleteDoc(doc(db,"services",id)); loadServices(); loadFaqs(); }
+window.duplicateService = async function(id){ await addDoc(collection(db,"services"),{ serviceTitle: document.getElementById("stitle-"+id).value+" (Copy)", portfolioTitle: document.getElementById("ptitle-"+id).value+" (Copy)", price: Number(document.getElementById("price-"+id).value||0), category: document.getElementById("cat-"+id).value, description: document.getElementById("desc-"+id).value, emoji: document.getElementById("emoji-"+id).value, image: document.getElementById("img-"+id).value, videoUrl: document.getElementById("vid-"+id).value, tools: document.getElementById("tools-"+id).value, showPortfolio: document.getElementById("show-"+id).value, createdAt: serverTimestamp() }); alert("Duplicated! ✅"); loadServices(); loadFaqs(); }
+window.copyOrderLink = function(id){ let title=document.getElementById("stitle-"+id).value; let price=document.getElementById("price-"+id).value; let wa=document.getElementById("g_whatsapp").value||"254714838764"; let link="https://wa.me/"+wa+"?text="+encodeURIComponent("Hi Jay Pee, I want: "+title+" - KSh "+price); navigator.clipboard.writeText(link).then(()=>alert("Copied:\n"+link)); }
+window.addNewService = async function(){ let btn=document.getElementById('addBtn'); let errEl=document.getElementById('addServiceError'); errEl.innerText=''; try{ btn.innerText="Saving..."; btn.disabled=true; let title=document.getElementById('new_serviceTitle').value.trim(); if(!title){ alert("Fill Name for SERVICES Page"); btn.innerText="Add New Service"; btn.disabled=false; return; } let price=Number(document.getElementById('new_price').value||0); let desc=document.getElementById('new_description').value; await addDoc(collection(db,"services"),{ serviceTitle:title, portfolioTitle:document.getElementById('new_portfolioTitle').value.trim()||title, price:price, description:desc, category:document.getElementById('new_category').value, emoji:document.getElementById('new_emoji').value||"✨", image:document.getElementById('new_imageUrl').value.trim(), videoUrl:document.getElementById('new_videoUrl').value.trim(), tools:document.getElementById('new_tools').value, showPortfolio:document.getElementById('new_showPortfolio').value, createdAt:serverTimestamp() }); if(document.getElementById('new_announce').value==='yes'){ let aud=document.getElementById('new_announceAudience').value; let disc=document.getElementById('new_announceDiscount').value==='yes'; let memberPrice = disc ? Math.round(price*0.9) : 0; let annTitle = "🆕 NEW: "+title+" - From KSh "+price + (disc ? ` | 👑 Members: KSh ${memberPrice} (10% OFF)` : ""); let annMsg = (desc||("New service added: "+title)) + (disc ? ` Members get 10% OFF - pay KSh ${memberPrice} instead of KSh ${price}. Login to claim.` : ""); let annData={title:annTitle,message:annMsg,type:"new_service",link:"services.html",audience:aud,memberDiscount:disc,originalPrice:price,memberPrice:memberPrice,active:true,createdAt:serverTimestamp()}; let refDoc=await addDoc(collection(db,"announcements"), annData); let notifCount=0; if(aud==='members_inbox'){ notifCount=await createMemberNotifications(refDoc.id, annData); } alert("Added! ✅ + Announcement sent! FAQ auto-created too!"+(notifCount?` To ${notifCount} members inbox.`:"")); } else { alert("Added! ✅ FAQ auto-created for this service!"); } location.reload(); }catch(e){ errEl.style.color='red'; errEl.innerText='❌ FAILED: '+e.message; alert("FAILED: "+e.message); btn.innerText="Add New Service"; btn.disabled=false; } }
+window.addPortfolio = async function(){ let title=document.getElementById('p_title').value.trim(); let link=document.getElementById('p_link').value.trim(); if(!title||!link){ alert("Fill Title + Link"); return; } await addDoc(collection(db,"portfolio"),{ title:title, type:document.getElementById('p_type').value, category:document.getElementById('p_category').value, price:Number(document.getElementById('p_price').value||0), description:document.getElementById('p_desc').value, fileUrl:link, createdAt:serverTimestamp() }); alert("Added to Portfolio! ✅"); location.reload(); }
+async function loadPortfolio(){ try{ const snap=await getDocs(collection(db,"portfolio")); let html=""; snap.forEach(d=>{ let s=d.data(); let vid=ytId(s.fileUrl||''); let media=s.type==='video'&&vid?`<iframe src="https://www.youtube.com/embed/${vid}" style="width:100%;height:180px;border:0;border-radius:10px" allowfullscreen></iframe>`:`<img src="${s.fileUrl}" style="width:100%;max-height:150px;object-fit:cover;border-radius:10px">`; html+=`<div class="card"><h3>${esc(s.title)} - ${s.type}</h3>${media}<p>${esc(s.description||'')} - KSh ${s.price||0}</p><button onclick="deletePortfolio('${d.id}')" class="del-btn" style="background:#ff4444">Delete This</button></div>`; }); document.getElementById('portfolioList').innerHTML=html||"<p style='text-align:center'>No portfolio items yet</p>"; }catch(e){ document.getElementById('portfolioList').innerHTML="Could not load portfolio"; } }
+window.deletePortfolio = async function(id){ if(!confirm("Delete this portfolio item?")) return; await deleteDoc(doc(db,"portfolio",id)); loadPortfolio(); }
+window.loadTraffic = async function(){
+  try{
+    let deleted = await cleanupOldTraffic();
+    if(deleted>0) document.getElementById('cleanupInfo').innerText = '🧹 Auto-cleaned '+deleted+' old records (older than 24h) - Searches, Orders, Views, Questions';
+    else document.getElementById('cleanupInfo').innerText = '✅ No old records - Last 24h only kept';
+    const cSnap = await getDocs(collection(db,"customers")); allCustomers=[]; cSnap.forEach(d=> allCustomers.push({id:d.id,...d.data()}));
+    const sSnap = await getDocs(collection(db,"searches")); allSearches=[]; sSnap.forEach(d=> allSearches.push({id:d.id,...d.data()}));
+    allOrders=[]; try{ const oSnap = await getDocs(collection(db,"orders")); oSnap.forEach(d=> allOrders.push({id:d.id,...d.data()})); }catch(e){} try{ const wSnap = await getDocs(collection(db,"whatsapp_clicks")); wSnap.forEach(d=> allOrders.push({id:d.id,...d.data()})); }catch(e){} try{ const w2Snap = await getDocs(collection(db,"whatsapp_orders")); w2Snap.forEach(d=> allOrders.push({id:d.id,...d.data()})); }catch(e){}
+    const qSnap = await getDocs(collection(db,"questions")); allQuestions=[]; qSnap.forEach(d=> allQuestions.push({id:d.id,...d.data()}));
+    allPageViews=[]; try{ const pSnap = await getDocs(collection(db,"page_views")); pSnap.forEach(d=> allPageViews.push({id:d.id,...d.data()})); }catch(e){}
+    allLikes=[]; try{ const lSnap = await getDocs(collection(db,"service_likes")); lSnap.forEach(d=> allLikes.push({id:d.id,...d.data()})); }catch(e){}
+    try{ const svcSnap = await getDocs(collection(db,"services")); svcSnap.forEach(d=>{ let s=d.data(); if(s.likes||s.dislikes){ allLikes.push({service:s.serviceTitle||s.name, liked:Number(s.likes||0), disliked:Number(s.dislikes||0)}); } }); }catch(e){}
+    document.getElementById('statCustomers').innerText = allCustomers.length; document.getElementById('statSearches').innerText = allSearches.length; document.getElementById('statOrders').innerText = allOrders.length; document.getElementById('statQuestions').innerText = allQuestions.length;
+    let blocked = allCustomers.filter(c=>c.blocked===true); document.getElementById('statBlocked').innerText = blocked.length;
+    document.getElementById('statTodaySignups').innerText = allCustomers.filter(c=>isToday(c.createdAt)).length; document.getElementById('statTodaySearches').innerText = allSearches.filter(s=>isToday(s.at||s.createdAt)).length; document.getElementById('statTodayOrders').innerText = allOrders.filter(o=>isToday(o.at||o.createdAt||o.timestamp)).length;
+    document.getElementById('dashTrafficSummary').innerText = `${allCustomers.length} customers • ${allSearches.length} searches • ${allOrders.length} WhatsApp orders • ${allQuestions.length} questions`; document.getElementById('trafficUpdated').innerText = 'Last updated: '+new Date().toLocaleTimeString('en-KE');
+    let counts={}; allSearches.forEach(s=>{ let t=getSearchTerm(s).toLowerCase(); if(!t) return; counts[t]=(counts[t]||0)+1; }); let sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,10); document.getElementById('topSearches').innerHTML = sorted.length ? sorted.map(([term,count],i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span><b>#${i+1}</b> ${esc(term)}</span><b>${count} searches</b></div>`).join('') : '<p>No searches yet.</p>';
+    let oCounts={}; allOrders.forEach(o=>{ let t=getOrderName(o); oCounts[t]=(oCounts[t]||0)+1; }); let oSorted = Object.entries(oCounts).sort((a,b)=>b[1]-a[1]).slice(0,10); document.getElementById('topOrders').innerHTML = oSorted.length ? oSorted.map(([term,count],i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span><b>#${i+1}</b> ${esc(term)}</span><b>${count} clicks</b></div>`).join('') : '<p>No orders yet.</p>';
+    let rs=[...allSearches].sort((a,b)=>getTimeVal(b)-getTimeVal(a)).slice(0,20); document.getElementById('recentSearches').innerHTML = rs.length ? rs.map(s=>`<div style="padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#888">${fmtDate(s.at||s.createdAt)}</span> - 🔍 <b>${esc(getSearchTerm(s)||'(empty)')}</b></div>`).join('') : '<p>No searches yet.</p>';
+    let ro=[...allOrders].sort((a,b)=>getTimeVal(b)-getTimeVal(a)).slice(0,20); document.getElementById('recentOrders').innerHTML = ro.length ? ro.map(o=>`<div style="padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#888">${fmtDate(o.at||o.createdAt||o.timestamp)}</span> - 💬 <b>${esc(getOrderName(o))}</b></div>`).join('') : '<p>No orders yet.</p>';
+    let pvCounts={}; allPageViews.forEach(p=>{ let pg=p.page||'Unknown'; pvCounts[pg]=(pvCounts[pg]||0)+1; }); let pvSorted = Object.entries(pvCounts).sort((a,b)=>b[1]-a[1]); document.getElementById('pageViews').innerHTML = pvSorted.length ? pvSorted.map(([pg,count])=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span>${esc(pg)}</span><b>${count} views</b></div>`).join('') : '<p>No page views yet.</p>';
+    renderCustomers(); document.getElementById('blockedList').innerHTML = blocked.length ? blocked.map(c=>`<div class="customer-row"><b>${esc(c.name||c.email)}</b><p>${esc(c.phone||'')} • ${esc(c.email||'')}</p><button class="mini-btn" style="background:#25D366" onclick="unblockCustomer('${c.id}')">✅ Unblock</button></div>`).join('') : '<p>No blocked users.</p>';
+    document.getElementById('questionsList').innerHTML = allQuestions.length ? [...allQuestions].sort((a,b)=>getTimeVal(b)-getTimeVal(a)).map(q=>`<div class="customer-row"><b>${esc(q.name||'Anonymous')}</b> <span style="font-size:11px;color:#888">${fmtDate(q.at)}</span><p><b>Contact:</b> ${esc(q.contact||q.phone||'-')}</p><p>${esc(q.question||q.text||'')}</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="mini-btn" style="background:#25D366" onclick="replyQuestion('${q.id}')">💬 Reply</button><button class="mini-btn" style="background:#ff4444" onclick="deleteQuestion('${q.id}')">🗑️ Delete</button></div><textarea id="reply-${q.id}" placeholder="Type reply..." rows="2" style="margin-top:8px"></textarea></div>`).join('') : '<p>No questions yet.</p>';
+    let feed=[]; allCustomers.forEach(c=> feed.push({ts:getTimeVal(c), text:`👤 <b>${esc(c.name||c.email)}</b> signed up`, time:c.createdAt})); allSearches.forEach(s=> feed.push({ts:getTimeVal(s), text:`🔍 Searched: <b>${esc(getSearchTerm(s))}</b>`, time:s.at||s.createdAt})); allQuestions.forEach(q=> feed.push({ts:getTimeVal(q), text:`❓ <b>${esc(q.name||'Someone')}</b> asked: ${esc((q.question||'').substring(0,60))}`, time:q.at})); allOrders.forEach(o=> feed.push({ts:getTimeVal(o), text:`💬 Order: <b>${esc(getOrderName(o))}</b>`, time:o.at||o.createdAt})); feed.sort((a,b)=>b.ts-a.ts); document.getElementById('activityFeed').innerHTML = feed.length ? feed.slice(0,30).map(f=>`<div style="padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#888">${fmtDate(f.time)}</span> - ${f.text}</div>`).join('') : '<p>No activity yet.</p>';
+    let likeMap={};
+    let likeByTitle={};
+    allLikes.forEach(l=>{
+      let title = (l.serviceTitle||l.service||l.title||'Unknown').toString().trim();
+      if(!likeByTitle[title]) likeByTitle[title]={liked:0,disliked:0, voters:[]};
+      if(l.value==='like'){ likeByTitle[title].liked += 1; }
+      else if(l.value==='dislike'){ likeByTitle[title].disliked += 1; }
+      else if(l.liked){ likeByTitle[title].liked += Number(l.liked||0); }
+      else if(l.disliked){ likeByTitle[title].disliked += Number(l.disliked||0); }
+      else if(l.type==='like'){ likeByTitle[title].liked += 1; }
+      else if(l.type==='dislike'){ likeByTitle[title].disliked += 1; }
+      if(l.value||l.voterEmail) likeByTitle[title].voters.push(l);
+    });
+    Object.keys(oCounts).forEach(orderLabel=>{
+      let found=null;
+      for(let t of Object.keys(likeByTitle)){ if(orderLabel.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(orderLabel.toLowerCase().split(' - ')[0])){ found=t; break; } }
+      if(found) likeMap[orderLabel]=likeByTitle[found];
+      else if(!likeMap[orderLabel]) likeMap[orderLabel]={liked:0,disliked:0};
+    });
+    Object.keys(likeByTitle).forEach(t=>{ if(!Object.keys(likeMap).some(k=>k.toLowerCase().includes(t.toLowerCase()))){ likeMap[t]=likeByTitle[t]; if(!oCounts[t]) oCounts[t]=0; } });
+    drawTrafficGraph(oCounts, likeMap);
+    let totalLiked=Object.values(likeByTitle).reduce((a,b)=>a+b.liked,0); let totalDisliked=Object.values(likeByTitle).reduce((a,b)=>a+b.disliked,0); let totalOrders=Object.values(oCounts).reduce((a,b)=>a+b,0);
+    document.getElementById('graphSummary').innerHTML = 'Total Orders (24h): <b>'+totalOrders+'</b> • Total Liked: <b style="color:#4f6bff">👍 '+totalLiked+'</b> • Total Not Liked: <b style="color:#ff4444">👎 '+totalDisliked+'</b> • Top Service: <b>'+(oSorted[0]?esc(oSorted[0][0])+' ('+oSorted[0][1]+' orders)':'-')+'</b>';
+    let likesTableEl=document.getElementById('likesTable');
+    if(likesTableEl){
+      likesTableEl.innerHTML = Object.keys(likeByTitle).length ? Object.entries(likeByTitle).map(([title, v])=>{
+        let votersHtml = v.voters.slice(0,20).map(x=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid #eee">${x.value==='like'?'👍 Liked':'👎 Not Liked'} • ${esc(x.voterEmail||'guest')} • ${fmtDate(x.at)} • ${esc(x.voterType||'')}</div>`).join('');
+        return `<div style="background:#f8fafc;border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:10px"><b>${esc(title)}</b><br><span style="color:#4f6bff;font-weight:800">👍 ${v.liked} Liked</span> | <span style="color:#ff4444;font-weight:800">👎 ${v.disliked} Not Liked</span><div style="margin-top:8px">${votersHtml || '<span style="font-size:12px;color:#888">No voter details</span>'}</div></div>`;
+      }).join('') : '<p>No likes yet. Go to services.html and tap Like on any service, then Refresh Traffic.</p>';
+    }
+  }catch(e){ console.log(e); }
+};
+window.renderCustomers = function(){ let q = (document.getElementById('customerSearch')?.value||'').toLowerCase(); let list = allCustomers.filter(c=> (`${c.name||''} ${c.phone||''} ${c.email||''} ${c.location||''}`).toLowerCase().includes(q)); list.sort((a,b)=> getTimeVal(b)-getTimeVal(a)); document.getElementById('customersList').innerHTML = list.length ? list.map(c=>`<div class="customer-row"><b>${esc(c.name||'No name')} ${c.blocked?'🚫 BLOCKED':''}</b><p>📞 ${esc(c.phone||'-')} • ✉️ ${esc(c.email||'-')}</p><p>📍 ${esc(c.location||'-')} • Joined: ${fmtDate(c.createdAt)}</p><div style="display:flex;gap:6px;flex-wrap:wrap"><a href="https://wa.me/${(c.phone||'').replace(/\D/g,'').replace(/^0/,'254')}" target="_blank" style="background:#25D366;color:#fff;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:800">💬 WhatsApp Them</a>${c.blocked?`<button class="mini-btn" style="background:#25D366" onclick="unblockCustomer('${c.id}')">✅ Unblock</button>`:`<button class="mini-btn" style="background:#ff9900" onclick="blockCustomer('${c.id}')">🚫 Block</button>`}<button class="mini-btn" style="background:#ff4444" onclick="deleteCustomer('${c.id}')">🗑️ Delete</button></div></div>`).join('') : '<p>No customers found.</p>'; };
+window.blockCustomer = async function(id){ if(!confirm('Block this customer?')) return; await updateDoc(doc(db,"customers",id),{blocked:true, blockedAt:serverTimestamp()}); alert('Blocked! 🚫'); loadTraffic(); };
+window.unblockCustomer = async function(id){ await updateDoc(doc(db,"customers",id),{blocked:false}); alert('Unblocked! ✅'); loadTraffic(); };
+window.deleteCustomer = async function(id){ if(!confirm('Delete this customer record?')) return; await deleteDoc(doc(db,"customers",id)); loadTraffic(); };
+window.deleteQuestion = async function(id){ if(!confirm('Delete this question?')) return; await deleteDoc(doc(db,"questions",id)); loadTraffic(); };
+window.replyQuestion = async function(id){ let q = allQuestions.find(x=>x.id===id); if(!q) return; let reply = document.getElementById('reply-'+id).value.trim(); if(!reply){ alert('Type your reply first'); return; } let phone = (q.contact||'').replace(/\D/g,''); if(phone.startsWith('0')) phone='254'+phone.substring(1); let msg = `Hi ${q.name||''}, thanks for asking: "${q.question}"\n\nMy reply: ${reply}\n\n- Jay Pee Media Hub`; window.open('https://wa.me/'+(phone||'254714838764')+'?text='+encodeURIComponent(msg),'_blank'); await updateDoc(doc(db,"questions",id),{replied:true, reply:reply, repliedAt:serverTimestamp()}); alert('Reply opened in WhatsApp ✅'); loadTraffic(); };
+</script>
+</body>
+</html>
